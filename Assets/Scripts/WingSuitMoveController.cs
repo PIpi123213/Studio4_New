@@ -43,17 +43,14 @@ public class WingSuitMoveController : MonoBehaviour
     [SerializeField] private float glideSpeed = 1000f;
     private void ApplyMovement()
     {
-        //调用垂直速度计算函数
+        if (isAddingUpwardVelocity) return; // 如果正在增加向上速度，跳过对 rb.velocity 的修改
+
         DetectDive();
 
-        // 计算最终速度
         Vector3 glideVelocity = transform.forward * glideSpeed;
-        glideVelocity.y = verticalSpeed; // 添加垂直速度
+        glideVelocity.y = verticalSpeed;
 
-        // 应用速度
         rb.velocity = glideVelocity;
-        // rb.velocity = transform.forward * glideSpeed;
-
     }
 
     // 仅用 yaw 控制水平旋转即可
@@ -67,7 +64,7 @@ public class WingSuitMoveController : MonoBehaviour
     {
         if (isRotatingAway) return; // 如果正在旋转，跳过输入控制
 
-        yaw        += (leftController.position.y - rightController.position.y) * 120f * Time.deltaTime;
+        yaw        += (leftController.position.y - rightController.position.y) * 30f * Time.deltaTime;
         currentYaw =  Mathf.SmoothDampAngle(currentYaw, yaw, ref yawVelocity, 1f);
 
         Quaternion targetRotation = Quaternion.Euler(0f, currentYaw, 0f);
@@ -78,10 +75,22 @@ public class WingSuitMoveController : MonoBehaviour
     private void OnTriggerEnter(Collider other)//检测
     {
         Debug.Log("Detected object: " + other.name);
-        // 计算远离物体的方向；这里可以依据需求调整策略
-        Vector3 directionAway = transform.forward*1f + (transform.position - other.ClosestPoint(transform.position)).normalized;
-        // 启动协程平滑转向，同时禁用控制器输入旋转
-        StartCoroutine(SmoothRotateAway(directionAway, 2f));
+        // 获取碰撞点和法线
+        Vector3 contactPoint       = other.ClosestPoint(transform.position);
+        Vector3 directionToContact = (contactPoint - transform.position).normalized;
+        // 判断法线方向
+        if (Mathf.Abs(directionToContact.y) > 0.7f) // 接近水平
+        {
+            Debug.Log("Horizontal object detected, lifting...");
+            StartCoroutine(GraduallyAddUpwardVelocity(glideSpeed, 3f)); // 目标速度增量 10f，持续时间 1f
+        }
+        else // 接近竖直
+        {
+            Debug.Log("Vertical object detected, rotating...");
+            Vector3 directionAway = transform.forward * 1f + (transform.position - contactPoint).normalized;
+            StartCoroutine(SmoothRotateAway(directionAway, 2f));
+        }
+
     }
 
     [SerializeField] private float     defaultVerticalSpeed;
@@ -91,7 +100,6 @@ public class WingSuitMoveController : MonoBehaviour
     private void DetectDive()
     {
         float averageHeight = (Head.position.y) - ((leftController.position.y + rightController.position.y) / 2f);
-        Debug.Log("Average Height: " + averageHeight + " (Head: " + Head.position.y + ", Left: " + leftController.position.y + ", Right: " + rightController.position.y);
         if(averageHeight >= 0f)
         {
             verticalSpeed = defaultVerticalSpeed - averageHeight * gravityFactor;
@@ -106,6 +114,52 @@ public class WingSuitMoveController : MonoBehaviour
 
     }
 
+    // 触发器检测到地面后，抬起玩家
+    private bool isAddingUpwardVelocity = false; // 标志位
+
+    private IEnumerator GraduallyAddUpwardVelocity(float targetUpwardSpeed, float duration)
+    {
+        isAddingUpwardVelocity = true; // 设置标志位
+
+        float elapsedTime          = 0f;
+        float halfDuration         = duration / 2f; // 分为两段时间
+        float initialVerticalSpeed = rb.velocity.y;
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+
+            // 根据时间分段处理速度插值
+            float smoothT;
+            if (elapsedTime <= halfDuration)
+            {
+                // 第一阶段：速度渐强
+                smoothT = Mathf.SmoothStep(0f, 1f, elapsedTime / halfDuration);
+            }
+            else
+            {
+                // 第二阶段：速度渐弱
+                smoothT = Mathf.SmoothStep(1f, 0f, (elapsedTime - halfDuration) / halfDuration);
+            }
+
+            Vector3 currentVelocity = rb.velocity;
+            if (elapsedTime <= halfDuration)
+            {
+                currentVelocity.y = Mathf.Lerp(initialVerticalSpeed, initialVerticalSpeed + targetUpwardSpeed, smoothT);
+            }
+            else
+            {
+                currentVelocity.y = Mathf.Lerp(initialVerticalSpeed + targetUpwardSpeed, initialVerticalSpeed, smoothT);
+            }
+            rb.velocity = currentVelocity;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        isAddingUpwardVelocity = false; // 恢复标志位
+    }
+
+    //水平转向
     private IEnumerator SmoothRotateAway(Vector3 direction, float duration)
     {
         isRotatingAway = true;
