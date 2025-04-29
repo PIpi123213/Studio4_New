@@ -147,7 +147,10 @@ public class ZipLine : MonoBehaviour
         //设置为zipline子物体
         Transform originalParent = playerTransform.parent;
         playerTransform.SetParent(zipLineHandler);
-        StartCoroutine(setSlideringPlayerposition());
+
+        //取消交互以防止位置偏移
+        grabInteractable.interactionLayers = 0;
+        //StartCoroutine(setSlideringPlayerposition());
         
 
 
@@ -208,6 +211,8 @@ public class ZipLine : MonoBehaviour
     }
     public IEnumerator setSlideringPlayerposition()
     {
+       
+       
         while (Vector3.Distance(playerTransform.localPosition, sliderPlayerposition) > 0.1f)
         {
             // 加速逻辑
@@ -244,7 +249,7 @@ public class ZipLine : MonoBehaviour
             }
         }
         // **恢复交互**
-        //grabInteractable.interactionLayers = originalLayer;
+        grabInteractable.interactionLayers = originalLayer;
         //dynamicMoveProvider.useGravity = true;
         // **强制释放玩家**
     }
