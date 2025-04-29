@@ -14,19 +14,22 @@ public class WingSuitMoveController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
+        // 同步 Rigidbody 的初始旋转
+        rb.rotation = transform.rotation;
+
         //生成尾翼
-        trailRenderer = gameObject.AddComponent<TrailRenderer>();
-        trailRenderer.time       = 100.0f;
-        trailRenderer.startWidth = 0.5f;
-        trailRenderer.endWidth   = 0.1f;
-        trailRenderer.material   = new Material(Shader.Find("Sprites/Default"));
-        trailRenderer.startColor = Color.white;
-        trailRenderer.endColor   = Color.clear;
+        // trailRenderer = gameObject.AddComponent<TrailRenderer>();
+        // trailRenderer.time       = 100.0f;
+        // trailRenderer.startWidth = 0.5f;
+        // trailRenderer.endWidth   = 0.1f;
+        // trailRenderer.material   = new Material(Shader.Find("Sprites/Default"));
+        // trailRenderer.startColor = Color.white;
+        // trailRenderer.endColor   = Color.clear;
     }
 
     void Update()
     {
-        Debug.DrawRay(transform.position, -transform.forward * 10f, Color.red);
+        // Debug.DrawRay(transform.position, -transform.forward * 10f, Color.red);
     }
 
     private void FixedUpdate()
@@ -47,6 +50,9 @@ public class WingSuitMoveController : MonoBehaviour
 
         DetectDive();
 
+        // 根据 rb.velocity.y 动态调整 glideSpeed
+        // glideSpeed = Mathf.Lerp(500f, 2000f, Mathf.Clamp01(rb.velocity.y / 10f)); // 这里假设 rb.velocity.y 在 0 到 10 之间变化
+
         Vector3 glideVelocity = transform.forward * glideSpeed;
         glideVelocity.y = verticalSpeed;
 
@@ -64,7 +70,7 @@ public class WingSuitMoveController : MonoBehaviour
     {
         if (isRotatingAway) return; // 如果正在旋转，跳过输入控制
 
-        yaw        += (leftController.position.y - rightController.position.y) * 30f * Time.deltaTime;
+        yaw        += (leftController.position.y - rightController.position.y) * 70f * Time.deltaTime;
         currentYaw =  Mathf.SmoothDampAngle(currentYaw, yaw, ref yawVelocity, 1f);
 
         Quaternion targetRotation = Quaternion.Euler(0f, currentYaw, 0f);
@@ -87,7 +93,7 @@ public class WingSuitMoveController : MonoBehaviour
         else // 接近竖直
         {
             Debug.Log("Vertical object detected, rotating...");
-            Vector3 directionAway = transform.forward * 1f + (transform.position - contactPoint).normalized;
+            Vector3 directionAway = transform.forward * 2f + (transform.position - contactPoint).normalized;
             StartCoroutine(SmoothRotateAway(directionAway, 2f));
         }
 
@@ -117,45 +123,50 @@ public class WingSuitMoveController : MonoBehaviour
     // 触发器检测到地面后，抬起玩家
     private bool isAddingUpwardVelocity = false; // 标志位
 
-    private IEnumerator GraduallyAddUpwardVelocity(float targetUpwardSpeed, float duration)
+    private IEnumerator GraduallyAddUpwardVelocity(float additionalUpwardSpeed, float duration)
     {
         isAddingUpwardVelocity = true; // 设置标志位
 
         float elapsedTime          = 0f;
-        float halfDuration         = duration / 2f; // 分为两段时间
-        float initialVerticalSpeed = rb.velocity.y;
+        float initialVerticalSpeed = rb.velocity.y; // 获取当前的垂直速度
 
         while (elapsedTime < duration)
         {
             float t = elapsedTime / duration;
 
-            // 根据时间分段处理速度插值
-            float smoothT;
-            if (elapsedTime <= halfDuration)
-            {
-                // 第一阶段：速度渐强
-                smoothT = Mathf.SmoothStep(0f, 1f, elapsedTime / halfDuration);
-            }
-            else
-            {
-                // 第二阶段：速度渐弱
-                smoothT = Mathf.SmoothStep(1f, 0f, (elapsedTime - halfDuration) / halfDuration);
-            }
+            // 使用平滑插值增加向上的速度
+            float smoothT        = Mathf.SmoothStep(0f, 1f, t);
+            float upwardVelocity = Mathf.Lerp(0f, additionalUpwardSpeed, smoothT);
 
             Vector3 currentVelocity = rb.velocity;
-            if (elapsedTime <= halfDuration)
-            {
-                currentVelocity.y = Mathf.Lerp(initialVerticalSpeed, initialVerticalSpeed + targetUpwardSpeed, smoothT);
-            }
-            else
-            {
-                currentVelocity.y = Mathf.Lerp(initialVerticalSpeed + targetUpwardSpeed, initialVerticalSpeed, smoothT);
-            }
-            rb.velocity = currentVelocity;
+            currentVelocity.y = initialVerticalSpeed + upwardVelocity;
+            rb.velocity       = currentVelocity;
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        // 平滑过渡到正常的垂直速度
+        float transitionDuration = 1f; // 过渡时间
+        float transitionElapsed  = 0f;
+        float finalVerticalSpeed = defaultVerticalSpeed; // 目标垂直速度
+
+        while (transitionElapsed < transitionDuration)
+        {
+            float t = transitionElapsed / transitionDuration;
+
+            // 平滑插值到目标垂直速度
+            float smoothT       = Mathf.SmoothStep(0f, 1f, t);
+            float verticalSpeed = Mathf.Lerp(rb.velocity.y, finalVerticalSpeed, smoothT);
+
+            Vector3 currentVelocity = rb.velocity;
+            currentVelocity.y = verticalSpeed;
+            rb.velocity       = currentVelocity;
+
+            transitionElapsed += Time.deltaTime;
+            yield return null;
+        }
+
         isAddingUpwardVelocity = false; // 恢复标志位
     }
 
