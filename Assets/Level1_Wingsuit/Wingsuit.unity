@@ -7581,6 +7581,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1528460577277966045, guid: 264b3d032826ee94db94c06198ca3ace,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528460577277966045, guid: 264b3d032826ee94db94c06198ca3ace,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528460577277966045, guid: 264b3d032826ee94db94c06198ca3ace,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528460577277966045, guid: 264b3d032826ee94db94c06198ca3ace,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -5787
       objectReference: {fileID: 0}
@@ -7978,6 +7993,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672241980981171452, guid: 264b3d032826ee94db94c06198ca3ace,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4715772757515184311, guid: 264b3d032826ee94db94c06198ca3ace,
         type: 3}
@@ -75287,7 +75307,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138606283}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -75735,17 +75755,17 @@ PrefabInstance:
     - target: {fileID: 6238422983563143754, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12666
+      value: 10078
       objectReference: {fileID: 0}
     - target: {fileID: 6238422983563143754, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5080
+      value: 7528
       objectReference: {fileID: 0}
     - target: {fileID: 6238422983563143754, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1125
+      value: -7472
       objectReference: {fileID: 0}
     - target: {fileID: 6238422983563143754, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
