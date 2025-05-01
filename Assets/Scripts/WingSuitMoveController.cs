@@ -27,18 +27,18 @@ public class WingSuitMoveController : MonoBehaviour
         // trailRenderer.endColor   = Color.clear;
     }
 
-    void Update()
-    {
-        // Debug.DrawRay(transform.position, -transform.forward * 10f, Color.red);
-    }
+ 
 
-    private void FixedUpdate()
+    private void Update()
     {
         ApplyMovement();
         if (!isRotatingAway) // 只有不处于纠正旋转时才响应输入
         {
             ApplyRotation();
         }
+
+        LimitPlayerHeight();
+
         Debug.Log("Rigidbody Velocity: " + rb.velocity);
 
     }
@@ -123,6 +123,25 @@ public class WingSuitMoveController : MonoBehaviour
     // 触发器检测到地面后，抬起玩家
     private bool isAddingUpwardVelocity = false; // 标志位
 
+    private void LimitPlayerHeight()
+    {
+        float      maxDistanceFromGround = 30f; // 最大离地距离
+        RaycastHit hit;
+
+        // 从玩家位置向下发射射线
+        if (Physics.Raycast(transform.position, Vector3.down, out hit))
+        {
+            float distanceFromGround = hit.distance;
+
+            if (distanceFromGround > maxDistanceFromGround)
+            {
+                // 如果超过最大距离，强制调整垂直速度向下
+                Vector3 currentVelocity = rb.velocity;
+                currentVelocity.y = Mathf.Min(currentVelocity.y, -1f); // 确保速度向下
+                rb.velocity       = currentVelocity;
+            }
+        }
+    }
     private IEnumerator GraduallyAddUpwardVelocity(float additionalUpwardSpeed, float duration)
     {
         isAddingUpwardVelocity = true; // 设置标志位
