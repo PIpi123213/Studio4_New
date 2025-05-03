@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 public class SceneTransitionManager : MonoBehaviour
 {
 
-    public static            SceneTransitionManager Instance { get; private set; }
-    public                   string                 CurrentSceneName;
-    [SerializeField] private GameObject             WhiteFadeIn;
+    public static SceneTransitionManager Instance { get; private set; }
+    public        string                 CurrentSceneName;
+    public        FadeScreen             fadeScreen;
 
     private void Awake()
     {
@@ -37,8 +37,7 @@ public class SceneTransitionManager : MonoBehaviour
             //MoveManager.Instance.OnSceneOut();
             /*Scene currentScene = SceneManager.GetActiveScene();
             SceneTransitionManager.Instance.GoToScene(currentScene.name);*/
-
-            StartCoroutine(FadeInAndGoToScene("Climb_Test 1", 2f));
+            StartCoroutine(FadeOutAndGoToSceneRoutine("New Scene"));
 
 
         }
@@ -46,14 +45,7 @@ public class SceneTransitionManager : MonoBehaviour
 
 
     }
-    private IEnumerator FadeInAndGoToScene(string sceneName, float fadeDuration)
-    {
-        // 运行 FadeWhiteInMaterial 协程
-        yield return StartCoroutine(FadeWhiteInMaterial(fadeDuration));
 
-        // 在 FadeWhiteInMaterial 完成后运行 GoToSceneAsync
-        yield return StartCoroutine(GoToSceneAsyncRoutine(sceneName));
-    }
     private void UpdateCurrentScene()
     {
         CurrentSceneName = SceneManager.GetActiveScene().name;
@@ -68,6 +60,16 @@ public class SceneTransitionManager : MonoBehaviour
 
     private IEnumerator GoToSceneRoutine(string sceneIndex)
     {
+        SceneManager.LoadScene(sceneIndex);
+        yield return null;
+        UpdateCurrentScene();
+
+    }
+    private IEnumerator FadeOutAndGoToSceneRoutine(string sceneIndex)
+    {
+        fadeScreen.FadeOut(fadeScreen.FadeDuration);
+        yield return new WaitForSeconds(fadeScreen.FadeDuration);
+
         SceneManager.LoadScene(sceneIndex);
         yield return null;
         UpdateCurrentScene();
@@ -99,38 +101,5 @@ public class SceneTransitionManager : MonoBehaviour
         }
 
         UpdateCurrentScene();
-    }
-    private IEnumerator FadeWhiteInMaterial(float duration)
-    {
-        if (WhiteFadeIn == null)
-        {
-            Debug.LogError("WhiteFadeIn GameObject is not assigned.");
-            yield break;
-        }
-
-        Renderer renderer = WhiteFadeIn.GetComponent<Renderer>();
-        if (renderer == null || renderer.material == null)
-        {
-            Debug.LogError("WhiteFadeIn does not have a Renderer or Material.");
-            yield break;
-        }
-
-        Material material     = renderer.material;
-        Color    initialColor = material.color;
-        Color    targetColor  = new Color(initialColor.r, initialColor.g, initialColor.b, 1f); // Alpha = 1 (255)
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            float t = elapsedTime / duration;
-            material.color = Color.Lerp(initialColor, targetColor, t);
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        // Ensure the final color is set
-        material.color = targetColor;
     }
 }
