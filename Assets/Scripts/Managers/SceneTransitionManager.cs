@@ -4,9 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-   
-    public static SceneTransitionManager Instance { get; private set; }
-    public string CurrentSceneName;
+
+    public static            SceneTransitionManager Instance { get; private set; }
+    public                   string                 CurrentSceneName;
+    [SerializeField] private GameObject             WhiteFadeIn;
 
     private void Awake()
     {
@@ -23,35 +24,45 @@ public class SceneTransitionManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            MoveManager.Instance.OnSceneIn();//¼ÇÂ¼Î»ÖÃ
+            // MoveManager.Instance.OnSceneIn();//ï¿½ï¿½Â¼Î»ï¿½ï¿½
             //MoveManager.Instance.OnSceneOut();
             /*Scene currentScene = SceneManager.GetActiveScene();
             SceneTransitionManager.Instance.GoToScene(currentScene.name);*/
             GoToScene("New Scene");
-           
+
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            MoveManager.Instance.OnSceneIn();//¼ÇÂ¼Î»ÖÃ
+            // MoveManager.Instance.OnSceneIn();//ï¿½ï¿½Â¼Î»ï¿½ï¿½
             //MoveManager.Instance.OnSceneOut();
             /*Scene currentScene = SceneManager.GetActiveScene();
             SceneTransitionManager.Instance.GoToScene(currentScene.name);*/
-            GoToScene("Climb_Test 1");
+
+            StartCoroutine(FadeInAndGoToScene("Climb_Test 1", 2f));
+
 
         }
 
 
 
+    }
+    private IEnumerator FadeInAndGoToScene(string sceneName, float fadeDuration)
+    {
+        // è¿è¡Œ FadeWhiteInMaterial åç¨‹
+        yield return StartCoroutine(FadeWhiteInMaterial(fadeDuration));
+
+        // åœ¨ FadeWhiteInMaterial å®Œæˆåè¿è¡Œ GoToSceneAsync
+        yield return StartCoroutine(GoToSceneAsyncRoutine(sceneName));
     }
     private void UpdateCurrentScene()
     {
         CurrentSceneName = SceneManager.GetActiveScene().name;
         Debug.Log($"Current Scene: {CurrentSceneName}");
     }
-    // Í¬²½³¡¾°¼ÓÔØ
+    // Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void GoToScene(string sceneIndex)
     {
-      
+
         StartCoroutine(GoToSceneRoutine(sceneIndex));
     }
 
@@ -63,7 +74,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     }
 
-    // Òì²½³¡¾°¼ÓÔØ£¨´ø½ø¶È¿ØÖÆ£©
+    // ï¿½ì²½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½ï¿½Æ£ï¿½
     public void GoToSceneAsync(string sceneIndex)
     {
         StartCoroutine(GoToSceneAsyncRoutine(sceneIndex));
@@ -71,22 +82,55 @@ public class SceneTransitionManager : MonoBehaviour
 
     private IEnumerator GoToSceneAsyncRoutine(string sceneIndex)
     {
-     
+
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         operation.allowSceneActivation = false;
 
         float timer = 0;
-     
+
 
         operation.allowSceneActivation = true;
 
-        // µÈ´ı³¡¾°ÍêÈ«¼¤»î
+        // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
         while (!operation.isDone)
         {
             yield return null;
         }
 
         UpdateCurrentScene();
+    }
+    private IEnumerator FadeWhiteInMaterial(float duration)
+    {
+        if (WhiteFadeIn == null)
+        {
+            Debug.LogError("WhiteFadeIn GameObject is not assigned.");
+            yield break;
+        }
+
+        Renderer renderer = WhiteFadeIn.GetComponent<Renderer>();
+        if (renderer == null || renderer.material == null)
+        {
+            Debug.LogError("WhiteFadeIn does not have a Renderer or Material.");
+            yield break;
+        }
+
+        Material material     = renderer.material;
+        Color    initialColor = material.color;
+        Color    targetColor  = new Color(initialColor.r, initialColor.g, initialColor.b, 1f); // Alpha = 1 (255)
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            material.color = Color.Lerp(initialColor, targetColor, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the final color is set
+        material.color = targetColor;
     }
 }
