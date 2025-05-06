@@ -3,22 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Left Hand
-  - Right Hand
-  - SamplesInfoPanel
-  - Rock
-  - Ground
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - ClimbPoints
   - 
-  - Rock
+  - 
+  - 
   - 
   - 
   - 
