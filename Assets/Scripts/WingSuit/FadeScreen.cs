@@ -54,7 +54,7 @@ public class FadeScreen : MonoBehaviour
             float t = elapsedTime / duration;
             targetColor.a           = Mathf.Lerp(alphaIn, alphaOut, t);
             renderer.material.color = targetColor;
-            Debug.Log("透明度："+renderer.material.color.a);
+            //Debug.Log("透明度："+renderer.material.color.a);
             elapsedTime    += Time.deltaTime;
 
 
