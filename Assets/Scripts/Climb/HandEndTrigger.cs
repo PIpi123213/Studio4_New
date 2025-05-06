@@ -12,10 +12,11 @@ public class HandEndTrigger : MonoBehaviour
     private XRInteractionManager interactionManager;
     private InteractionLayerMask originalLayer;
     public CustomClimbInteractable ClimbInteractable1;
+    public GameObject handend;
     public Trigger2 trigger2 ;
     void Start()
     {
-        ClimbInteractable1 = GetComponent<CustomClimbInteractable>();
+        //ClimbInteractable1 = GetComponent<CustomClimbInteractable>();
 
      
         ClimbInteractable1.selectEntered.AddListener(OnSelectEnter);
@@ -33,21 +34,21 @@ public class HandEndTrigger : MonoBehaviour
     }
     private void OnSelectEnter(SelectEnterEventArgs args)
     {
-        End();
+        StartCoroutine(End());
     }
-    private void End()
+    private IEnumerator End()
     {
-        ClimbInteractable1.enabled = false;
+
+        yield return new WaitForSeconds(0.3f);
+        handend.SetActive(false);
 
 
-
-        
         //ClimbInteractable1.interactionLayers = 0;
         trigger2.Endanimation();
 
         StaticPoint.target = StaticPoint.gameObject.transform;
         StaticPoint.attachmentType = ObiParticleAttachment.AttachmentType.Dynamic;
-
+        yield return null;
 
     }
 
