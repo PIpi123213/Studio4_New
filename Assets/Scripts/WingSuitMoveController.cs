@@ -17,6 +17,9 @@ public class WingSuitMoveController : MonoBehaviour
         // 同步 Rigidbody 的初始旋转
         rb.rotation = transform.rotation;
 
+        currentYaw = transform.eulerAngles.y; // 初始化 currentYaw
+        yaw        = currentYaw;
+
         //生成尾翼
         // trailRenderer = gameObject.AddComponent<TrailRenderer>();
         // trailRenderer.time       = 100.0f;
@@ -27,7 +30,7 @@ public class WingSuitMoveController : MonoBehaviour
         // trailRenderer.endColor   = Color.clear;
     }
 
- 
+
 
     private void Update()
     {
@@ -63,7 +66,7 @@ public class WingSuitMoveController : MonoBehaviour
     private                  float     yaw = 0f;
     [SerializeField] private Transform leftController;
     [SerializeField] private Transform rightController;
-    private                  float     currentYaw  = 0f; // 实际旋转的 Y 值（带缓动）
+    private                  float     currentYaw ; // 实际旋转的 Y 值（带缓动）
     private                  float     yawVelocity = 0f; // 平滑用的速度缓存变量
 
     private void ApplyRotation()
