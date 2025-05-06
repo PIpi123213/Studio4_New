@@ -16,10 +16,22 @@ public class SignalReceiver : MonoBehaviour
             Debug.LogWarning("TimelineSignalReceiver: 没有找到 PlayableDirector 组件！");
         }
     }*/
+    
+    public const string Photo1End = "Photo1End";
+    public const string Photo2End = "Photo2End";
+    public const string Photo3End = "Photo3End";
 
     public void OnInterationComplete()
     {
         EventManager.Instance.Trigger(ARInteractionManager.InteractionComplete,null);
     }
 
+    public void TriggerEvent(string eventName)
+    {
+        // 触发事件
+        EventManager.Instance.Trigger(eventName, null);
+        /*
+        Debug.Log("1111");
+    */
+    }
 }

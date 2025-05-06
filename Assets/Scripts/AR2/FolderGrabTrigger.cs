@@ -21,8 +21,7 @@ public class FolderGrabTrigger : MonoBehaviour
     private void OnSelectEnter(SelectEnterEventArgs args)
     {
         Debug.Log("Folder grabbed!");
-        // 例如：改变材质颜色
-        GetComponent<Renderer>().material.color = Color.blue;
+
         if (!hasTriggered)
         {
             hasTriggered = true;
