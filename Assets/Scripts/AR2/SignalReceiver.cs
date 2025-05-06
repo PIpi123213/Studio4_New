@@ -20,6 +20,7 @@ public class SignalReceiver : MonoBehaviour
     public const string Photo1End = "Photo1End";
     public const string Photo2End = "Photo2End";
     public const string Photo3End = "Photo3End";
+    public const string ToActiveCarton = "ToActiveCarton";
 
     public void OnInterationComplete()
     {
