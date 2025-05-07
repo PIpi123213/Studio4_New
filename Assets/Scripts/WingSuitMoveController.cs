@@ -5,13 +5,13 @@ using Unity.SharpZipLib.Zip.Compression.Streams;
 
 public class WingSuitMoveController : MonoBehaviour
 {
-    private Rigidbody rb;
+    private Rigidbody     rb;
     private TrailRenderer trailRenderer;
-    private bool isRotatingAway = false; // 新增标志
+    private bool          isRotatingAway = false; // 新增标志
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb            = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
         // 同步 Rigidbody 的初始旋转
@@ -35,26 +35,23 @@ public class WingSuitMoveController : MonoBehaviour
     private void Update()
     {
         ApplyMovement();
-        if (!isRotatingAway) // 只有不处于纠正旋转时才响应输入
-        {
-            ApplyRotation();
-        }
+
+        ApplyRotation();
 
         LimitPlayerHeight();
 
-        Debug.Log("Rigidbody Velocity: " + rb.velocity);
+        CheckAndLiftIfGroundBelow();
 
+        // CheckSideRaycasts();
     }
 
     [SerializeField] private float glideSpeed = 1000f;
+
     private void ApplyMovement()
     {
-        if (isAddingUpwardVelocity) return; // 如果正在增加向上速度，跳过对 rb.velocity 的修改
+        // if (isAddingUpwardVelocity) return; // 如果正在增加向上速度，跳过对 rb.velocity 的修改
 
         DetectDive();
-
-        // 根据 rb.velocity.y 动态调整 glideSpeed
-        // glideSpeed = Mathf.Lerp(500f, 2000f, Mathf.Clamp01(rb.velocity.y / 10f)); // 这里假设 rb.velocity.y 在 0 到 10 之间变化
 
         Vector3 glideVelocity = transform.forward * glideSpeed;
         glideVelocity.y = verticalSpeed;
@@ -66,61 +63,184 @@ public class WingSuitMoveController : MonoBehaviour
     private                  float     yaw = 0f;
     [SerializeField] private Transform leftController;
     [SerializeField] private Transform rightController;
-    private                  float     currentYaw ; // 实际旋转的 Y 值（带缓动）
+    private                  float     currentYaw;       // 实际旋转的 Y 值（带缓动）
     private                  float     yawVelocity = 0f; // 平滑用的速度缓存变量
 
     private void ApplyRotation()
     {
         if (isRotatingAway) return; // 如果正在旋转，跳过输入控制
 
-        yaw        += (leftController.position.y - rightController.position.y) * 70f * Time.deltaTime;
-        currentYaw =  Mathf.SmoothDampAngle(currentYaw, yaw, ref yawVelocity, 1f);
+        yaw        += (leftController.position.y - rightController.position.y) * 120f;
+        currentYaw =  Mathf.Lerp(currentYaw, yaw, 1f);
 
         Quaternion targetRotation = Quaternion.Euler(0f, currentYaw, 0f);
         rb.MoveRotation(targetRotation);
     }
 
+    private void CheckSideRaycasts()
+    {
+        float rayLength = 20f;
+
+        // 向左发射射线
+        if (Physics.Raycast(transform.position, -transform.right, out RaycastHit leftHit, rayLength))
+        {
+            if (leftHit.collider.CompareTag("Wall")) // 检查是否为 Wall
+            {
+                Debug.Log("Left Wall detected: " + leftHit.collider.name);
+                StartCoroutine(MoveSideways(-transform.right, 30f, 1f)); // 向右移动
+            }
+        }
+
+        // 向右发射射线
+        if (Physics.Raycast(transform.position, transform.right, out RaycastHit rightHit, rayLength))
+        {
+            if (rightHit.collider.CompareTag("Wall")) // 检查是否为 Wall
+            {
+                Debug.Log("Right Wall detected: " + rightHit.collider.name);
+                StartCoroutine(MoveSideways(transform.right, 30f, 1f)); // 向左移动
+            }
+        }
+    }
+
+
+    private IEnumerator MoveSideways(Vector3 direction, float distance, float duration)
+    {
+        Vector3 startPosition  = transform.position;
+        Vector3 targetPosition = startPosition + direction * distance;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            float t       = elapsedTime / duration;
+            float smoothT = Mathf.SmoothStep(0f, 1f, t);
+
+            // 保留当前的前进速度
+            Vector3 forwardVelocity = rb.velocity.z * transform.forward;
+
+            // 计算侧向移动的位置
+            Vector3 sidewaysPosition = Vector3.Lerp(startPosition, targetPosition, smoothT);
+
+            // 使用 Rigidbody 的 MovePosition
+            rb.MovePosition(sidewaysPosition + forwardVelocity * Time.deltaTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 确保最终位置正确
+        rb.MovePosition(targetPosition + rb.velocity.z * transform.forward * Time.deltaTime);
+    }
+
+    // private void HandleSideCollision(RaycastHit hit)
+    // {
+    //     Vector3 contactPoint  = hit.point;
+    //     Vector3 directionAway = (transform.position - contactPoint).normalized + transform.forward;
+    //
+    //     // 执行旋转逻辑
+    //     StartCoroutine(SmoothRotateAway(directionAway, 1f));
+    // }
+
     //碰撞物体检测以及转向
-    private void OnTriggerEnter(Collider other)//检测
+    private void OnTriggerEnter(Collider other) //检测
     {
         Debug.Log("Detected object: " + other.name);
         // 获取碰撞点和法线
         Vector3 contactPoint       = other.ClosestPoint(transform.position);
         Vector3 directionToContact = (contactPoint - transform.position).normalized;
         // 判断法线方向
-        if (Mathf.Abs(directionToContact.y) > 0.7f) // 接近水平
+        if (other.CompareTag("Wall"))
         {
-            Debug.Log("Horizontal object detected, lifting...");
-            StartCoroutine(GraduallyAddUpwardVelocity(glideSpeed, 3f)); // 目标速度增量 10f，持续时间 1f
+            Debug.Log("Vertical object detected, rotating parallel to wall...");
+            Vector3 wallNormal = other.ClosestPoint(transform.position) - transform.position;
+            StartCoroutine(SmoothRotateParallelToWall(wallNormal, 2f));
         }
-        else // 接近竖直
+        else if (other.CompareTag("pillar"))
         {
-            Debug.Log("Vertical object detected, rotating...");
-            Vector3 directionAway = transform.forward * 2f + (transform.position - contactPoint).normalized;
-            StartCoroutine(SmoothRotateAway(directionAway, 2f));
+            // 计算物体相对于玩家的位置
+            Vector3 directionToObject = other.transform.position - transform.position;
+            float   dotProduct        = Vector3.Dot(transform.right, directionToObject);
+
+            if (dotProduct > 0) // 物体在玩家右边
+            {
+                Debug.Log("Object detected on the right, rotating to left-forward...");
+                Vector3 targetDirection = (transform.forward - transform.right).normalized; // 左前方
+                StartCoroutine(SmoothRotateToDirection(targetDirection, 1f));
+            }
+            else if (dotProduct < 0) // 物体在玩家左边
+            {
+                Debug.Log("Object detected on the left, rotating to right-forward...");
+                Vector3 targetDirection = (transform.forward + transform.right).normalized; // 右前方
+                StartCoroutine(SmoothRotateToDirection(targetDirection, 1f));
+            }
+        }
+    }
+
+
+    private IEnumerator SmoothRotateToDirection(Vector3 targetDirection, float duration)
+    {
+        isRotatingAway = true; // 暂停 ApplyRotation
+
+        Quaternion initialRotation = rb.rotation;
+        Quaternion targetRotation  = Quaternion.LookRotation(targetDirection);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            float t       = elapsedTime / duration;
+            float smoothT = Mathf.SmoothStep(0f, 1f, t);
+
+            // 插值旋转
+            Quaternion newRotation = Quaternion.Slerp(initialRotation, targetRotation, smoothT);
+            rb.MoveRotation(newRotation);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
+        // 确保最终角度更新
+        rb.MoveRotation(targetRotation);
+
+        // 更新 yaw 和 currentYaw
+        yaw         = targetRotation.eulerAngles.y;
+        currentYaw  = yaw;
+        yawVelocity = 0f;
+
+        isRotatingAway = false; // 恢复 ApplyRotation
     }
 
     [SerializeField] private float     defaultVerticalSpeed;
     [SerializeField] private float     gravityFactor = 10f; //控制俯冲比例
-    private                  float     verticalSpeed ;
+    private                  float     verticalSpeed;
     [SerializeField] private Transform Head;
+
     private void DetectDive()
     {
         float averageHeight = (Head.position.y) - ((leftController.position.y + rightController.position.y) / 2f);
-        if(averageHeight >= 0f)
+        if (averageHeight >= 0f)
         {
             verticalSpeed = defaultVerticalSpeed - averageHeight * gravityFactor;
 
         }
         else
         {
-            verticalSpeed = Mathf.Lerp(defaultVerticalSpeed, defaultVerticalSpeed * 0.5f, Mathf.Abs(averageHeight) / 0.5f) - averageHeight * gravityFactor; // 俯冲时，速度会减小
+            verticalSpeed =
+                Mathf.Lerp(defaultVerticalSpeed, defaultVerticalSpeed * 0.5f, Mathf.Abs(averageHeight) / 0.5f) -
+                averageHeight * gravityFactor; // 俯冲时，速度会减小
         }
+    }
 
-        Debug.Log("Vertical Speed: " + verticalSpeed);
-
+    private void CheckAndLiftIfGroundBelow()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 20f))
+        {
+            if (hit.collider.CompareTag("Ground"))
+            {
+                StartCoroutine(GraduallyAddAndReduceUpwardVelocity(30f, 2f));
+            }
+        }
     }
 
     // 触发器检测到地面后，抬起玩家
@@ -128,7 +248,7 @@ public class WingSuitMoveController : MonoBehaviour
 
     private void LimitPlayerHeight()
     {
-        float      maxDistanceFromGround = 30f; // 最大离地距离
+        float      maxDistanceFromGround = 70f; // 最大离地距离
         RaycastHit hit;
 
         // 从玩家位置向下发射射线
@@ -145,47 +265,30 @@ public class WingSuitMoveController : MonoBehaviour
             }
         }
     }
-    private IEnumerator GraduallyAddUpwardVelocity(float additionalUpwardSpeed, float duration)
+
+    private IEnumerator GraduallyAddAndReduceUpwardVelocity(float maxUpwardSpeed, float duration)
     {
         isAddingUpwardVelocity = true; // 设置标志位
 
-        float elapsedTime          = 0f;
-        float initialVerticalSpeed = rb.velocity.y; // 获取当前的垂直速度
+        float halfDuration = duration / 2f; // 加速和减速各占一半时间
+        float elapsedTime  = 0f;
 
         while (elapsedTime < duration)
         {
-            float t = elapsedTime / duration;
+            float t = elapsedTime < halfDuration
+                ? elapsedTime / halfDuration                   // 前半段加速
+                : (elapsedTime - halfDuration) / halfDuration; // 后半段减速
 
-            // 使用平滑插值增加向上的速度
-            float smoothT        = Mathf.SmoothStep(0f, 1f, t);
-            float upwardVelocity = Mathf.Lerp(0f, additionalUpwardSpeed, smoothT);
+            float smoothT = Mathf.SmoothStep(0f, 1f, t);
+            float upwardVelocity = elapsedTime < halfDuration
+                ? Mathf.Lerp(1f, maxUpwardSpeed, smoothT)  // 从1加速到maxUpwardSpeed
+                : Mathf.Lerp(maxUpwardSpeed, 1f, smoothT); // 从maxUpwardSpeed减速到1
 
             Vector3 currentVelocity = rb.velocity;
-            currentVelocity.y = initialVerticalSpeed + upwardVelocity;
+            currentVelocity.y = upwardVelocity;
             rb.velocity       = currentVelocity;
 
             elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        // 平滑过渡到正常的垂直速度
-        float transitionDuration = 1f; // 过渡时间
-        float transitionElapsed  = 0f;
-        float finalVerticalSpeed = defaultVerticalSpeed; // 目标垂直速度
-
-        while (transitionElapsed < transitionDuration)
-        {
-            float t = transitionElapsed / transitionDuration;
-
-            // 平滑插值到目标垂直速度
-            float smoothT       = Mathf.SmoothStep(0f, 1f, t);
-            float verticalSpeed = Mathf.Lerp(rb.velocity.y, finalVerticalSpeed, smoothT);
-
-            Vector3 currentVelocity = rb.velocity;
-            currentVelocity.y = verticalSpeed;
-            rb.velocity       = currentVelocity;
-
-            transitionElapsed += Time.deltaTime;
             yield return null;
         }
 
@@ -193,18 +296,22 @@ public class WingSuitMoveController : MonoBehaviour
     }
 
     //水平转向
-    private IEnumerator SmoothRotateAway(Vector3 direction, float duration)
+    private IEnumerator SmoothRotateParallelToWall(Vector3 wallNormal, float duration)
     {
-        isRotatingAway = true;
+        isRotatingAway = true; // 暂停 ApplyRotation
 
         Quaternion initialRotation = rb.rotation;
 
-        // 仅计算目标方向的 yaw 旋转
-        Vector3    targetDirection = new Vector3(direction.x, 0f, direction.z).normalized;
-        Quaternion targetRotation  = Quaternion.LookRotation(targetDirection);
+        // 计算与墙平行的方向
+        Vector3 parallelDirection = Vector3.Cross(wallNormal, Vector3.up).normalized;
 
-        // 保持当前的 pitch 和 roll
-        targetRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
+        // 确保方向与当前前进方向一致
+        if (Vector3.Dot(parallelDirection, transform.forward) < 0)
+        {
+            parallelDirection = -parallelDirection;
+        }
+
+        Quaternion targetRotation = Quaternion.LookRotation(parallelDirection);
 
         float elapsedTime = 0f;
 
@@ -213,21 +320,22 @@ public class WingSuitMoveController : MonoBehaviour
             float t       = elapsedTime / duration;
             float smoothT = Mathf.SmoothStep(0f, 1f, t);
 
+            // 插值旋转
             Quaternion newRotation = Quaternion.Slerp(initialRotation, targetRotation, smoothT);
-
             rb.MoveRotation(newRotation);
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
+        // 确保最终角度更新
         rb.MoveRotation(targetRotation);
 
-        // 确保最终角度更新
+        // 更新 yaw 和 currentYaw
         yaw         = targetRotation.eulerAngles.y;
         currentYaw  = yaw;
         yawVelocity = 0f;
 
-        isRotatingAway = false;
+        isRotatingAway = false; // 恢复 ApplyRotation
     }
-
 }

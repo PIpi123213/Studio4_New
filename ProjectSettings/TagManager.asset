@@ -4,21 +4,21 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Left Hand
+  - Ground
   - Right Hand
-  - SamplesInfoPanel
-  - Rock
-  - HandEnd
+  - Left Hand
+  - Wall
+  - pillar
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - ClimbPoints
   - 
-  - Rock
+  - 
+  - 
   - 
   - 
   - 
