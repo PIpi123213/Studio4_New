@@ -72,7 +72,7 @@ public class Trigger2 : MonoBehaviour
         //��������
 
         
-        MoveManager.Instance.OnSceneIn();//��¼λ��
+        //MoveManager.Instance.OnSceneIn();//��¼λ��
         // ��ɺ�ִ�г����л��������߼�
         Debug.Log("All animations completed!");
         Arinteraction.SetActive(false);

@@ -2506,7 +2506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3213779316297709596
 Transform:
   m_ObjectHideFlags: 0
@@ -6046,7 +6046,7 @@ RectTransform:
   m_GameObject: {fileID: 2112534905044268785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.57967657, y: 500, z: 0.8928572}
+  m_LocalScale: {x: 0.5500319, y: 474.43, z: 0.84719646}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5449813571193036602}
@@ -12122,7 +12122,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4082796751929805033}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: -0.0205}
+  m_LocalPosition: {x: 0, y: 0, z: -0.029}
   m_LocalScale: {x: 0.004563399, y: 0.004563399, z: 0.004563399}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12130,7 +12130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.457, y: 0.01}
+  m_AnchoredPosition: {x: -0.007, y: 0.01}
   m_SizeDelta: {x: 208.4302, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7159015049438888067
@@ -12161,16 +12161,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "My dear nephew,\nSince you've found your way here, I assume you've already
-    heard of my passing. \nAs you know, I was a successful game designer\u2014the
-    mind behind the most popular brain-machine experience games on the market. I
-    built an entertainment empire, crafting the most immersive and exhilarating experiences
-    for countless people.\nThis is the final game I ever created, and I've left something
-    here for you.\n                          Take care,\n                               
-    Matt"
+  m_text: "\u6211\u4EB2\u7231\u7684\u4F84\u5B50:\n  \n    \u65E2\u7136\u4F60\u6765\u5230\u8FD9\u91CC\uFF0C\u60F3\u5FC5\u4F60\u5DF2\u7ECF\u542C\u95FB\u4E86\u6211\u7684\u6B7B\u8BAF\u3002\n 
+    \n    \u5982\u4F60\u6240\u77E5\uFF0C\u6211\u662F\u4E00\u540D\u6210\u529F\u7684\u6E38\u620F\u8BBE\u8BA1\u5E08\uFF0C\u4E00\u624B\u6253\u9020\u4E86\u73B0\u5728\u5E02\u9762\u4E0A\u6700\u6D41\u884C\u7684\u8111\u673A\u4F53\u9A8C\u6E38\u620F\uFF0C\u521B\u5EFA\u4E86\u5A31\u4E50\u4E1A\u7684\u5546\u4E1A\u5E1D\u56FD\uFF0C\u4E3A\u65E0\u6570\u7684\u4EBA\u521B\u9020\u4E86\u6700\u6C89\u6D78\u6700\u523A\u6FC0\u7684\u4F53\u9A8C\u3002\n\n   
+    \u8FD9\u662F\u6211\u5236\u4F5C\u7684\u6700\u540E\u4E00\u573A\u6E38\u620F\u4F53\u9A8C\uFF0C\u6211\u5728\u8FD9\u91CC\u7ED9\u4F60\u7559\u4E86\u4E00\u4E9B\u4E1C\u897F\u3002\n                  
+    \n\n                     \u8205\u8205 Matt"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7a9e9945064e898468306b32e6d3f620, type: 2}
+  m_sharedMaterial: {fileID: -8533052345625654376, guid: 7a9e9945064e898468306b32e6d3f620,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12194,21 +12192,21 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11
-  m_fontSizeBase: 11
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: -8.6
-  m_wordSpacing: 21.9
-  m_lineSpacing: -80.43
+  m_characterSpacing: -10.6
+  m_wordSpacing: 30
+  m_lineSpacing: 61.8
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 71.6
+  m_paragraphSpacing: -57.4
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
@@ -25985,7 +25983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7798596790347974453
 Transform:
   m_ObjectHideFlags: 0
@@ -25995,7 +25993,7 @@ Transform:
   m_GameObject: {fileID: 8689868856180088620}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0046, y: 0, z: -0.0001}
   m_LocalScale: {x: 0.3, y: 0.00034780594, z: 0.19477132}
   m_ConstrainProportionsScale: 1
   m_Children:
