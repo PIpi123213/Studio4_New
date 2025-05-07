@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0026875848, g: 0.0021359848, b: 0.00080011867, a: 1}
+  m_IndirectSpecularColor: {r: 0.000018149758, g: 0.000000031945266, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -183,7 +183,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 62
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -209,13 +209,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118175162}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.052124746, y: 0.54487467, z: 0.033963487, w: 0.8362064}
+  m_LocalPosition: {x: -10.2, y: 10.34, z: -8.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -7.134, y: 66.177, z: 0}
 --- !u!114 &1118175166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,13 +348,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131104943}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.91052556, y: -0.05652043, z: -0.38743332, w: 0.13283136}
+  m_LocalRotation: {x: -0.37706858, y: -0.35715085, z: -0.1604446, w: 0.83935696}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -163.4, y: -46.1, z: 0}
+  m_LocalEulerAnglesHint: {x: -48.383, y: -46.1, z: 0}
 --- !u!114 &2131104946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +447,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5179556818153971157, guid: a51553ccaba8da14ba6c91585743c2e3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a51553ccaba8da14ba6c91585743c2e3, type: 3}
