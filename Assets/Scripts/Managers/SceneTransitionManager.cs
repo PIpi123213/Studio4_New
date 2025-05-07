@@ -26,9 +26,9 @@ public class SceneTransitionManager : MonoBehaviour
         {
             // MoveManager.Instance.OnSceneIn();//��¼λ��
             //MoveManager.Instance.OnSceneOut();
-            /*Scene currentScene = SceneManager.GetActiveScene();
-            SceneTransitionManager.Instance.GoToScene(currentScene.name);*/
-            GoToScene("New Scene");
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneTransitionManager.Instance.GoToScene(currentScene.name);
+            //GoToScene("New Scene");
 
         }
         if (Input.GetKeyDown(KeyCode.B))

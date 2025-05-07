@@ -45,7 +45,7 @@ public class HandEndTrigger : MonoBehaviour
 
         //ClimbInteractable1.interactionLayers = 0;
         trigger2.Endanimation();
-
+        yield return new WaitForSeconds(0.2f);
         StaticPoint.target = StaticPoint.gameObject.transform;
         StaticPoint.attachmentType = ObiParticleAttachment.AttachmentType.Dynamic;
         yield return null;

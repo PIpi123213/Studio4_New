@@ -21,7 +21,8 @@ public class Trigger2 : MonoBehaviour
     public Vector3 lakeTargetPosition = new Vector3(0, 0, 0);
     public Vector3 lakeStartPosition = new Vector3(0, 0, 0);
     public GameObject VFX;
-   
+    public GameObject Arinteraction;
+    public GameObject FirstRope;
     //public GameObject postprocess;
 
     private void Awake()
@@ -74,7 +75,7 @@ public class Trigger2 : MonoBehaviour
         MoveManager.Instance.OnSceneIn();//��¼λ��
         // ��ɺ�ִ�г����л��������߼�
         Debug.Log("All animations completed!");
-
+        Arinteraction.SetActive(false);
         //gameObject.SetActive(false);
 
 
@@ -89,7 +90,7 @@ public class Trigger2 : MonoBehaviour
     public IEnumerator RunBothAnimations_out()
     {
        
-
+        FirstRope.SetActive(false);
         Coroutine radiusRoutine = StartCoroutine(AnimateRadius_out());
         //Coroutine opacityRoutine = StartCoroutine(AnimateOpacity_out());
         Coroutine SkyopacityRoutine = StartCoroutine(AnimateSkybox_out());
