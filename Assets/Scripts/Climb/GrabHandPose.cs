@@ -116,6 +116,8 @@ public class GrabHandPose : MonoBehaviour
         finalHandPosition_left = new Vector3(h2.root.localPosition.x / h2.root.localScale.x,
             h2.root.localPosition.y / h2.root.localScale.y, h2.root.localPosition.z / h2.root.localScale.z);
 
+        startingHandPosition_left = h1.orginLocalPos;
+
         startingHandRotation_left = h1.root.localRotation;
         finalHandRotation_left = h2.root.localRotation;
 
@@ -134,6 +136,9 @@ public class GrabHandPose : MonoBehaviour
             h1.root.localPosition.y / h1.root.localScale.y, h1.root.localPosition.z / h1.root.localScale.z);
         finalHandPosition_right = new Vector3(h2.root.localPosition.x / h2.root.localScale.x,
             h2.root.localPosition.y / h2.root.localScale.y, h2.root.localPosition.z / h2.root.localScale.z);
+
+        startingHandPosition_right = h1.orginLocalPos;
+
 
         startingHandRotation_right = h1.root.localRotation;
         finalHandRotation_right = h2.root.localRotation;

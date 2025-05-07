@@ -22,6 +22,15 @@ public class SceneTransitionManager : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            // MoveManager.Instance.OnSceneIn();//��¼λ��
+            //MoveManager.Instance.OnSceneOut();
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneTransitionManager.Instance.GoToScene(currentScene.name);
+            //GoToScene("New Scene");
+
+        }
         if (Input.GetKeyDown(KeyCode.B))
         {
             // MoveManager.Instance.OnSceneIn();//��¼λ��

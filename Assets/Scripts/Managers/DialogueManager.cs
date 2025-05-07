@@ -11,10 +11,7 @@ public class DialogueManager : MonoBehaviour
     public List<NamedNarration> narrationTimelines;
 
     private Dictionary<string, PlayableDirector> narrationDict;
-
-    /*// 事件名
-    public const string PlayDialogue = "PlayDialogue";
-    public const string DialogueFinished = "DialogueFinished";*/
+    
 
     [Serializable]
     public class NamedNarration
@@ -52,16 +49,14 @@ public class DialogueManager : MonoBehaviour
     private void OnEnable()
     {
         /*if (EventManager.Instance != null)*/
-            EventManager.Instance.Subscribe(PhotoGrabTrigger.OnPhotoGrabbed, OnPlayDialogue);
-            EventManager.Instance.Subscribe(FolderGrabTrigger.OnFolderGrabbed, OnPlayDialogue);
+            EventManager.Instance.Subscribe(LetterGrabTrigger.OnLetterGrabbed, OnPlayDialogue);
         /*else
             Debug.LogWarning("EventManager.Instance 为空，DialogueManager 订阅失败");;*/
     }
 
     private void OnDisable()
     {
-        EventManager.Instance.Unsubscribe(PhotoGrabTrigger.OnPhotoGrabbed, OnPlayDialogue);
-        EventManager.Instance.Unsubscribe(FolderGrabTrigger.OnFolderGrabbed, OnPlayDialogue);
+        EventManager.Instance.Unsubscribe(LetterGrabTrigger.OnLetterGrabbed, OnPlayDialogue);
     }
 
     private void OnPlayDialogue(object param)

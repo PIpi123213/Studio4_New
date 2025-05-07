@@ -21,8 +21,10 @@ public class Trigger2 : MonoBehaviour
     public Vector3 lakeTargetPosition = new Vector3(0, 0, 0);
     public Vector3 lakeStartPosition = new Vector3(0, 0, 0);
     public GameObject VFX;
-   //public GameObject postprocess;
-    
+    public GameObject Arinteraction;
+    public GameObject FirstRope;
+    //public GameObject postprocess;
+
     private void Awake()
     {
         lake.transform.position = lakeStartPosition;
@@ -70,16 +72,47 @@ public class Trigger2 : MonoBehaviour
         //��������
 
         
-        MoveManager.Instance.OnSceneIn();//��¼λ��
+        //MoveManager.Instance.OnSceneIn();//��¼λ��
         // ��ɺ�ִ�г����л��������߼�
         Debug.Log("All animations completed!");
+        Arinteraction.SetActive(false);
+        //gameObject.SetActive(false);
 
-        gameObject.SetActive(false);
+
+    }
+    public void Endanimation()
+    {
+        StartCoroutine(RunBothAnimations_out());
+
+
+
+    }
+    public IEnumerator RunBothAnimations_out()
+    {
+       
+        FirstRope.SetActive(false);
+        Coroutine radiusRoutine = StartCoroutine(AnimateRadius_out());
+        //Coroutine opacityRoutine = StartCoroutine(AnimateOpacity_out());
+        Coroutine SkyopacityRoutine = StartCoroutine(AnimateSkybox_out());
+      
+        yield return radiusRoutine;
+        yield return SkyopacityRoutine;
+ 
+
+        //MoveManager.Instance.OnSceneIn();
+     
+      
 
 
     }
 
+
+
+
+
+
     [SerializeField] float RadiusDuration = 5f;
+    [SerializeField] float RadiusDuration_out = 5f;
     [SerializeField] float startRadius = 0f;
     [SerializeField] float endRadius = 100f;
 
@@ -87,7 +120,7 @@ public class Trigger2 : MonoBehaviour
     {
 
         float elapsedTime = 0f;
-        Vector3 lakeStartPosition = Vector3.zero;
+        
         float remainingMovementTime = 0f;
 
         while (elapsedTime < RadiusDuration)
@@ -104,16 +137,6 @@ public class Trigger2 : MonoBehaviour
                 // ���Ӷ���İ뾶����
                 drmGameObject.radius += Mathf.Lerp(0, endRadius - startRadius, extraT) * Time.deltaTime;
                 VFX.SetActive(true);
-
-
-               
-
-
-
-
-
-
-
             }
             if (drmGameObject.radius > 450)
             {
@@ -147,19 +170,75 @@ public class Trigger2 : MonoBehaviour
         // ʾ�����룺����Passthrough��ָ�����
 
         lake.transform.position = lakeTargetPosition;
-        Debug.Log("Final lake position: " + lake.transform.position);
         hasTriggered = true;
         radiusFinished = true;
         drmGameObject.radius = endRadius;
     }
+    public IEnumerator AnimateRadius_out()
+    {
+
+        float elapsedTime = 0f;
+        
+        float remainingMovementTime = 0f;
+
+        while (elapsedTime < RadiusDuration_out)
+        {
+            // ʹ�÷����Բ�ֵ����
+            float t = 1 - Mathf.Pow(1 - (elapsedTime / RadiusDuration_out), 2); // ��������
+            drmGameObject.radius = Mathf.Lerp(endRadius, startRadius, t);
+            if (drmGameObject.radius < 250)
+            {
+                //playercamera.clearFlags = CameraClearFlags.Skybox;
+                float extraSpeedFactor = 5f; // �ɸ�����Ҫ�������ٱ���
+                float extraT = 1-Mathf.Pow(1- (elapsedTime / RadiusDuration_out), 2) * extraSpeedFactor;
+
+                // ���Ӷ���İ뾶����
+                drmGameObject.radius -= Mathf.Lerp(0, endRadius - startRadius, extraT) * Time.deltaTime;
+                VFX.SetActive(false);
+                //Debug.Log("vfx");
+            }
+            if (drmGameObject.radius < 450)
+            {
+              
+                float extraSpeedFactor = 5f;
+                float extraT = 1-Mathf.Pow(1- (elapsedTime / RadiusDuration_out), 2) * extraSpeedFactor;
+                // 额外的半径增长
+                drmGameObject.radius -= Mathf.Lerp(0, endRadius - startRadius, extraT) * Time.deltaTime;
+
+                // 计算剩余时间比例
+                if (remainingMovementTime > 0)
+                {
+                    float moveProgress = 1f - (RadiusDuration_out - elapsedTime) / remainingMovementTime;
+                    moveProgress = Mathf.Clamp01(moveProgress);
+
+                    // 使用线性移动确保在剩余时间内完成
+                    lake.transform.position = Vector3.Lerp(lakeTargetPosition, lakeStartPosition, moveProgress);
+
+
+                }
+            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        // ʾ�����룺����Passthrough��ָ�����
+
+        lake.SetActive(false);
+        // hasTriggered = true;
+        //radiusFinished = true;
+        drmGameObject.radius = startRadius;
+    }
+
+
+
     [SerializeField] float opacityDuration = 5f;
+    [SerializeField] float opacityDuration_out = 2f;
     [SerializeField] float startOpacity = 1f;
     [SerializeField] float endOpacity = 0f;
     private IEnumerator AnimateOpacity()
     {
 
         float elapsedTime = 0f;
-        Debug.Log("AnimateOpacity");
+       
 
 
         while (elapsedTime < opacityDuration)
@@ -174,15 +253,46 @@ public class Trigger2 : MonoBehaviour
         if (ptLayer != null)
         {
             ptLayer.enabled = false;
-            Destroy(ptLayer);
+           // Destroy(ptLayer);
         }
         //SetupPostprocess();
         Coroutine skyboxRoutine = StartCoroutine(AnimateSkyboxExposure(0f, 1f, skyboxFadeDuration));
         yield return skyboxRoutine;
 
     }
+    private IEnumerator AnimateOpacity_out()
+    {
 
-    private IEnumerator AnimateSkyboxExposure(float startExposure, float endExposure, float duration)
+        float elapsedTime = 0f;
+      
+
+
+        while (elapsedTime < opacityDuration_out)
+        {
+            ptLayer.textureOpacity = Mathf.Lerp(endOpacity, startOpacity, elapsedTime / opacityDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+       // opacityFinished = true;
+       // hasTriggered = true;
+        ptLayer.textureOpacity = startOpacity;
+        if (ptLayer != null)
+        {
+            ptLayer.enabled = true;
+           // Destroy(ptLayer);
+        }
+        //SetupPostprocess();
+      
+
+    }
+    public IEnumerator AnimateSkybox_out()
+    {
+
+        Coroutine skyboxRoutine = StartCoroutine(AnimateSkyboxExposure(1f, 0f, 5f));
+        yield return skyboxRoutine;
+    }
+
+    public IEnumerator AnimateSkyboxExposure(float startExposure, float endExposure, float duration)
     {
         if (RenderSettings.skybox.HasProperty("_Exposure"))
         {

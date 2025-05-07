@@ -12,7 +12,7 @@ public class MoveManager : MonoBehaviour
     XROrigin xrOrigin;
     Vector3 lastEyeLocalPos;
     public static MoveManager Instance { get; private set; }
-    private Vector3 CurrentWorldPosition = Vector3.zero;
+    public Vector3 CurrentWorldPosition = Vector3.zero;
 
     private void Awake()
     {
