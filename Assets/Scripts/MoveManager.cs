@@ -94,7 +94,7 @@ public class MoveManager : MonoBehaviour
 
     public void OnSceneOut()
     {
-        CurrentWorldPosition = CurrentWorldPosition + localPosition;
+        //CurrentWorldPosition = CurrentWorldPosition + localPosition;
         this.transform.position = CurrentWorldPosition;
         Debug.Log(this.transform.position);
 
