@@ -24648,6 +24648,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1769076088}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &529225248 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2482654801763992317, guid: 06ee0d4a640706f4986df3313f544f0c,
+    type: 3}
+  m_PrefabInstance: {fileID: 220163201778656515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &530575912
 GameObject:
   m_ObjectHideFlags: 0
@@ -32358,6 +32364,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!4 &668647760 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1005847401869181184, guid: 06ee0d4a640706f4986df3313f544f0c,
+    type: 3}
+  m_PrefabInstance: {fileID: 220163201778656515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &669555723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98485,7 +98497,7 @@ PrefabInstance:
     - target: {fileID: 1490892131857608675, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
       propertyPath: m_TagString
-      value: RightHandGem
+      value: Right Hand
       objectReference: {fileID: 0}
     - target: {fileID: 1810242768909117028, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
@@ -98500,7 +98512,7 @@ PrefabInstance:
     - target: {fileID: 1819814419465640123, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
       propertyPath: m_TagString
-      value: LeftHandGem
+      value: Left Hand
       objectReference: {fileID: 0}
     - target: {fileID: 4013490045523989073, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
@@ -98701,7 +98713,7 @@ PrefabInstance:
         type: 3}
       propertyPath: leftController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 529225248}
     - target: {fileID: 5178793157866668746, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
       propertyPath: skullTransform
@@ -98711,7 +98723,7 @@ PrefabInstance:
         type: 3}
       propertyPath: rightController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 668647760}
     - target: {fileID: 5178793157866668746, guid: 06ee0d4a640706f4986df3313f544f0c,
         type: 3}
       propertyPath: playableDirector

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.Playables;
+
 
 public class Trigger0 : MonoBehaviour
 {
@@ -16,14 +18,15 @@ public class Trigger0 : MonoBehaviour
     private bool radiusFinished = false;
     private bool opacityFinished = false;
     public Camera playercamera;
- 
+    public PlayableDirector letterTimeline;
+
     public GameObject VFX;
-  
+
     //public GameObject postprocess;
 
     private void Awake()
     {
-        
+
     }
     void Start()
     {
@@ -42,8 +45,8 @@ public class Trigger0 : MonoBehaviour
     private void OnSelectEnter(SelectEnterEventArgs args)
     {
         Debug.Log("catch it��");
-     
-        
+        letterTimeline.Play();
+
         if (!hasTriggered)
         {
             //StartCoroutine(AnimateRadius());
@@ -59,7 +62,7 @@ public class Trigger0 : MonoBehaviour
 
         Coroutine radiusRoutine = StartCoroutine(AnimateRadius());
         Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
-      
+
         // �ȴ�������ɣ���ʱ��ȡ���ֵ��
         yield return radiusRoutine;
         yield return opacityRoutine;
@@ -69,7 +72,7 @@ public class Trigger0 : MonoBehaviour
         //MoveManager.Instance.OnSceneIn();//��¼λ��
         // ��ɺ�ִ�г����л��������߼�
         Debug.Log("All animations completed!");
-       
+
 
 
     }
@@ -83,7 +86,7 @@ public class Trigger0 : MonoBehaviour
     public IEnumerator RunBothAnimations_out()
     {
 
-     
+
         Coroutine radiusRoutine = StartCoroutine(AnimateRadius_out());
         //Coroutine opacityRoutine = StartCoroutine(AnimateOpacity_out());
         Coroutine SkyopacityRoutine = StartCoroutine(AnimateSkybox_out());
@@ -104,7 +107,7 @@ public class Trigger0 : MonoBehaviour
 
 
 
-    [SerializeField] float RadiusDuration = 5f;
+    [SerializeField] float RadiusDuration = 25f;
     [SerializeField] float RadiusDuration_out = 5f;
     [SerializeField] float startRadius = 0f;
     [SerializeField] float endRadius = 100f;
@@ -137,20 +140,20 @@ public class Trigger0 : MonoBehaviour
             }
             if (drmGameObject.radius > 450)
             {
-                
+
                 float extraSpeedFactor = 5f;
                 float extraT = Mathf.Pow(elapsedTime / RadiusDuration, 2) * extraSpeedFactor;
                 // 额外的半径增长
                 drmGameObject.radius += Mathf.Lerp(0, endRadius - startRadius, extraT) * Time.deltaTime;
 
-           
+
             }
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         // ʾ�����룺����Passthrough��ָ�����
 
-       
+
         hasTriggered = true;
         radiusFinished = true;
         drmGameObject.radius = endRadius;
@@ -187,7 +190,7 @@ public class Trigger0 : MonoBehaviour
                 drmGameObject.radius -= Mathf.Lerp(0, endRadius - startRadius, extraT) * Time.deltaTime;
 
                 // 计算剩余时间比例
-             
+
             }
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -201,7 +204,7 @@ public class Trigger0 : MonoBehaviour
 
 
 
-    [SerializeField] float opacityDuration = 5f;
+    [SerializeField] float opacityDuration = 25f;
     [SerializeField] float opacityDuration_out = 2f;
     [SerializeField] float startOpacity = 1f;
     [SerializeField] float endOpacity = 0f;

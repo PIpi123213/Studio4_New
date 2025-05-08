@@ -36,7 +36,7 @@ public class WingSuitMoveController : MonoBehaviour
         // trailRenderer.endColor   = Color.clear;
     }
 
-    
+
 
 
     private void Update()
