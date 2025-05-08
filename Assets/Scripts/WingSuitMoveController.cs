@@ -34,15 +34,15 @@ public class WingSuitMoveController : MonoBehaviour
 
     private void Update()
     {
-        ApplyMovement();
+        ApplyMovement(); // 始终允许玩家移动
 
-        ApplyRotation();
+        if (!isForcedToSkull) // 如果未强制飞向 Skull，允许玩家控制转向
+        {
+            ApplyRotation();
+        }
 
         LimitPlayerHeight();
-
         CheckAndLiftIfGroundBelow();
-
-        // CheckSideRaycasts();
     }
 
     [SerializeField] private float glideSpeed = 1000f;
@@ -70,7 +70,7 @@ public class WingSuitMoveController : MonoBehaviour
     {
         if (isRotatingAway) return; // 如果正在旋转，跳过输入控制
 
-        yaw        += (leftController.position.y - rightController.position.y) * 120f;
+        yaw        += (leftController.position.y - rightController.position.y) * 3f;
         currentYaw =  Mathf.Lerp(currentYaw, yaw, 1f);
 
         Quaternion targetRotation = Quaternion.Euler(0f, currentYaw, 0f);
@@ -142,7 +142,10 @@ public class WingSuitMoveController : MonoBehaviour
     // }
 
     //碰撞物体检测以及转向
-    private void OnTriggerEnter(Collider other) //检测
+    private                  bool      isForcedToSkull = false; // 标志位，表示是否强制飞向 Skull
+    [SerializeField] private Transform skullTransform;          // Skull 的 Transform
+    public const string OnObstacleDetected = "OnObstacleDetected"; // 事件名称
+    private void OnTriggerEnter(Collider other)                 //检测
     {
         Debug.Log("Detected object: " + other.name);
         // 获取碰撞点和法线
@@ -153,26 +156,40 @@ public class WingSuitMoveController : MonoBehaviour
         {
             Debug.Log("Vertical object detected, rotating parallel to wall...");
             Vector3 wallNormal = other.ClosestPoint(transform.position) - transform.position;
-            StartCoroutine(SmoothRotateParallelToWall(wallNormal, 2f));
+            StartCoroutine(SmoothRotateParallelToWall(wallNormal, 1f));
+            EventManager.Instance.Trigger(OnObstacleDetected, "air_leaking"); // 触发事件
         }
         else if (other.CompareTag("pillar"))
         {
             // 计算物体相对于玩家的位置
             Vector3 directionToObject = other.transform.position - transform.position;
             float   dotProduct        = Vector3.Dot(transform.right, directionToObject);
+            if (Vector3.Dot(transform.forward, directionToObject) < 0)
+            {
+                if (dotProduct > 0) // 物体在玩家右边
+                {
+                    Debug.Log("Object detected on the right, rotating to left-forward...");
+                    Vector3 targetDirection = (transform.forward - transform.right).normalized; // 左前方
+                    StartCoroutine(SmoothRotateToDirection(targetDirection, 1f));
+                }
+                else if (dotProduct < 0) // 物体在玩家左边
+                {
+                    Debug.Log("Object detected on the left, rotating to right-forward...");
+                    Vector3 targetDirection = (transform.forward + transform.right).normalized; // 右前方
+                    StartCoroutine(SmoothRotateToDirection(targetDirection, 1f));
+                }
+            }
+        }
+        else if (other.name == "RushToDeathArea")
+        {
+            Debug.Log("Entering RushToDeathArea, forcing player to fly towards Skull...");
+            isForcedToSkull = true; // 禁用玩家转向控制
 
-            if (dotProduct > 0) // 物体在玩家右边
-            {
-                Debug.Log("Object detected on the right, rotating to left-forward...");
-                Vector3 targetDirection = (transform.forward - transform.right).normalized; // 左前方
-                StartCoroutine(SmoothRotateToDirection(targetDirection, 1f));
-            }
-            else if (dotProduct < 0) // 物体在玩家左边
-            {
-                Debug.Log("Object detected on the left, rotating to right-forward...");
-                Vector3 targetDirection = (transform.forward + transform.right).normalized; // 右前方
-                StartCoroutine(SmoothRotateToDirection(targetDirection, 1f));
-            }
+            // 计算目标方向
+            Vector3 directionToSkull = (skullTransform.position - transform.position).normalized;
+
+            // 启动协程，平滑旋转到目标方向
+            StartCoroutine(SmoothRotateToDirection(directionToSkull, 2f));
         }
     }
 

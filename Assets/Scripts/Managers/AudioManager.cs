@@ -58,12 +58,14 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
+
     }
 
     private void OnDisable()
     {
         EventManager.Instance.Unsubscribe(CustomClimbInteractable.OnRockClimb, OnPlayRandomClimbSound);
-    }
+    	EventManager.Instance.Unsubscribe(WingSuitMoveController.OnObstacleDetected, PlayAudio);
+	}
 
     void InitSounds(Sound[] sounds)
     {
@@ -115,6 +117,7 @@ public class AudioManager : MonoBehaviour
     {
         PlayAudio("LavaBGM");
         EventManager.Instance.Subscribe(CustomClimbInteractable.OnRockClimb,OnPlayRandomClimbSound );
+		EventManager.Instance.Subscribe(WingSuitMoveController.OnObstacleDetected, PlayAudio);
 
     }
 }
