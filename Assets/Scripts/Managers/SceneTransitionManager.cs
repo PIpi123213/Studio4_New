@@ -18,6 +18,7 @@ public class SceneTransitionManager : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject);
         UpdateCurrentScene();
     }
     private void Update()
@@ -102,4 +103,7 @@ public class SceneTransitionManager : MonoBehaviour
 
         UpdateCurrentScene();
     }
+
+  
+
 }

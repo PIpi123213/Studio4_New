@@ -9,6 +9,12 @@ TagManager:
   - Left Hand
   - Wall
   - pillar
+  - RightHandGem
+  - LeftHandGem
+  - PlayerCamera
+  - Rock
+  - HandEnd
+  - wingsuitplayer
   layers:
   - Default
   - TransparentFX

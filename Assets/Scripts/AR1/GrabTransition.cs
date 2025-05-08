@@ -8,8 +8,8 @@ public class GrabTransition : MonoBehaviour
     public GrabHandPose handPoseGrab;
     private bool istrigger = false;
     public FadeScreen fadeScreen;
-    public Camera playercamera;
-    public GameObject scene;
+    //public Camera playercamera;
+    //public GameObject scene;
     void Start()
     {
         
@@ -18,7 +18,7 @@ public class GrabTransition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (handPoseGrab.HandGrabing==1&&!istrigger)
+        if (handPoseGrab.HandGrabing==2&&!istrigger)
         {
             istrigger = true;
             trantoFly();
@@ -27,8 +27,9 @@ public class GrabTransition : MonoBehaviour
 
     public void trantoFly()
     {
-        fadeScreen.FadeOut(1f);
-        playercamera.clearFlags = CameraClearFlags.Skybox;
+      
+        PlayerStateTran.Instance.StageToLevel1();
+   
 
     }
     public IEnumerator AnimateSkyboxExposure(float startExposure, float endExposure, float duration)
