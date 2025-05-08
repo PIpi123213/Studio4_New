@@ -6,10 +6,11 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class GrabHandPose : MonoBehaviour
 {
     public bool ifTwoHandGrab = false;
+    public int HandGrabing = 0;
     public handDataPose rightHandPose;
     public handDataPose leftHandPose;
-    public GameObject leftHandModel;
-    public GameObject rightHandModel;
+    public GameObject leftHandModel_Geom;
+    public GameObject rightHandModel_Geom;
     private Vector3 startingHandPosition_left;
     private Vector3 finalHandPosition_left;
     private Quaternion startingHandRotation_left;
@@ -27,20 +28,29 @@ public class GrabHandPose : MonoBehaviour
     private Quaternion[] finalFingerRotations_right;
 
 
-
+    private XRGrabInteractable grabInteractable;
     void Start()
     {
-        XRGrabInteractable grabInteractable = GetComponent<XRGrabInteractable>();
+         grabInteractable = GetComponent<XRGrabInteractable>();
 
         grabInteractable.selectEntered.AddListener(SetupPose);
         grabInteractable.selectExited.AddListener(UnSetPose);
 
         rightHandPose.gameObject.SetActive(false);
         leftHandPose.gameObject.SetActive(false);
+        StartCoroutine(findGeom());
     }
 
     public void SetupPose(BaseInteractionEventArgs arg)
     {
+        if (grabInteractable.interactorsSelecting.Count == 2)
+        {
+            HandGrabing = 2;
+        }
+        else
+        {
+            HandGrabing = 1;
+        }
         if (arg.interactorObject is XRDirectInteractor)
         {
             handDataPose handData = arg.interactorObject.transform.GetComponentInChildren<handDataPose>();
@@ -55,7 +65,7 @@ public class GrabHandPose : MonoBehaviour
 
                 
                     rightHandPose.gameObject.SetActive(true);
-                    rightHandModel.SetActive(false);
+                    rightHandModel_Geom.SetActive(false);
                 
                 
                 
@@ -67,7 +77,7 @@ public class GrabHandPose : MonoBehaviour
                 StartCoroutine(SetHandDataRoutine(handData, finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left));
                 
                     leftHandPose.gameObject.SetActive(true);
-                    leftHandModel.SetActive(false);
+                    leftHandModel_Geom.SetActive(false);
                 
                
                 //Debug.LogWarning("leftshould"+ leftHandPose.transform.position + "final" + finalHandPosition_left + "left" + handData.root.position);
@@ -80,6 +90,14 @@ public class GrabHandPose : MonoBehaviour
 
     public void UnSetPose(BaseInteractionEventArgs arg)
     {
+        if (grabInteractable.interactorsSelecting.Count == 1)
+        {
+            HandGrabing = 1;
+        }
+        else
+        {
+            HandGrabing = 0;
+        }
         if (arg.interactorObject is XRDirectInteractor)
         {
             handDataPose handData = arg.interactorObject.transform.GetComponentInChildren<handDataPose>();
@@ -89,7 +107,7 @@ public class GrabHandPose : MonoBehaviour
                 StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right));
                 
                     rightHandPose.gameObject.SetActive(false);
-                    rightHandModel.SetActive(true);
+                    rightHandModel_Geom.SetActive(true);
                 
 
             }
@@ -99,7 +117,7 @@ public class GrabHandPose : MonoBehaviour
                 StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left,finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left));
                
                     leftHandPose.gameObject.SetActive(false);
-                    leftHandModel.SetActive(true);
+                    leftHandModel_Geom.SetActive(true);
                 
 
             }
@@ -116,7 +134,7 @@ public class GrabHandPose : MonoBehaviour
         finalHandPosition_left = new Vector3(h2.root.localPosition.x / h2.root.localScale.x,
             h2.root.localPosition.y / h2.root.localScale.y, h2.root.localPosition.z / h2.root.localScale.z);
 
-        startingHandPosition_left = h1.orginLocalPos;
+        //startingHandPosition_left = h1.orginLocalPos;
 
         startingHandRotation_left = h1.root.localRotation;
         finalHandRotation_left = h2.root.localRotation;
@@ -137,7 +155,7 @@ public class GrabHandPose : MonoBehaviour
         finalHandPosition_right = new Vector3(h2.root.localPosition.x / h2.root.localScale.x,
             h2.root.localPosition.y / h2.root.localScale.y, h2.root.localPosition.z / h2.root.localScale.z);
 
-        startingHandPosition_right = h1.orginLocalPos;
+        //startingHandPosition_right = h1.orginLocalPos;
 
 
         startingHandRotation_right = h1.root.localRotation;
@@ -185,7 +203,18 @@ public class GrabHandPose : MonoBehaviour
 
 
     }
+    private IEnumerator findGeom()
+    {
+        yield return null;
+        // 等待一帧
+        leftHandModel_Geom = GameObject.FindWithTag("LeftHandGem");
+        if (leftHandModel_Geom == null)
+            Debug.LogError("仍然未找到！");
 
+        rightHandModel_Geom = GameObject.FindWithTag("RightHandGem");
+        if (rightHandModel_Geom == null)
+            Debug.LogError("仍然未找到！");
+    }
 
 
 

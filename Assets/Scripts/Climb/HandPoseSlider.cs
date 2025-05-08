@@ -35,6 +35,7 @@ public class HandPoseSlider : MonoBehaviour
     public bool ziplineActive = false;
     public bool isUnset = false;
 
+
     void Start()
     {
         //XRGrabInteractable grabInteractable = GetComponent<XRGrabInteractable>();
@@ -46,6 +47,7 @@ public class HandPoseSlider : MonoBehaviour
 
         rightHandPose.gameObject.SetActive(false);
         leftHandPose.gameObject.SetActive(false);
+        StartCoroutine(findGeom());
     }
 
     public void SetupPose(BaseInteractionEventArgs arg)
@@ -271,7 +273,18 @@ public class HandPoseSlider : MonoBehaviour
 
 
     }
+    private IEnumerator findGeom()
+    {
+        yield return null;
+        // 等待一帧
+        leftHandModel_Geom = GameObject.FindWithTag("LeftHandGem");
+        if (leftHandModel_Geom == null)
+            Debug.LogError("仍然未找到！");
 
+        rightHandModel_Geom = GameObject.FindWithTag("RightHandGem");
+        if (rightHandModel_Geom == null)
+            Debug.LogError("仍然未找到！");
+    }
 
 
 }

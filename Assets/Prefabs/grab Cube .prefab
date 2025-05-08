@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 7065496361094796506}
   - component: {fileID: 3704475175591893043}
   - component: {fileID: 510770533414269732}
-  - component: {fileID: 8754072692981747815}
   - component: {fileID: 54737277990324652}
   - component: {fileID: 3945288700255078780}
   - component: {fileID: 7564377434530151720}
+  - component: {fileID: 7222999573080993832}
   m_Layer: 0
   m_Name: 'grab Cube '
   m_TagString: Untagged
@@ -111,24 +111,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8754072692981747815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4856641759479380640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55494015ec48ee240aa4ac60c6f9b8e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ifTwoHandGrab: 1
-  rightHandPose: {fileID: 2942275327189833910}
-  leftHandPose: {fileID: 7563061597929614872}
-  leftHandModel_Geom: {fileID: 0}
-  rightHandModel_Geom: {fileID: 0}
-  poseTransitionDuration: 0.2
 --- !u!54 &54737277990324652
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -326,6 +308,25 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 2
   m_ScaleMultiplier: 0.25
+--- !u!114 &7222999573080993832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4856641759479380640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 769579c6109ed394e973e08bcaa4ef15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ifTwoHandGrab: 0
+  HandGrabing: 0
+  rightHandPose: {fileID: 2942275327189833910}
+  leftHandPose: {fileID: 7563061597929614872}
+  leftHandModel_Geom: {fileID: 0}
+  rightHandModel_Geom: {fileID: 0}
+  poseTransitionDuration: 0.2
 --- !u!1001 &2295349665630638515
 PrefabInstance:
   m_ObjectHideFlags: 0
