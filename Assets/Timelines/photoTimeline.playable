@@ -24,7 +24,7 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: 2773403259326674261}
---- !u!114 &-8156773133548142689
+--- !u!114 &-1473437114620709118
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -36,7 +36,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: b397afb0ef3143940a3cbfb538db0754, type: 3}
+  m_Clip: {fileID: 8300000, guid: fee5b3142828a964aa84ff3be4d8bd3b, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
@@ -65,8 +65,8 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: -8156773133548142689}
-    m_Duration: 6.016666666666667
+    m_Asset: {fileID: -1473437114620709118}
+    m_Duration: 5.184
     m_TimeScale: 1
     m_ParentTrack: {fileID: -1092265931705032660}
     m_EaseInDuration: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: AR2.1
+    m_DisplayName: "\u6700\u597D\u7684\u670B\u53CB"
   m_Markers:
     m_Objects: []
   m_TrackProperties:

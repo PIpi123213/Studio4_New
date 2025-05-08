@@ -114,7 +114,7 @@ public class Trigger0 : MonoBehaviour
 
     private IEnumerator AnimateRadius()
     {
-
+        yield return new WaitForSeconds(20f);
         float elapsedTime = 0f;
 
         float remainingMovementTime = 0f;
@@ -204,7 +204,7 @@ public class Trigger0 : MonoBehaviour
 
 
 
-    [SerializeField] float opacityDuration = 25f;
+    [SerializeField] float opacityDuration = 100f;
     [SerializeField] float opacityDuration_out = 2f;
     [SerializeField] float startOpacity = 1f;
     [SerializeField] float endOpacity = 0f;
