@@ -157,7 +157,7 @@ public class WingSuitMoveController : MonoBehaviour
             Debug.Log("Vertical object detected, rotating parallel to wall...");
             Vector3 wallNormal = other.ClosestPoint(transform.position) - transform.position;
             StartCoroutine(SmoothRotateParallelToWall(wallNormal, 1f));
-            EventManager.Instance.Trigger(OnObstacleDetected, "air_leaking"); // 触发事件
+            // EventManager.Instance.Trigger(OnObstacleDetected, "air_leaking"); // 触发事件
         }
         else if (other.CompareTag("pillar"))
         {
