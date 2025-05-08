@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using Unity.SharpZipLib.Zip.Compression.Streams;
+using UnityEngine.Playables;
 
 public class WingSuitMoveController : MonoBehaviour
 {
@@ -20,6 +21,11 @@ public class WingSuitMoveController : MonoBehaviour
         currentYaw = transform.eulerAngles.y; // 初始化 currentYaw
         yaw        = currentYaw;
 
+        if (playableDirector != null)
+        {
+            playableDirector.stopped += OnPlayableDirectorStopped; // 订阅 stopped 事件
+        }
+
         //生成尾翼
         // trailRenderer = gameObject.AddComponent<TrailRenderer>();
         // trailRenderer.time       = 100.0f;
@@ -30,6 +36,7 @@ public class WingSuitMoveController : MonoBehaviour
         // trailRenderer.endColor   = Color.clear;
     }
 
+    
 
 
     private void Update()
@@ -142,21 +149,33 @@ public class WingSuitMoveController : MonoBehaviour
     // }
 
     //碰撞物体检测以及转向
-    private                  bool      isForcedToSkull = false; // 标志位，表示是否强制飞向 Skull
-    [SerializeField] private Transform skullTransform;          // Skull 的 Transform
-    public const string OnObstacleDetected = "OnObstacleDetected"; // 事件名称
-    private void OnTriggerEnter(Collider other)                 //检测
+    private                  bool             isForcedToSkull = false;                   // 标志位，表示是否强制飞向 Skull
+    [SerializeField] private Transform        skullTransform;                            // Skull 的 Transform
+    public const             string           OnObstacleDetected = "OnObstacleDetected"; // 事件名称
+    [SerializeField] private AudioSource      audioSource;                               // 引用 AudioSource
+    [SerializeField] private AudioClip        air_leaking;
+    [SerializeField] public  AudioClip        dead;             // 播放的音效
+    [SerializeField] private PlayableDirector playableDirector; // 引用 PlayableDirector
+    public                   FadeScreen       fadeScreen;
+
+    private void OnTriggerEnter(Collider other) //检测
     {
         Debug.Log("Detected object: " + other.name);
         // 获取碰撞点和法线
         Vector3 contactPoint       = other.ClosestPoint(transform.position);
         Vector3 directionToContact = (contactPoint - transform.position).normalized;
+
+
         // 判断法线方向
         if (other.CompareTag("Wall"))
         {
             Debug.Log("Vertical object detected, rotating parallel to wall...");
             Vector3 wallNormal = other.ClosestPoint(transform.position) - transform.position;
             StartCoroutine(SmoothRotateParallelToWall(wallNormal, 1f));
+            if (audioSource != null && air_leaking != null)
+            {
+                audioSource.PlayOneShot(air_leaking);
+            }
             // EventManager.Instance.Trigger(OnObstacleDetected, "air_leaking"); // 触发事件
         }
         else if (other.CompareTag("pillar"))
@@ -179,6 +198,10 @@ public class WingSuitMoveController : MonoBehaviour
                     StartCoroutine(SmoothRotateToDirection(targetDirection, 1f));
                 }
             }
+            if (audioSource != null && air_leaking != null)
+            {
+                audioSource.PlayOneShot(air_leaking);
+            }
         }
         else if (other.name == "RushToDeathArea")
         {
@@ -190,6 +213,34 @@ public class WingSuitMoveController : MonoBehaviour
 
             // 启动协程，平滑旋转到目标方向
             StartCoroutine(SmoothRotateToDirection(directionToSkull, 2f));
+            if (audioSource != null && dead != null)
+            {
+                audioSource.PlayOneShot(dead);
+            }
+
+        }
+        else if (other.CompareTag("DeadEnd"))
+        {
+            Debug.Log("DeadEnd detected, playing timeline...");
+
+            if (playableDirector != null&&fadeScreen!= null)
+            {
+                playableDirector.Play(); // 播放 Timeline
+                fadeScreen.Fade(0f, 1f, 0.001f);
+            }
+            else
+            {
+                Debug.LogWarning("PlayableDirector is not assigned.");
+            }
+
+        }
+    }
+    private void OnPlayableDirectorStopped(PlayableDirector director)
+    {
+        if (director == playableDirector)
+        {
+            Debug.Log("Timeline finished, transitioning to the next scene...");
+            SceneTransitionManager.Instance.GoToScene("New Scene"); // 调用转场方法
         }
     }
 
