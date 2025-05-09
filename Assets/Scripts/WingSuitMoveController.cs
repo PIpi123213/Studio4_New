@@ -9,7 +9,7 @@ public class WingSuitMoveController : MonoBehaviour
     private Rigidbody     rb;
     private TrailRenderer trailRenderer;
     private bool          isRotatingAway = false; // 新增标志
-
+   
     void Start()
     {
         rb            = GetComponent<Rigidbody>();
@@ -41,6 +41,9 @@ public class WingSuitMoveController : MonoBehaviour
 
     private void Update()
     {
+        
+        if (!PlayerStateTran.Instance.isStart) return;
+        
         ApplyMovement(); // 始终允许玩家移动
 
         if (!isForcedToSkull) // 如果未强制飞向 Skull，允许玩家控制转向
@@ -77,7 +80,7 @@ public class WingSuitMoveController : MonoBehaviour
     {
         if (isRotatingAway) return; // 如果正在旋转，跳过输入控制
 
-        yaw        += (leftController.position.y - rightController.position.y) * 3f;
+        yaw        += (leftController.position.y - rightController.position.y) * 1.5f;
         currentYaw =  Mathf.Lerp(currentYaw, yaw, 1f);
 
         Quaternion targetRotation = Quaternion.Euler(0f, currentYaw, 0f);
@@ -286,7 +289,7 @@ public class WingSuitMoveController : MonoBehaviour
     private void DetectDive()
     {
         float averageHeight = (Head.position.y) - ((leftController.position.y + rightController.position.y) / 2f);
-        if (averageHeight >= 0f)
+        if (averageHeight >= 0.05)
         {
             verticalSpeed = defaultVerticalSpeed - averageHeight * gravityFactor;
 

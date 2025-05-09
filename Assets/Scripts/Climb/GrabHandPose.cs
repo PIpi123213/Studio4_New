@@ -105,7 +105,7 @@ public class GrabHandPose : MonoBehaviour
             {
                 //SendHandData(handData, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right);
                 StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right));
-                
+                SetHandDataBack_Right();
                     rightHandPose.gameObject.SetActive(false);
                     rightHandModel_Geom.SetActive(true);
                 
@@ -115,7 +115,7 @@ public class GrabHandPose : MonoBehaviour
             {
                 //SendHandData(handData, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left);
                 StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left,finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left));
-               
+                SetHandDataBack_Left();
                     leftHandPose.gameObject.SetActive(false);
                     leftHandModel_Geom.SetActive(true);
                 
@@ -170,6 +170,43 @@ public class GrabHandPose : MonoBehaviour
             finalFingerRotations_right[i] = h2.fingerBones[i].localRotation;
         }
     }
+    public void SetHandDataBack_Right()
+    {
+        startingHandPosition_right = Vector3.zero;
+
+        finalHandPosition_right = Vector3.zero;
+           
+
+        //startingHandPosition_right = h1.orginLocalPos;
+
+
+        startingHandRotation_right = Quaternion.identity;
+        finalHandRotation_right = Quaternion.identity;
+
+        startingFingerRotations_right = null;
+        finalFingerRotations_right = null;
+
+     
+    }
+    public void SetHandDataBack_Left()
+    {
+        startingHandPosition_left = Vector3.zero;
+
+        finalHandPosition_left = Vector3.zero;
+
+
+        //startingHandPosition_right = h1.orginLocalPos;
+
+
+        startingHandRotation_left = Quaternion.identity;
+        finalHandRotation_left = Quaternion.identity;
+
+        startingFingerRotations_left = null;
+        finalFingerRotations_left = null;
+
+
+    }
+
     public void SendHandData(handDataPose h, Vector3 newPosition, Quaternion newRotation, Quaternion[] newBonesRotation)
     {
         h.root.localPosition = newPosition;

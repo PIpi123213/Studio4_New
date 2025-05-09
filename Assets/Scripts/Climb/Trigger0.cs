@@ -26,7 +26,7 @@ public class Trigger0 : MonoBehaviour
 
     private void Awake()
     {
-
+        RenderSettings.skybox.SetFloat("_Exposure", 0f);
     }
     void Start()
     {
@@ -210,7 +210,7 @@ public class Trigger0 : MonoBehaviour
     [SerializeField] float endOpacity = 0f;
     private IEnumerator AnimateOpacity()
     {
-
+        yield return new WaitForSeconds(10f);
         float elapsedTime = 0f;
 
 
@@ -229,9 +229,12 @@ public class Trigger0 : MonoBehaviour
             ptLayer.enabled = false;
             // Destroy(ptLayer);
         }
+        playercamera.clearFlags = CameraClearFlags.Skybox;
+        RenderSettings.skybox.SetFloat("_Exposure", 0f);
+
         //SetupPostprocess();
-       /* Coroutine skyboxRoutine = StartCoroutine(AnimateSkyboxExposure(0f, 1f, skyboxFadeDuration));
-        yield return skyboxRoutine;*/
+        /* Coroutine skyboxRoutine = StartCoroutine(AnimateSkyboxExposure(0f, 1f, skyboxFadeDuration));
+         yield return skyboxRoutine;*/
 
     }
     private IEnumerator AnimateOpacity_out()

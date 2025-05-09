@@ -12,12 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/TestSceneFolder/AR_ARfoundation_Test.unity
     guid: 035e6422d6a6e7f47885194c8433d280
   - enabled: 1
-    path: Assets/Scenes/TestSceneFolder/New Scene.unity
-    guid: 5439a53777aaf4e4e80807b5697ab337
-  - enabled: 1
+    path: Assets/Scenes/TheLastPlay.unity
+    guid: 626ae0f7e270c2c4eaa236ce7d8ba451
+  - enabled: 0
     path: Assets/Intro/Stage.unity
     guid: bfd5e502e7a8d074e81b0b71967d6516
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/TestSceneFolder/New Scene.unity
+    guid: 5439a53777aaf4e4e80807b5697ab337
+  - enabled: 0
     path: Assets/Level1_Wingsuit/Wingsuit.unity
     guid: 9bbea71198251e74a854bc3eb862b6fb
   m_configObjects:
