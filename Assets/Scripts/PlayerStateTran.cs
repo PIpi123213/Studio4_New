@@ -121,9 +121,9 @@ public class PlayerStateTran : MonoBehaviour
         transform.localPosition = StartLocalPos;
         transform.localRotation = StartLocalRot;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         isStart = true;
-        SceneTransitionManager.Instance.fadeScreen.FadeIn(2f);
+        SceneTransitionManager.Instance.fadeScreen.FadeIn(3f);
         yield return null;
 
     }

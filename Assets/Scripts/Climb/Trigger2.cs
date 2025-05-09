@@ -33,7 +33,7 @@ public class Trigger2 : MonoBehaviour
     void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
-        StartCoroutine(findCamera());
+        //StartCoroutine(findCamera());
         // ���� Select Enter �¼�
         grabInteractable.selectEntered.AddListener(OnSelectEnter);
         drmGameObject.radius = 0;
@@ -337,7 +337,7 @@ public class Trigger2 : MonoBehaviour
         // ȡ�������¼�
         grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
     }
-
+   
     private IEnumerator findCamera()
     {
         yield return null;

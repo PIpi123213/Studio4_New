@@ -230,6 +230,7 @@ public class WingSuitMoveController : MonoBehaviour
             {
                 playableDirector.Play(); // 播放 Timeline
                 fadeScreen.Fade(0f, 1f, 0.001f);
+                //PlayerStateTran.Instance.Level1ToStage2();
             }
             else
             {
