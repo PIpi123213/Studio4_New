@@ -8,7 +8,7 @@ public class SceneTransitionManager : MonoBehaviour
     public static SceneTransitionManager Instance { get; private set; }
     public        string                 CurrentSceneName;
     public        FadeScreen             fadeScreen;
-
+    public FadeScreen fadeScreen_Black;
     private void Awake()
     {
         if (Instance != null && Instance != this)

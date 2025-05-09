@@ -124,7 +124,10 @@ public class PlayerStateTran : MonoBehaviour
     
     private IEnumerator WingsuitToStage()
     {
-        SceneTransitionManager.Instance.fadeScreen.FadeOut(0.8f);
+
+
+
+        //SceneTransitionManager.Instance.fadeScreen_Black.FadeOut(0.8f);
         yield return new WaitForSeconds(0.3f);
         ChangeSkyboxLevel2();
         level0_Drm.SetActive(false);
@@ -137,7 +140,7 @@ public class PlayerStateTran : MonoBehaviour
         this.transform.position = MoveManager.Instance.CurrentWorldPosition + level2_scene.transform.position; 
         //MoveManager.Instance.OnSceneOut();
         yield return new WaitForSeconds(0.5f);
-        SceneTransitionManager.Instance.fadeScreen.FadeIn(1f);
+        SceneTransitionManager.Instance.fadeScreen_Black.FadeIn(1f);
         yield return null;
 
     }

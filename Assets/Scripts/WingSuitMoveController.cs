@@ -243,7 +243,9 @@ public class WingSuitMoveController : MonoBehaviour
         if (director == playableDirector)
         {
             Debug.Log("Timeline finished, transitioning to the next scene...");
-            SceneTransitionManager.Instance.GoToScene("New Scene"); // 调用转场方法
+            /* SceneTransitionManager.Instance.GoToScene("New Scene");*/
+            PlayerStateTran.Instance.Level1ToStage2();
+            // 调用转场方法
         }
     }
 
