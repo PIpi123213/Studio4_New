@@ -38,7 +38,7 @@ public class GrabHandPose : MonoBehaviour
 
         rightHandPose.gameObject.SetActive(false);
         leftHandPose.gameObject.SetActive(false);
-        StartCoroutine(findGeom());
+        //StartCoroutine(findGeom());
     }
 
     public void SetupPose(BaseInteractionEventArgs arg)

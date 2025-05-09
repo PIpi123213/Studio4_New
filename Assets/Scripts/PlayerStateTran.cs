@@ -65,7 +65,8 @@ public class PlayerStateTran : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Level1ToStage2();
+             Level1ToStage2();
+            //StageToLevel1();
         }
     }
     public void restSkybox()
@@ -126,18 +127,23 @@ public class PlayerStateTran : MonoBehaviour
     {
 
 
-
-        //SceneTransitionManager.Instance.fadeScreen_Black.FadeOut(0.8f);
-        yield return new WaitForSeconds(0.3f);
-        ChangeSkyboxLevel2();
-        level0_Drm.SetActive(false);
-        level2_Drm.SetActive(true);
+        //level1_scene.SetActive(false);
+        transform.SetParent(null);
+        //level2_scene.SetActive(true);
+        SceneTransitionManager.Instance.fadeScreen_Black.FadeOut(0.8f);
+        //yield return new WaitForSeconds(0.3f);
+        
+        //ChangeSkyboxLevel2();
+        
+        //level0_Drm.SetActive(false);
+        //level2_Drm.SetActive(true);
         Stage = 2;
         
-        transform.SetParent(null);
+        
+        SceneTransitionManager.Instance.GoToSceneAsync("New Scene");
         yield return null;
         
-        this.transform.position = MoveManager.Instance.CurrentWorldPosition + level2_scene.transform.position; 
+        this.transform.position = MoveManager.Instance.CurrentWorldPosition ; 
         //MoveManager.Instance.OnSceneOut();
         yield return new WaitForSeconds(0.5f);
         SceneTransitionManager.Instance.fadeScreen_Black.FadeIn(1f);
