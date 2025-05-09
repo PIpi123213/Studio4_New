@@ -65,11 +65,16 @@ public class PlayerStateTran : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-             Level1ToStage2();
+            Level1ToStage2();
             //StageToLevel1();
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            //Level1ToStage2();
+            StageToLevel1();
+        }
     }
-    public void restSkybox()
+        public void restSkybox()
     {
         RenderSettings.skybox = skyboxMaterials;
         RenderSettings.skybox.SetFloat("_Exposure", 0);
@@ -143,11 +148,7 @@ public class PlayerStateTran : MonoBehaviour
         SceneTransitionManager.Instance.GoToSceneAsync("New Scene");
         yield return null;
         
-        this.transform.position = MoveManager.Instance.CurrentWorldPosition ; 
-        //MoveManager.Instance.OnSceneOut();
-        yield return new WaitForSeconds(0.5f);
-        SceneTransitionManager.Instance.fadeScreen_Black.FadeIn(1f);
-        yield return null;
+       
 
     }
     public IEnumerator AnimateSkyboxExposure(float startExposure, float endExposure, float duration)

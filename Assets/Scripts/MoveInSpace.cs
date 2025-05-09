@@ -30,8 +30,8 @@ public class MoveInSpace:ScriptableObject
 
     public void UpdateOffset(Vector3 newOffset)
     {
-        _currentOffset = _ignoreVertical ?
-            new Vector3(newOffset.x, 0, newOffset.z) :
+        _currentOffset = 
+           
             newOffset;
 
 #if UNITY_EDITOR

@@ -15,6 +15,7 @@ TagManager:
   - Rock
   - HandEnd
   - wingsuitplayer
+  - DeadEnd
   layers:
   - Default
   - TransparentFX

@@ -33,7 +33,7 @@ public class GameStateMachine : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(this.gameObject); // 状态机在场景切换中不销毁
+        //DontDestroyOnLoad(this.gameObject); // 状态机在场景切换中不销毁
     }
     
     private void Start()

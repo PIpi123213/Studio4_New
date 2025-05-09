@@ -18,7 +18,7 @@ public class SceneTransitionManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         UpdateCurrentScene();
     }
     private void Update()
