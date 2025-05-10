@@ -25,8 +25,7 @@ public class SceneTransitionManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            // MoveManager.Instance.OnSceneIn();//��¼λ��
-            //MoveManager.Instance.OnSceneOut();
+            
             Scene currentScene = SceneManager.GetActiveScene();
             SceneTransitionManager.Instance.GoToScene(currentScene.name);
             //GoToScene("New Scene");
@@ -34,11 +33,8 @@ public class SceneTransitionManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            // MoveManager.Instance.OnSceneIn();//��¼λ��
-            //MoveManager.Instance.OnSceneOut();
-            /*Scene currentScene = SceneManager.GetActiveScene();
-            SceneTransitionManager.Instance.GoToScene(currentScene.name);*/
-            StartCoroutine(FadeOutAndGoToSceneRoutine("New Scene"));
+            
+            StartCoroutine(FadeOutAndGoToSceneRoutine("TheLastPlay"));
 
 
         }
