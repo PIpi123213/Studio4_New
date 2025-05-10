@@ -47,7 +47,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         InitSounds(bgmSounds);
         InitSounds(sfxSounds);

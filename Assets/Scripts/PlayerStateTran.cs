@@ -66,9 +66,15 @@ public class PlayerStateTran : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             Level1ToStage2();
+            //StageToLevel1();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            //Level1ToStage2();
+            StageToLevel1();
         }
     }
-    public void restSkybox()
+        public void restSkybox()
     {
         RenderSettings.skybox = skyboxMaterials;
         RenderSettings.skybox.SetFloat("_Exposure", 0);
@@ -115,9 +121,9 @@ public class PlayerStateTran : MonoBehaviour
         transform.localPosition = StartLocalPos;
         transform.localRotation = StartLocalRot;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         isStart = true;
-        SceneTransitionManager.Instance.fadeScreen.FadeIn(2f);
+        SceneTransitionManager.Instance.fadeScreen.FadeIn(3f);
         yield return null;
 
     }
@@ -126,22 +132,23 @@ public class PlayerStateTran : MonoBehaviour
     {
 
 
-
-        //SceneTransitionManager.Instance.fadeScreen_Black.FadeOut(0.8f);
-        yield return new WaitForSeconds(0.3f);
-        ChangeSkyboxLevel2();
-        level0_Drm.SetActive(false);
-        level2_Drm.SetActive(true);
+        //level1_scene.SetActive(false);
+        transform.SetParent(null);
+        //level2_scene.SetActive(true);
+        SceneTransitionManager.Instance.fadeScreen_Black.FadeOut(0.8f);
+        //yield return new WaitForSeconds(0.3f);
+        
+        //ChangeSkyboxLevel2();
+        
+        //level0_Drm.SetActive(false);
+        //level2_Drm.SetActive(true);
         Stage = 2;
         
-        transform.SetParent(null);
+        
+        SceneTransitionManager.Instance.GoToSceneAsync("New Scene");
         yield return null;
         
-        this.transform.position = MoveManager.Instance.CurrentWorldPosition + level2_scene.transform.position; 
-        //MoveManager.Instance.OnSceneOut();
-        yield return new WaitForSeconds(0.5f);
-        SceneTransitionManager.Instance.fadeScreen_Black.FadeIn(1f);
-        yield return null;
+       
 
     }
     public IEnumerator AnimateSkyboxExposure(float startExposure, float endExposure, float duration)

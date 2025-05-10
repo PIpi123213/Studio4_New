@@ -150,7 +150,7 @@ public class ZipLine : MonoBehaviour
 
         //取消交互以防止位置偏移
         grabInteractable.interactionLayers = 0;
-        StartCoroutine(setSlideringPlayerposition());
+       // StartCoroutine(setSlideringPlayerposition());
         
 
 

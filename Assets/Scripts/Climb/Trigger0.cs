@@ -59,7 +59,7 @@ public class Trigger0 : MonoBehaviour
     {
         // ͬʱ������������
         hasTriggered = true;
-
+        yield return new WaitForSeconds(20f);
         Coroutine radiusRoutine = StartCoroutine(AnimateRadius());
         Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
 
@@ -114,7 +114,7 @@ public class Trigger0 : MonoBehaviour
 
     private IEnumerator AnimateRadius()
     {
-        yield return new WaitForSeconds(20f);
+        
         float elapsedTime = 0f;
 
         float remainingMovementTime = 0f;
@@ -210,7 +210,7 @@ public class Trigger0 : MonoBehaviour
     [SerializeField] float endOpacity = 0f;
     private IEnumerator AnimateOpacity()
     {
-        yield return new WaitForSeconds(10f);
+      
         float elapsedTime = 0f;
 
 

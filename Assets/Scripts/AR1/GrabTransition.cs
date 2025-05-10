@@ -8,11 +8,12 @@ public class GrabTransition : MonoBehaviour
     public GrabHandPose handPoseGrab;
     private bool istrigger = false;
     public FadeScreen fadeScreen;
+    [SerializeField] private AudioSource audioSource; 
     //public Camera playercamera;
     //public GameObject scene;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class GrabTransition : MonoBehaviour
 
     public void trantoFly()
     {
-      
+        audioSource.Play();
         PlayerStateTran.Instance.StageToLevel1();
    
 
@@ -46,7 +47,7 @@ public class GrabTransition : MonoBehaviour
                 yield return null;
             }
 
-            // È·±£×îÖÕÆØ¹â¶ÈÎªÄ¿±êÖµ
+            // È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¹ï¿½ï¿½ÎªÄ¿ï¿½ï¿½Öµ
             RenderSettings.skybox.SetFloat("_Exposure", endExposure);
         }
     }

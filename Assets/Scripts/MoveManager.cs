@@ -6,7 +6,7 @@ using UnityEngine.XR;
 
 public class MoveManager : MonoBehaviour
 {
-    [SerializeField] private MoveInSpace _movementData;
+    public MoveInSpace _movementData;
     public Transform TrackingObject;
     private Vector3 localPosition = Vector3.zero;
     XROrigin xrOrigin;
@@ -24,7 +24,7 @@ public class MoveManager : MonoBehaviour
         {
             Destroy(gameObject);  // ∑¿÷π÷ÿ∏¥¥¥Ω®
         }
-        _movementData.InitializeSystem();
+        //_movementData.InitializeSystem();
         CurrentWorldPosition = this.transform.position;
         xrOrigin = GetComponent<XROrigin>();
     }
@@ -44,7 +44,7 @@ public class MoveManager : MonoBehaviour
         if (TryGetDevicePosition(out Vector3 currentPos))
         {
             localPosition = TrackingObject.localPosition;
-            _movementData.UpdateOffset(localPosition);
+            
         }
     }
     private bool TryGetDevicePosition(out Vector3 position)
@@ -86,7 +86,9 @@ public class MoveManager : MonoBehaviour
     }
     public void OnSceneIn()
     {
+      
         CurrentWorldPosition = this.transform.position;
+        _movementData.UpdateOffset(CurrentWorldPosition);
         Debug.Log(this.transform.position);
 
 
@@ -95,7 +97,7 @@ public class MoveManager : MonoBehaviour
     public void OnSceneOut()
     {
         //CurrentWorldPosition = CurrentWorldPosition + localPosition;
-        this.transform.position = CurrentWorldPosition;
+        this.transform.position = _movementData.Offset;
         Debug.Log(this.transform.position);
 
 

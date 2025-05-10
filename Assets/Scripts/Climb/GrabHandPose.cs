@@ -38,7 +38,7 @@ public class GrabHandPose : MonoBehaviour
 
         rightHandPose.gameObject.SetActive(false);
         leftHandPose.gameObject.SetActive(false);
-        StartCoroutine(findGeom());
+        //StartCoroutine(findGeom());
     }
 
     public void SetupPose(BaseInteractionEventArgs arg)
@@ -58,10 +58,10 @@ public class GrabHandPose : MonoBehaviour
             if(handData.type == handDataPose.HandModelType.Right && rightHandPose!=null)
             {
                 SetRightHandDataValues(handData, rightHandPose);
-               // SendHandData(handData, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right);
+               SendHandData(handData, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right);
                
 
-                StartCoroutine(SetHandDataRoutine(handData, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right));
+                //StartCoroutine(SetHandDataRoutine(handData, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right));
 
                 
                     rightHandPose.gameObject.SetActive(true);
@@ -73,8 +73,8 @@ public class GrabHandPose : MonoBehaviour
             else if(handData.type == handDataPose.HandModelType.Left && leftHandPose != null)
             {
                 SetLeftHandDataValues(handData, leftHandPose);
-                // SendHandData(handData, finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left);
-                StartCoroutine(SetHandDataRoutine(handData, finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left));
+                SendHandData(handData, finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left);
+                //StartCoroutine(SetHandDataRoutine(handData, finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left));
                 
                     leftHandPose.gameObject.SetActive(true);
                     leftHandModel_Geom.SetActive(false);
@@ -103,8 +103,8 @@ public class GrabHandPose : MonoBehaviour
             handDataPose handData = arg.interactorObject.transform.GetComponentInChildren<handDataPose>();
             if (handData.type == handDataPose.HandModelType.Right && rightHandPose != null)
             {
-                //SendHandData(handData, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right);
-                StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right));
+                SendHandData(handData, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right);
+                //StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right));
                 SetHandDataBack_Right();
                     rightHandPose.gameObject.SetActive(false);
                     rightHandModel_Geom.SetActive(true);
@@ -113,8 +113,8 @@ public class GrabHandPose : MonoBehaviour
             }
             else if (handData.type == handDataPose.HandModelType.Left && leftHandPose != null)
             {
-                //SendHandData(handData, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left);
-                StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left,finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left));
+                SendHandData(handData, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left);
+                //StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left,finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left));
                 SetHandDataBack_Left();
                     leftHandPose.gameObject.SetActive(false);
                     leftHandModel_Geom.SetActive(true);

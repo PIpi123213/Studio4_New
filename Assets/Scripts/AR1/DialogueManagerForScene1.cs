@@ -16,6 +16,7 @@ public class DialogueManagerForScene1 : MonoBehaviour
     public const string PlayDialogue = "PlayDialogue";
     public const string DialogueFinished = "DialogueFinished";*/
 
+    public EventManager eventManager;
     [Serializable]
     public class NamedNarration
     {
@@ -52,18 +53,18 @@ public class DialogueManagerForScene1 : MonoBehaviour
     private void OnEnable()
     {
         /*if (EventManager.Instance != null)*/
-            EventManager.Instance.Subscribe(PhotoGrabTrigger.OnPhotoGrabbed, OnPlayDialogue);
-            EventManager.Instance.Subscribe(FolderGrabTrigger.OnFolderGrabbed, OnPlayDialogue);
-            EventManager.Instance.Subscribe(GameCartridgeGrabTrigger.OnGameCartridgeGrabbed, OnPlayDialogue);
+            eventManager.Subscribe(PhotoGrabTrigger.OnPhotoGrabbed, OnPlayDialogue);
+            eventManager.Subscribe(FolderGrabTrigger.OnFolderGrabbed, OnPlayDialogue);
+            eventManager.Subscribe(GameCartridgeGrabTrigger.OnGameCartridgeGrabbed, OnPlayDialogue);
         /*else
             Debug.LogWarning("EventManager.Instance 为空，DialogueManager 订阅失败");;*/
     }
 
     private void OnDisable()
     {
-        EventManager.Instance.Unsubscribe(PhotoGrabTrigger.OnPhotoGrabbed, OnPlayDialogue);
-        EventManager.Instance.Unsubscribe(FolderGrabTrigger.OnFolderGrabbed, OnPlayDialogue);
-        EventManager.Instance.Unsubscribe(GameCartridgeGrabTrigger.OnGameCartridgeGrabbed, OnPlayDialogue);
+        eventManager.Unsubscribe(PhotoGrabTrigger.OnPhotoGrabbed, OnPlayDialogue);
+        eventManager.Unsubscribe(FolderGrabTrigger.OnFolderGrabbed, OnPlayDialogue);
+        eventManager.Unsubscribe(GameCartridgeGrabTrigger.OnGameCartridgeGrabbed, OnPlayDialogue);
     }
 
     private void OnPlayDialogue(object param)

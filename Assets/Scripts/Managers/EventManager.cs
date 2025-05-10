@@ -19,7 +19,7 @@ public class EventManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(this.gameObject);
+       
     }
 
     /// 订阅事件监听

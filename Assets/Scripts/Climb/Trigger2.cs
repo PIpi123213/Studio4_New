@@ -33,7 +33,7 @@ public class Trigger2 : MonoBehaviour
     void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
-        StartCoroutine(findCamera());
+        //StartCoroutine(findCamera());
         // ���� Select Enter �¼�
         grabInteractable.selectEntered.AddListener(OnSelectEnter);
         drmGameObject.radius = 0;
@@ -77,7 +77,7 @@ public class Trigger2 : MonoBehaviour
         //MoveManager.Instance.OnSceneIn();//��¼λ��
         // ��ɺ�ִ�г����л��������߼�
         Debug.Log("All animations completed!");
-        Arinteraction.SetActive(false);
+        
         //gameObject.SetActive(false);
 
 
@@ -132,6 +132,7 @@ public class Trigger2 : MonoBehaviour
             drmGameObject.radius = Mathf.Lerp(startRadius, endRadius, t);
             if (drmGameObject.radius > 250)
             {
+                Arinteraction.SetActive(false);
                 playercamera.clearFlags = CameraClearFlags.Skybox;
                 float extraSpeedFactor = 5f; // �ɸ�����Ҫ�������ٱ���
                 float extraT = Mathf.Pow(elapsedTime / RadiusDuration, 2) * extraSpeedFactor;
@@ -336,7 +337,7 @@ public class Trigger2 : MonoBehaviour
         // ȡ�������¼�
         grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
     }
-
+   
     private IEnumerator findCamera()
     {
         yield return null;
