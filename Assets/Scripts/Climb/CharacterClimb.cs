@@ -9,18 +9,18 @@ public class CharacterClimb : MonoBehaviour
     // Start is called before the first frame update
     public CustomClimbProvider climbProvider;
     public DynamicMoveProvider dynamicMoveProvider;
-    
+    public ZipLine zipline;
     public static bool isClimbing = false;
     public static bool isStart = false;
     void Start()
     {
         if (climbProvider == null)
         {
-            Debug.LogError("ClimbProvider Î´ÕÒµ½£¡");
+            Debug.LogError("ClimbProvider æœªæ‰¾åˆ°ï¼");
         }
         if (dynamicMoveProvider == null)
         {
-            Debug.LogError("DynamicMoveProvider Î´ÕÒµ½£¡");
+            Debug.LogError("DynamicMoveProvider æœªæ‰¾åˆ°ï¼");
         }
        
     }
@@ -31,13 +31,13 @@ public class CharacterClimb : MonoBehaviour
         if (climbProvider == null || dynamicMoveProvider == null)
             return;
 
-        // ¼ì²âÅÊÅÀ×´Ì¬
+        // æ£€æµ‹æ”€çˆ¬çŠ¶æ€
         isClimbing = climbProvider.locomotionPhase == LocomotionPhase.Moving ||
-                          climbProvider.locomotionPhase == LocomotionPhase.Started ;
+                          climbProvider.locomotionPhase == LocomotionPhase.Started || ZipLine.isSliding;
 
 
 
-        // Èç¹ûÕıÔÚÅÊÅÀ£¬¹Ø±ÕÖØÁ¦£»·ñÔò¿ªÆôÖØÁ¦
+        // å¦‚æœæ­£åœ¨æ”€çˆ¬ï¼Œå…³é—­é‡åŠ›ï¼›å¦åˆ™å¼€å¯é‡åŠ›
         //dynamicMoveProvider.useGravity = !isClimbing;
     }
 }
