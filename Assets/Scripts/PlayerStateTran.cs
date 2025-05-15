@@ -92,7 +92,7 @@ public class PlayerStateTran : MonoBehaviour
     }
     public void StageToLevel1()
     {
-        MoveManager.Instance.OnSceneIn();
+        
         StartCoroutine(StageToWingsuit());
         Debug.Log("Stage-Level1");
     }
