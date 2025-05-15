@@ -92,7 +92,7 @@ public class PlayerStateTran : MonoBehaviour
     }
     public void StageToLevel1()
     {
-       
+        MoveManager.Instance.OnSceneIn();
         StartCoroutine(StageToWingsuit());
         Debug.Log("Stage-Level1");
     }
@@ -112,11 +112,10 @@ public class PlayerStateTran : MonoBehaviour
         level0_scene.SetActive(false);
         Stage = 1;
         level1_scene.SetActive(true);
-
+       
         if (wingsuitplayer == null)
             Debug.LogError("»‘»ªŒ¥’“µΩ£°wingsuitplayer");
 
-        MoveManager.Instance.OnSceneIn();
         transform.SetParent(wingsuitplayer.transform);
         transform.localPosition = StartLocalPos;
         transform.localRotation = StartLocalRot;

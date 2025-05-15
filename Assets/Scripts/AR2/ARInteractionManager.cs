@@ -32,6 +32,16 @@ public class ARInteractionManager : MonoBehaviour
         {
             interactableObjects[i].SetActive(false);
         }
+        
+        
+         Transform parentTransform = interactableObjects[1].transform.parent;
+         GameObject parentObject = parentTransform.gameObject;
+        Debug.Log(parentObject);
+         Rigidbody rb = parentObject.GetComponent<Rigidbody>();
+         rb.useGravity = false;
+
+        Collider parentCollider = parentObject.GetComponent<Collider>();
+        parentCollider.enabled = false;
 
         // 订阅交互完成事件
         EventManager.Instance.Subscribe(InteractionComplete, OnInteractionComplete);
@@ -53,6 +63,17 @@ public class ARInteractionManager : MonoBehaviour
     {
         if (currentIndex >= 0 && currentIndex < interactableObjects.Count)
         {
+            if (currentIndex == 1)
+            {
+                Transform parentTransform = interactableObjects[currentIndex].transform.parent;
+                GameObject parentObject = parentTransform.gameObject;
+
+                Rigidbody rb = parentObject.GetComponent<Rigidbody>();
+                rb.useGravity = true;
+
+                Collider parentCollider = parentObject.GetComponent<Collider>();
+                parentCollider.enabled = true;
+            }
             interactableObjects[currentIndex].SetActive(true);
         }
     }
@@ -62,7 +83,26 @@ public class ARInteractionManager : MonoBehaviour
         // 当前物体交互完，隐藏
         if (currentIndex >= 0 && currentIndex < interactableObjects.Count)
         {
+          
+          
+           
+            if (currentIndex == 1)
+            {
+                Transform parentTransform = interactableObjects[currentIndex].transform.parent;
+                GameObject parentObject = parentTransform.gameObject;
+
+                Rigidbody rb = parentObject.GetComponent<Rigidbody>();
+                rb.useGravity = false;
+
+                Collider parentCollider = parentObject.GetComponent<Collider>();
+                parentCollider.enabled = false;
+
+               
+                
+            }
             interactableObjects[currentIndex].SetActive(false);
+
+
         }
 
         currentIndex++;
