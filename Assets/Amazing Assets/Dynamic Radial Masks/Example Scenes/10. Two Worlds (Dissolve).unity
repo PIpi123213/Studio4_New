@@ -595,21 +595,21 @@ MonoBehaviour:
   shaderData_Position:
   - {x: 0, y: 0, z: 0, w: 0}
   shaderData_Radius:
-  - 0.04
+  - 29.88
   shaderData_Intensity:
-  - 1
+  - 1.06
   shaderData_EdgeSize:
-  - 2
+  - 16.37
   shaderData_RingCount:
   - 3
   shaderData_Phase:
-  - 19.606894
+  - 78.852264
   shaderData_Frequency:
   - 10
   shaderData_Smooth:
-  - 3
+  - 0.15
   shaderData_NoiseStrength:
-  - 5
+  - 96.74
   shape: 2
   count: 1
   type: 0
@@ -663,15 +663,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92de4220c61c9f6449f2a9668f90cd1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.04
-  intensity: 1
-  noiseStrength: 5
-  edgeSize: 2
+  radius: 29.88
+  intensity: 1.06
+  noiseStrength: 96.74
+  edgeSize: 16.37
   ringCount: 3
   frequency: 10
   phaseSpeed: 2
-  currentPhase: 19.630934
-  smooth: 3
+  currentPhase: 79.51893
+  smooth: 0.15
   displayAllProperties: 0
   maskShape: 2
 --- !u!4 &1258493647
