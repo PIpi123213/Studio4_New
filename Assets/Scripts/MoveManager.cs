@@ -48,17 +48,17 @@ public class MoveManager : MonoBehaviour
             localPosition = TrackingObject.localPosition;
             
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+     /*   if (Input.GetKeyDown(KeyCode.Space))
         {
-            /* player.position = new Vector3(-TrackingObject.transform.localPosition.x *4f, player.position.y, -TrackingObject.transform.localPosition.z * 4f);
+            *//* player.position = new Vector3(-TrackingObject.transform.localPosition.x *4f, player.position.y, -TrackingObject.transform.localPosition.z * 4f);
              float yAngle = TrackingObject.transform.localEulerAngles.y;
-             player.rotation = Quaternion.Euler(0f, -yAngle, 0f);*/
+             player.rotation = Quaternion.Euler(0f, -yAngle, 0f);*//*
             OnSceneIn();
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
             OnSceneOut();
-        }
+        }*/
     }
     private bool TryGetDevicePosition(out Vector3 position)
     {
@@ -102,7 +102,7 @@ public class MoveManager : MonoBehaviour
       
         CurrentWorldPosition = this.transform.position;
         _movementData.UpdateOffset(CurrentWorldPosition);
-    
+        Debug.Log("已初始空间位置");
 
 
     }

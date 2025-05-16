@@ -63,7 +63,7 @@ public class PlayerStateTran : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+     /*   if (Input.GetKeyDown(KeyCode.A))
         {
             Level1ToStage2();
             //StageToLevel1();
@@ -72,7 +72,7 @@ public class PlayerStateTran : MonoBehaviour
         {
             //Level1ToStage2();
             StageToLevel1();
-        }
+        }*/
     }
         public void restSkybox()
     {

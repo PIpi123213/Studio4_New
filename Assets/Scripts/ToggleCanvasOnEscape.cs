@@ -1,21 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class ToggleCanvasOnEscape : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private Canvas targetCanvas; // ÍÏ×§ÄãµÄ Canvas µ½ Inspector
-
+    public DynamicMoveProvider dynamicMoveProvider;
+    public ActionBasedContinuousTurnProvider turnProvider;
+    
+ 
+    void Start()
+    {
+        //dynamicMoveProvider.enabled = false;
+        //turnProvider.enabled = false;
+        dynamicMoveProvider.moveSpeed = 0f;
+        turnProvider.turnSpeed = 0f;
+        targetCanvas.enabled = false;
+    }
     void Update()
     {
         // ¼ì²â ESC °´¼ü
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+         
             ToggleCanvas();
         }
+   
     }
-
+  
     void ToggleCanvas()
     {
         if (targetCanvas != null)
@@ -34,5 +51,23 @@ public class ToggleCanvasOnEscape : MonoBehaviour
         {
             Debug.LogWarning("Target Canvas Î´·ÖÅä£¡");
         }
+    }
+    public void lockProvider()
+    {
+        dynamicMoveProvider.moveSpeed = 0f;
+        turnProvider.turnSpeed = 0f;
+
+/*        dynamicMoveProvider.enabled = false;
+        turnProvider.enabled = false;*/
+        Debug.Log("1111");
+    }
+    public void UnlockProvider()
+    {
+        dynamicMoveProvider.moveSpeed = 1f;
+        turnProvider.turnSpeed = 60f;
+
+     /*   dynamicMoveProvider.enabled = true;
+        turnProvider.enabled = true;*/
+
     }
 }
