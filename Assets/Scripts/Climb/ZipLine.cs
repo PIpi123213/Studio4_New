@@ -150,10 +150,6 @@ public class ZipLine : MonoBehaviour
 
         //取消交互以防止位置偏移
         grabInteractable.interactionLayers = 0;
-       // StartCoroutine(setSlideringPlayerposition());
-        
-
-
 
         // 初始化：移动到第一个点
         zipLineHandler.position = waypoints[0].position;
@@ -161,6 +157,13 @@ public class ZipLine : MonoBehaviour
         float currentSpeed = 0f;
         float acceleration = speed / 3f;
 
+
+        Coroutine setPlayerPosition =StartCoroutine(setSlideringPlayerposition());
+        yield return setPlayerPosition;
+
+
+        // 初始化：移动到第一个点
+       
         // 遍历所有路径段
         while (currentWaypointIndex < waypoints.Length)
         {
@@ -213,17 +216,18 @@ public class ZipLine : MonoBehaviour
     {
        
        
-        while (Vector3.Distance(playerTransform.localPosition, sliderPlayerposition) > 0.1f)
+        while (Vector3.Distance(playerTransform.localPosition, sliderPlayerposition) > 0.01f)
         {
             // 加速逻辑
             playerTransform.localPosition = Vector3.MoveTowards(
                   playerTransform.localPosition,
                   sliderPlayerposition,
-                  0.1f * Time.deltaTime
+                  0.5f * Time.deltaTime
               );
             yield return null;
         }
 
+        Debug.LogWarning(playerTransform.localPosition);
 
        
 

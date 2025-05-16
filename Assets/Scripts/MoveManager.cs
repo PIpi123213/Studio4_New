@@ -13,7 +13,7 @@ public class MoveManager : MonoBehaviour
     Vector3 lastEyeLocalPos;
     public static MoveManager Instance { get; private set; }
     public Vector3 CurrentWorldPosition = Vector3.zero;
-
+    public Transform player;
     private void Awake()
     {
         if (Instance == null)
@@ -25,12 +25,14 @@ public class MoveManager : MonoBehaviour
             Destroy(gameObject);  // 防止重复创建
         }
         //_movementData.InitializeSystem();
-        CurrentWorldPosition = this.transform.position;
+        //CurrentWorldPosition = this.transform.position;
         xrOrigin = GetComponent<XROrigin>();
     }
 
     void Start()
     {
+
+        OnSceneOut();
         lastEyeLocalPos = TrackingObject.localPosition;
     }
     private void OnApplicationQuit()
@@ -46,6 +48,17 @@ public class MoveManager : MonoBehaviour
             localPosition = TrackingObject.localPosition;
             
         }
+     /*   if (Input.GetKeyDown(KeyCode.Space))
+        {
+            *//* player.position = new Vector3(-TrackingObject.transform.localPosition.x *4f, player.position.y, -TrackingObject.transform.localPosition.z * 4f);
+             float yAngle = TrackingObject.transform.localEulerAngles.y;
+             player.rotation = Quaternion.Euler(0f, -yAngle, 0f);*//*
+            OnSceneIn();
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            OnSceneOut();
+        }*/
     }
     private bool TryGetDevicePosition(out Vector3 position)
     {
@@ -89,7 +102,7 @@ public class MoveManager : MonoBehaviour
       
         CurrentWorldPosition = this.transform.position;
         _movementData.UpdateOffset(CurrentWorldPosition);
-        Debug.Log(this.transform.position);
+        Debug.Log("已初始空间位置");
 
 
     }
@@ -98,7 +111,7 @@ public class MoveManager : MonoBehaviour
     {
         //CurrentWorldPosition = CurrentWorldPosition + localPosition;
         this.transform.position = _movementData.Offset;
-        Debug.Log(this.transform.position);
+        //Debug.Log(this.transform.position);
 
 
     }
