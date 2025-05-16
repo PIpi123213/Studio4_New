@@ -24,7 +24,7 @@ public class Trigger2 : MonoBehaviour
     public GameObject Arinteraction;
     public GameObject FirstRope;
     //public GameObject postprocess;
-
+    
     private void Awake()
     {
         lake.transform.position = lakeStartPosition;
@@ -56,6 +56,7 @@ public class Trigger2 : MonoBehaviour
         {
             //StartCoroutine(AnimateRadius());
             //StartCoroutine(AnimateOpacity());
+            
             StartCoroutine(RunBothAnimations());
         }
     }

@@ -31,7 +31,7 @@ public class MoveManager : MonoBehaviour
 
     void Start()
     {
-
+        CurrentWorldPosition = _movementData.Offset;
         OnSceneOut();
         lastEyeLocalPos = TrackingObject.localPosition;
     }
