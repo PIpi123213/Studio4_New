@@ -6,20 +6,20 @@ using UnityEngine.Playables;
 
 public class WingSuitMoveController : MonoBehaviour
 {
-    private Rigidbody     rb;
+    private Rigidbody rb;
     private TrailRenderer trailRenderer;
-    private bool          isRotatingAway = false; // 新增标志
-   
+    private bool isRotatingAway = false; // 新增标志
+
     void Start()
     {
-        rb            = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
         // 同步 Rigidbody 的初始旋转
         rb.rotation = transform.rotation;
 
         currentYaw = transform.eulerAngles.y; // 初始化 currentYaw
-        yaw        = currentYaw;
+        yaw = currentYaw;
 
         if (playableDirector != null)
         {
@@ -41,9 +41,9 @@ public class WingSuitMoveController : MonoBehaviour
 
     private void Update()
     {
-        
+
         if (!PlayerStateTran.Instance.isStart) return;
-        
+
         ApplyMovement(); // 始终允许玩家移动
 
         if (!isForcedToSkull) // 如果未强制飞向 Skull，允许玩家控制转向
@@ -70,21 +70,38 @@ public class WingSuitMoveController : MonoBehaviour
     }
 
     // 仅用 yaw 控制水平旋转即可
-    private                  float     yaw = 0f;
+    private float yaw = 0f;
     [SerializeField] private Transform leftController;
     [SerializeField] private Transform rightController;
-    private                  float     currentYaw;       // 实际旋转的 Y 值（带缓动）
-    private                  float     yawVelocity = 0f; // 平滑用的速度缓存变量
+    private float currentYaw;       // 实际旋转的 Y 值（带缓动）
+    private float yawVelocity = 0f; // 平滑用的速度缓存变量
+    [SerializeField] private float maxTiltAngle = 30f; // 最大倾斜角度
+    [SerializeField] private Transform trackingSpace; // Head的父物体
 
     private void ApplyRotation()
     {
         if (isRotatingAway) return; // 如果正在旋转，跳过输入控制
 
-        yaw        += (leftController.position.y - rightController.position.y) * 1.5f;
-        currentYaw =  Mathf.Lerp(currentYaw, yaw, 1f);
+        float heightDifference = leftController.position.y - rightController.position.y;
+        yaw += heightDifference * 1.5f;
+        currentYaw = Mathf.Lerp(currentYaw, yaw, 1f);
 
+        // 计算倾斜角度（z轴旋转）
+        float tiltAngle = -heightDifference * maxTiltAngle; // 负号是为了让倾斜方向正确
+        tiltAngle = Mathf.Clamp(tiltAngle, -maxTiltAngle, maxTiltAngle);
+
+        // 应用旋转到主体
         Quaternion targetRotation = Quaternion.Euler(0f, currentYaw, 0f);
         rb.MoveRotation(targetRotation);
+
+        // 应用倾斜到trackingSpace（Head的父物体）
+        if (trackingSpace != null)
+        {
+            // 只改变z轴旋转，保持其他轴不变
+            Vector3 currentEuler = trackingSpace.eulerAngles;
+            trackingSpace.eulerAngles = new Vector3(currentEuler.x, currentEuler.y, tiltAngle);
+        }
+        Debug.Log("tiltAngle: " + tiltAngle);
     }
 
     private void CheckSideRaycasts()
@@ -115,14 +132,14 @@ public class WingSuitMoveController : MonoBehaviour
 
     private IEnumerator MoveSideways(Vector3 direction, float distance, float duration)
     {
-        Vector3 startPosition  = transform.position;
+        Vector3 startPosition = transform.position;
         Vector3 targetPosition = startPosition + direction * distance;
 
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
         {
-            float t       = elapsedTime / duration;
+            float t = elapsedTime / duration;
             float smoothT = Mathf.SmoothStep(0f, 1f, t);
 
             // 保留当前的前进速度
@@ -152,20 +169,20 @@ public class WingSuitMoveController : MonoBehaviour
     // }
 
     //碰撞物体检测以及转向
-    private                  bool             isForcedToSkull = false;                   // 标志位，表示是否强制飞向 Skull
-    [SerializeField] private Transform        skullTransform;                            // Skull 的 Transform
-    public const             string           OnObstacleDetected = "OnObstacleDetected"; // 事件名称
-    [SerializeField] private AudioSource      audioSource;                               // 引用 AudioSource
-    [SerializeField] private AudioClip        air_leaking;
-    [SerializeField] public  AudioClip        dead;             // 播放的音效
+    private bool isForcedToSkull = false;                   // 标志位，表示是否强制飞向 Skull
+    [SerializeField] private Transform skullTransform;                            // Skull 的 Transform
+    public const string OnObstacleDetected = "OnObstacleDetected"; // 事件名称
+    [SerializeField] private AudioSource audioSource;                               // 引用 AudioSource
+    [SerializeField] private AudioClip air_leaking;
+    [SerializeField] public AudioClip dead;             // 播放的音效
     [SerializeField] private PlayableDirector playableDirector; // 引用 PlayableDirector
-    public                   FadeScreen       fadeScreen;
+    public FadeScreen fadeScreen;
 
     private void OnTriggerEnter(Collider other) //检测
     {
         Debug.Log("Detected object: " + other.name);
         // 获取碰撞点和法线
-        Vector3 contactPoint       = other.ClosestPoint(transform.position);
+        Vector3 contactPoint = other.ClosestPoint(transform.position);
         Vector3 directionToContact = (contactPoint - transform.position).normalized;
 
 
@@ -185,7 +202,7 @@ public class WingSuitMoveController : MonoBehaviour
         {
             // 计算物体相对于玩家的位置
             Vector3 directionToObject = other.transform.position - transform.position;
-            float   dotProduct        = Vector3.Dot(transform.right, directionToObject);
+            float dotProduct = Vector3.Dot(transform.right, directionToObject);
             if (Vector3.Dot(transform.forward, directionToObject) < 0)
             {
                 if (dotProduct > 0) // 物体在玩家右边
@@ -226,7 +243,7 @@ public class WingSuitMoveController : MonoBehaviour
         {
             Debug.Log("DeadEnd detected, playing timeline...");
 
-            if (playableDirector != null&&fadeScreen!= null)
+            if (playableDirector != null && fadeScreen != null)
             {
                 playableDirector.Play(); // 播放 Timeline
                 fadeScreen.Fade(0f, 1f, 0.001f);
@@ -256,13 +273,13 @@ public class WingSuitMoveController : MonoBehaviour
         isRotatingAway = true; // 暂停 ApplyRotation
 
         Quaternion initialRotation = rb.rotation;
-        Quaternion targetRotation  = Quaternion.LookRotation(targetDirection);
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
 
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
         {
-            float t       = elapsedTime / duration;
+            float t = elapsedTime / duration;
             float smoothT = Mathf.SmoothStep(0f, 1f, t);
 
             // 插值旋转
@@ -277,16 +294,16 @@ public class WingSuitMoveController : MonoBehaviour
         rb.MoveRotation(targetRotation);
 
         // 更新 yaw 和 currentYaw
-        yaw         = targetRotation.eulerAngles.y;
-        currentYaw  = yaw;
+        yaw = targetRotation.eulerAngles.y;
+        currentYaw = yaw;
         yawVelocity = 0f;
 
         isRotatingAway = false; // 恢复 ApplyRotation
     }
 
-    [SerializeField] private float     defaultVerticalSpeed;
-    [SerializeField] private float     gravityFactor = 10f; //控制俯冲比例
-    private                  float     verticalSpeed;
+    [SerializeField] private float defaultVerticalSpeed;
+    [SerializeField] private float gravityFactor = 10f; //控制俯冲比例
+    private float verticalSpeed;
     [SerializeField] private Transform Head;
 
     private void DetectDive()
@@ -322,7 +339,7 @@ public class WingSuitMoveController : MonoBehaviour
 
     private void LimitPlayerHeight()
     {
-        float      maxDistanceFromGround = 70f; // 最大离地距离
+        float maxDistanceFromGround = 70f; // 最大离地距离
         RaycastHit hit;
 
         // 从玩家位置向下发射射线
@@ -335,7 +352,7 @@ public class WingSuitMoveController : MonoBehaviour
                 // 如果超过最大距离，强制调整垂直速度向下
                 Vector3 currentVelocity = rb.velocity;
                 currentVelocity.y = Mathf.Min(currentVelocity.y, -1f); // 确保速度向下
-                rb.velocity       = currentVelocity;
+                rb.velocity = currentVelocity;
             }
         }
     }
@@ -345,7 +362,7 @@ public class WingSuitMoveController : MonoBehaviour
         isAddingUpwardVelocity = true; // 设置标志位
 
         float halfDuration = duration / 2f; // 加速和减速各占一半时间
-        float elapsedTime  = 0f;
+        float elapsedTime = 0f;
 
         while (elapsedTime < duration)
         {
@@ -360,7 +377,7 @@ public class WingSuitMoveController : MonoBehaviour
 
             Vector3 currentVelocity = rb.velocity;
             currentVelocity.y = upwardVelocity;
-            rb.velocity       = currentVelocity;
+            rb.velocity = currentVelocity;
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -391,7 +408,7 @@ public class WingSuitMoveController : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            float t       = elapsedTime / duration;
+            float t = elapsedTime / duration;
             float smoothT = Mathf.SmoothStep(0f, 1f, t);
 
             // 插值旋转
@@ -406,8 +423,8 @@ public class WingSuitMoveController : MonoBehaviour
         rb.MoveRotation(targetRotation);
 
         // 更新 yaw 和 currentYaw
-        yaw         = targetRotation.eulerAngles.y;
-        currentYaw  = yaw;
+        yaw = targetRotation.eulerAngles.y;
+        currentYaw = yaw;
         yawVelocity = 0f;
 
         isRotatingAway = false; // 恢复 ApplyRotation
