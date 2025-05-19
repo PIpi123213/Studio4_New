@@ -90,6 +90,12 @@ public class WingSuitMoveController : MonoBehaviour
         float tiltAngle = -heightDifference * maxTiltAngle; // 负号是为了让倾斜方向正确
         tiltAngle = Mathf.Clamp(tiltAngle, -maxTiltAngle, maxTiltAngle);
 
+        // 计算双手平均高度
+        float averageHeight = (leftController.position.y + rightController.position.y) / 2f;
+        // 计算俯仰角度（x轴旋转），反转计算方向
+        float pitchAngle = -(averageHeight - trackingSpace.position.y) * maxTiltAngle;
+        pitchAngle = Mathf.Clamp(pitchAngle, -maxTiltAngle, maxTiltAngle);
+
         // 应用旋转到主体
         Quaternion targetRotation = Quaternion.Euler(0f, currentYaw, 0f);
         rb.MoveRotation(targetRotation);
@@ -97,11 +103,11 @@ public class WingSuitMoveController : MonoBehaviour
         // 应用倾斜到trackingSpace（Head的父物体）
         if (trackingSpace != null)
         {
-            // 只改变z轴旋转，保持其他轴不变
+            // 同时改变x轴和z轴旋转，保持y轴不变
             Vector3 currentEuler = trackingSpace.eulerAngles;
-            trackingSpace.eulerAngles = new Vector3(currentEuler.x, currentEuler.y, tiltAngle);
+            trackingSpace.eulerAngles = new Vector3(pitchAngle, currentEuler.y, tiltAngle);
         }
-        Debug.Log("tiltAngle: " + tiltAngle);
+        Debug.Log("tiltAngle: " + tiltAngle + ", pitchAngle: " + pitchAngle);
     }
 
     private void CheckSideRaycasts()
