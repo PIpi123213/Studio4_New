@@ -24,6 +24,9 @@ public class Swimmer : MonoBehaviour
     Rigidbody _rigidbody;
     float _cooldownTimer;
 
+    [Header("Gravity")]
+    public bool _useGravity = false;
+    public float gravityMultiplier = 0.01f;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -34,8 +37,8 @@ public class Swimmer : MonoBehaviour
     {
         _cooldownTimer += Time.fixedDeltaTime;
         if(_cooldownTimer>minTimeBetweenStrokes
-            &&leftControllerSwimReference.action.IsPressed()
-            && rightControllerSwimReference.action.IsPressed())
+            &&(leftControllerSwimReference.action.IsPressed()
+            ||rightControllerSwimReference.action.IsPressed()))
         {
             var leftHandVelocity = leftControllerVelocity.action.ReadValue<Vector3>();
             var rightHandVelocity = rightControllerVelocity.action.ReadValue<Vector3>();
@@ -53,6 +56,10 @@ public class Swimmer : MonoBehaviour
         if (_rigidbody.velocity.sqrMagnitude > 0.01f)
         {
             _rigidbody.AddForce(-_rigidbody.velocity*dragForce,ForceMode.Acceleration);
+        }
+        if (_useGravity)
+        {
+            _rigidbody.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
         }
 
     }
