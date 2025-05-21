@@ -36,7 +36,14 @@ public class MoveInSpace:ScriptableObject
 
     public void UpdateOffset(Vector3 newOffset,Quaternion newRotation)
     {
-        _currentOffset = new Vector3(newOffset.x,0,newOffset.z);
+        if (_ignoreVertical)
+        {
+            _currentOffset = new Vector3(newOffset.x, 0, newOffset.z);
+        }
+        else
+        {
+            _currentOffset = newOffset;
+        }
         _currentRotation = newRotation;
 
 

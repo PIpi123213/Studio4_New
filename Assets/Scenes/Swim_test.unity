@@ -413,7 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swimForce: 5
   dragForce: 1
-  minForce: 0
+  minForce: 1
   minTimeBetweenStrokes: 0
   leftControllerSwimReference: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
@@ -425,7 +425,7 @@ MonoBehaviour:
     type: 3}
   trackingReference: {fileID: 1222585267}
   _useGravity: 0
-  gravityMultiplier: 0.2
+  gravityMultiplier: 0.1
 --- !u!54 &1222585266
 Rigidbody:
   m_ObjectHideFlags: 0
