@@ -16,6 +16,7 @@ TagManager:
   - HandEnd
   - wingsuitplayer
   - DeadEnd
+  - SpeedUp
   layers:
   - Default
   - TransparentFX
