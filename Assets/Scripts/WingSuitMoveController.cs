@@ -30,6 +30,7 @@ public class WingSuitMoveController : MonoBehaviour
     [SerializeField] private float speedUpGravityFactor = 1.5f;  // 加速时的重力倍数
     [SerializeField] private float pillarSideBoostForce = 500f;  // 柱子碰撞后的横向推力
     [SerializeField] private float pillarBoostDuration = 1f;  // 柱子碰撞后的加速持续时间
+    [SerializeField] private Transform Head;  // 基准高度
     #endregion
 
     #region 私有变量
@@ -123,7 +124,8 @@ public class WingSuitMoveController : MonoBehaviour
         float pitchAngle = CalculatePitchAngle(averageHeight);
 
         // 应用旋转
-        ApplyRotations(-0.5f*tiltAngle, -pitchAngle);
+        Debug.Log("tiltAngle: " + tiltAngle + " pitchAngle: " + pitchAngle);
+        ApplyRotations(-0.5f * tiltAngle, -pitchAngle);
     }
 
     private void UpdateYaw(float heightDifference)
@@ -140,10 +142,16 @@ public class WingSuitMoveController : MonoBehaviour
 
     private float CalculatePitchAngle(float averageHeight)
     {
-        // 计算双手平均高度与头部高度的差值
-        float heightDiff = averageHeight - trackingSpace.position.y;
-        // 根据高度差计算俯仰角度，正值表示抬头，负值表示低头
-        float pitchAngle = heightDiff * maxTiltAngle;
+        Debug.Log("averageHeight: " + averageHeight);
+        Debug.Log("Head.transform.position.y: " + Head.transform.position.y);
+        Debug.Log("averageHeight - Head.transform.position.y: " + (averageHeight - Head.transform.position.y));
+        Debug.Log("maxTiltAngle: " + maxTiltAngle);
+        // 直接使用averageHeight来计算俯仰角度
+        // 添加一个基准高度，可以根据需要调整
+        float heightScaleFactor = 0.5f;  // 缩放因子
+        // 计算与基准高度的差值，并转换为俯仰角度
+        float pitchAngle = (averageHeight - Head.transform.position.y) * heightScaleFactor * maxTiltAngle;
+        Debug.Log("pitchAngle: " + pitchAngle);
         return Mathf.Clamp(pitchAngle, -maxTiltAngle, maxTiltAngle);
     }
 
