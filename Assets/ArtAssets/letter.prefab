@@ -393,7 +393,13 @@ PlayableDirector:
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
-  m_SceneBindings: []
+  m_SceneBindings:
+  - key: {fileID: 5708386364940614126, guid: 85f85c7d6fc39704f87280fb15d95fdf, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5221562243574989245, guid: 85f85c7d6fc39704f87280fb15d95fdf, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6778768843161547062, guid: 85f85c7d6fc39704f87280fb15d95fdf, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &7696832313037503740
