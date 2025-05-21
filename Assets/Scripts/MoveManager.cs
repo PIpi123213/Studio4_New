@@ -13,6 +13,7 @@ public class MoveManager : MonoBehaviour
     Vector3 lastEyeLocalPos;
     public static MoveManager Instance { get; private set; }
     public Vector3 CurrentWorldPosition = Vector3.zero;
+    public Quaternion CurrentWorldRotation = Quaternion.identity;
     public Transform player;
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class MoveManager : MonoBehaviour
     void Start()
     {
         CurrentWorldPosition = _movementData.Offset;
+        CurrentWorldRotation = _movementData.Rotation;
         OnSceneOut();
         lastEyeLocalPos = TrackingObject.localPosition;
     }
@@ -101,7 +103,8 @@ public class MoveManager : MonoBehaviour
     {
       
         CurrentWorldPosition = this.transform.position;
-        _movementData.UpdateOffset(CurrentWorldPosition);
+        CurrentWorldRotation = this.transform.rotation;
+        _movementData.UpdateOffset(CurrentWorldPosition, CurrentWorldRotation);
         Debug.Log("已初始空间位置");
 
 
@@ -111,6 +114,7 @@ public class MoveManager : MonoBehaviour
     {
         //CurrentWorldPosition = CurrentWorldPosition + localPosition;
         this.transform.position = _movementData.Offset;
+        this.transform.rotation = _movementData.Rotation;
         //Debug.Log(this.transform.position);
 
 

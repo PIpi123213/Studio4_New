@@ -11,6 +11,8 @@ public class GrabHandPose : MonoBehaviour
     public handDataPose leftHandPose;
     public GameObject leftHandModel_Geom;
     public GameObject rightHandModel_Geom;
+    
+
     private Vector3 startingHandPosition_left;
     private Vector3 finalHandPosition_left;
     private Quaternion startingHandRotation_left;
@@ -35,10 +37,34 @@ public class GrabHandPose : MonoBehaviour
 
         grabInteractable.selectEntered.AddListener(SetupPose);
         grabInteractable.selectExited.AddListener(UnSetPose);
+        grabInteractable.hoverEntered.AddListener(SetupAttachPos);
 
         rightHandPose.gameObject.SetActive(false);
         leftHandPose.gameObject.SetActive(false);
         //StartCoroutine(findGeom());
+    }
+    public void SetupAttachPos(BaseInteractionEventArgs arg)
+    {
+        if (grabInteractable.interactorsHovering.Count == 2 ) return;
+
+
+     /*   if (arg.interactorObject is XRDirectInteractor)
+        {
+            handDataPose handData = arg.interactorObject.transform.GetComponentInChildren<handDataPose>();
+         
+            if (handData.type == handDataPose.HandModelType.Right && rightHandPose != null)
+            {
+                Attachpoint.transform.position = rightHandPose.transform.position;
+            }
+            else if (handData.type == handDataPose.HandModelType.Left && leftHandPose != null)
+            {
+                Attachpoint.transform.position = leftHandPose.transform.position;
+            }
+
+
+
+        }
+*/
     }
 
     public void SetupPose(BaseInteractionEventArgs arg)
@@ -57,7 +83,8 @@ public class GrabHandPose : MonoBehaviour
             handData.animator.enabled = false;
             if(handData.type == handDataPose.HandModelType.Right && rightHandPose!=null)
             {
-                SetRightHandDataValues(handData, rightHandPose);
+                
+               SetRightHandDataValues(handData, rightHandPose);
                SendHandData(handData, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right);
                
 
@@ -72,6 +99,7 @@ public class GrabHandPose : MonoBehaviour
             }
             else if(handData.type == handDataPose.HandModelType.Left && leftHandPose != null)
             {
+              
                 SetLeftHandDataValues(handData, leftHandPose);
                 SendHandData(handData, finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left);
                 //StartCoroutine(SetHandDataRoutine(handData, finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left));

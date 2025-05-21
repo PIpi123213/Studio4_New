@@ -1,46 +1,29 @@
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class XRGrabListener : MonoBehaviour
+public class XRGrabListener : XRGrabInteractable
 {
-    public XRGrabInteractable grabInteractable; // 需要监听的 XRGrabInteractable 组件
-    public bool isTwoHandGrab = false;
-
-
-    private void OnEnable()
+    public Transform rightHandPos;
+    public Transform leftHandPos;
+    public override Transform GetAttachTransform(IXRInteractor interactor)
     {
-        if (grabInteractable != null)
+        handDataPose handData = interactor.transform.GetComponentInChildren<handDataPose>();
+        if (handData.type == handDataPose.HandModelType.Right&& rightHandPos!=null)
         {
-            grabInteractable.selectEntered.AddListener(OnGrab);
-            grabInteractable.selectExited.AddListener(OnRelease);
+            Transform _transform = rightHandPos;
+            //_transform.rotation = Quaternion.identity;
+            return _transform;
         }
-    }
-
-    private void OnDisable()
-    {
-        if (grabInteractable != null)
+        else if (handData.type == handDataPose.HandModelType.Left && leftHandPos != null)
         {
-            grabInteractable.selectEntered.RemoveListener(OnGrab);
-            grabInteractable.selectExited.RemoveListener(OnRelease);
+            Transform _transform = leftHandPos;
+            //_transform.rotation = Quaternion.identity;
+            return _transform;
         }
-    }
-
-    private void OnGrab(SelectEnterEventArgs args)
-    {
-        if (grabInteractable.interactorsSelecting.Count == 2)
+        else
         {
-            isTwoHandGrab = true;
-
-            Debug.Log("监听器：物体被双手抓住！");
-        }
-    }
-
-    private void OnRelease(SelectExitEventArgs args)
-    {
-        if (grabInteractable.interactorsSelecting.Count < 2)
-        {
-            isTwoHandGrab = false;
-            Debug.Log("监听器：物体被单手或松开！");
+            return this.transform;
         }
     }
 }
