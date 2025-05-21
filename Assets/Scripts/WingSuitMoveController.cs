@@ -111,7 +111,7 @@ public class WingSuitMoveController : MonoBehaviour
         float pitchAngle = CalculatePitchAngle(averageHeight);
 
         // 应用旋转
-        ApplyRotations(tiltAngle, pitchAngle);
+        ApplyRotations(-tiltAngle, pitchAngle);
     }
 
     private void UpdateYaw(float heightDifference)
