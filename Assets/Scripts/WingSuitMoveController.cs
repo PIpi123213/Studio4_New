@@ -26,6 +26,10 @@ public class WingSuitMoveController : MonoBehaviour
     [SerializeField] private float maxTiltAngle = 30f;
     [SerializeField] private float rotationSensitivity = 1.5f;
     [SerializeField] private float maxHeightFromGround = 70f;
+    [SerializeField] private float speedUpMultiplier = 1.5f;  // 加速倍数
+    [SerializeField] private float speedUpGravityFactor = 1.5f;  // 加速时的重力倍数
+    [SerializeField] private float pillarSideBoostForce = 500f;  // 柱子碰撞后的横向推力
+    [SerializeField] private float pillarBoostDuration = 1f;  // 柱子碰撞后的加速持续时间
     #endregion
 
     #region 私有变量
@@ -36,6 +40,11 @@ public class WingSuitMoveController : MonoBehaviour
     private bool isRotatingAway = false;
     private bool isForcedToSkull = false;
     private bool isAddingUpwardVelocity = false;
+    private bool isInSpeedUpZone = false;  // 是否在加速区域
+    private float originalGlideSpeed;  // 原始滑行速度
+    private float originalGravityFactor;  // 原始重力因子
+    private Vector3 pillarBoostDirection;  // 柱子碰撞后的推力方向
+    private float pillarBoostTimer = 0f;  // 柱子碰撞后的加速计时器
     #endregion
 
     #region Unity生命周期
@@ -43,6 +52,8 @@ public class WingSuitMoveController : MonoBehaviour
     {
         InitializeComponents();
         SubscribeToEvents();
+        originalGlideSpeed = glideSpeed;
+        originalGravityFactor = gravityFactor;
     }
 
     private void Update()
@@ -50,6 +61,7 @@ public class WingSuitMoveController : MonoBehaviour
         if (!PlayerStateTran.Instance.isStart) return;
 
         HandleMovement();
+        UpdatePillarBoost();
     }
     #endregion
 
@@ -101,7 +113,7 @@ public class WingSuitMoveController : MonoBehaviour
 
         // 计算左右手高度差和平均高度
         float heightDifference = leftController.position.y - rightController.position.y;
-        float averageHeight = (leftController.position.y + rightController.position.y) * 0.5f;
+        float averageHeight = (leftController.position.y + rightController.position.y);
 
         // 更新偏航角
         UpdateYaw(heightDifference);
@@ -128,7 +140,10 @@ public class WingSuitMoveController : MonoBehaviour
 
     private float CalculatePitchAngle(float averageHeight)
     {
-        float pitchAngle = -(averageHeight - trackingSpace.position.y) * maxTiltAngle;
+        // 计算双手平均高度与头部高度的差值
+        float heightDiff = averageHeight - trackingSpace.position.y;
+        // 根据高度差计算俯仰角度，正值表示抬头，负值表示低头
+        float pitchAngle = heightDiff * maxTiltAngle;
         return Mathf.Clamp(pitchAngle, -maxTiltAngle, maxTiltAngle);
     }
 
@@ -189,7 +204,7 @@ public class WingSuitMoveController : MonoBehaviour
     #endregion
 
     #region 碰撞处理
-    private void OnTriggerEnter(Collider other)
+    private void OnColliderEnter(Collider other)
     {
         HandleCollision(other);
     }
@@ -209,6 +224,9 @@ public class WingSuitMoveController : MonoBehaviour
             case "DeadEnd":
                 HandleDeadEnd();
                 break;
+            case "SpeedUp":
+                HandleSpeedUpZone(true);
+                break;
         }
 
         if (other.name == "RushToDeathArea")
@@ -226,17 +244,15 @@ public class WingSuitMoveController : MonoBehaviour
 
     private void HandlePillarCollision(Collider pillar)
     {
-        Vector3 directionToObject = pillar.transform.position - transform.position;
-        float dotProduct = Vector3.Dot(transform.right, directionToObject);
+        // 计算柱子相对于玩家的位置
+        Vector3 directionToPillar = pillar.transform.position - transform.position;
+        // 获取横向方向（忽略Y轴）
+        directionToPillar.y = 0;
+        directionToPillar.Normalize();
 
-        if (Vector3.Dot(transform.forward, directionToObject) < 0)
-        {
-            Vector3 targetDirection = dotProduct > 0
-                ? (transform.forward - transform.right).normalized
-                : (transform.forward + transform.right).normalized;
-
-            StartCoroutine(SmoothRotateToDirection(targetDirection, 1f));
-        }
+        // 根据柱子位置决定推力方向
+        pillarBoostDirection = directionToPillar;
+        pillarBoostTimer = pillarBoostDuration;
 
         PlaySound(air_leaking);
     }
@@ -256,6 +272,21 @@ public class WingSuitMoveController : MonoBehaviour
         Vector3 directionToSkull = (skullTransform.position - transform.position).normalized;
         StartCoroutine(SmoothRotateToDirection(directionToSkull, 2f));
         PlaySound(dead);
+    }
+
+    private void HandleSpeedUpZone(bool enter)
+    {
+        isInSpeedUpZone = enter;
+        if (enter)
+        {
+            glideSpeed = originalGlideSpeed * speedUpMultiplier;
+            gravityFactor = originalGravityFactor * speedUpGravityFactor;
+        }
+        else
+        {
+            glideSpeed = originalGlideSpeed;
+            gravityFactor = originalGravityFactor;
+        }
     }
 
     private void PlaySound(AudioClip clip)
@@ -358,5 +389,23 @@ public class WingSuitMoveController : MonoBehaviour
             PlayerStateTran.Instance.Level1ToStage2();
         }
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("SpeedUp"))
+        {
+            HandleSpeedUpZone(false);
+        }
+    }
     #endregion
+
+    private void UpdatePillarBoost()
+    {
+        if (pillarBoostTimer > 0f)
+        {
+            pillarBoostTimer -= Time.deltaTime;
+            // 应用横向推力
+            rb.AddForce(pillarBoostDirection * pillarSideBoostForce * Time.deltaTime, ForceMode.Force);
+        }
+    }
 }
