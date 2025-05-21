@@ -17,6 +17,7 @@ public class handDataPose : MonoBehaviour
     public Transform[] fingerBones;
     public float poseTransitionDuration = 0.2f;
     [Header("Lock Settings")]
+
     public bool isLocked; // 新增锁定状态
     public Vector3 lockedPosition; // 新增锁定位置
 

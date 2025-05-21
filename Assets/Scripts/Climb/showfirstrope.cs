@@ -24,6 +24,7 @@ public class showfirstrope : MonoBehaviour
     public void ropeshow()
     {
         rope.SetActive(true);
+        
         trigger_coll.isTrigger = false;
     }
 }

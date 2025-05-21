@@ -14,11 +14,14 @@ public class HandEndTrigger : MonoBehaviour
     public CustomClimbInteractable ClimbInteractable1;
     public GameObject handend;
     public Trigger2 trigger2 ;
+    public GameObject model;
+    public Collider model_coll;
+    public Rigidbody model_rigibody;
     void Start()
     {
         //ClimbInteractable1 = GetComponent<CustomClimbInteractable>();
+        model.SetActive(false);
 
-     
         ClimbInteractable1.selectEntered.AddListener(OnSelectEnter);
         interactionManager = ClimbInteractable1.interactionManager;
 
@@ -38,11 +41,12 @@ public class HandEndTrigger : MonoBehaviour
     }
     private IEnumerator End()
     {
-
+        model.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         handend.SetActive(false);
-
-
+        model_coll.isTrigger = false;
+        model_rigibody.isKinematic = false;
+        
         
         trigger2.Endanimation();
         yield return new WaitForSeconds(2f);

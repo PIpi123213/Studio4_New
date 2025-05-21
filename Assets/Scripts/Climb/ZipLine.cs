@@ -41,14 +41,27 @@ public class ZipLine : MonoBehaviour
         grabInteractable.selectEntered.AddListener(OnGrab);
         //grabInteractable.selectExited.AddListener(OnRelase);
         grabInteractable.selectExited.AddListener(UnSetPose);
-    }
 
+       
+
+
+    }
+    public void resetPlayerPostion()
+    {
+        Vector3 targetWorldPos = zipLineHandler.position + zipLineHandler.TransformDirection(sliderPlayerposition);
+        //Quaternion aRotation = playerTransform.rotation;
+        Vector3 worldOffsetFromAtoB = playerTransform.TransformPoint(MoveManager.Instance.TrackingObject.localPosition) - playerTransform.position;
+        Vector3 desiredAWorldPos = targetWorldPos - worldOffsetFromAtoB;
+       // sliderPlayerposition = sliderPlayerposition - (aRotation*new Vector3(MoveManager.Instance.TrackingObject.transform.localPosition.x , 0f, MoveManager.Instance.TrackingObject.transform.localPosition.z)) ;
+
+        sliderPlayerposition = desiredAWorldPos;
+    }
     private void OnDestroy()
     {
         grabInteractable.selectEntered.RemoveListener(OnGrab);
         grabInteractable.selectExited.RemoveListener(UnSetPose);
     }
-
+     
     private void OnGrab(SelectEnterEventArgs args)
     {
         if (isSliding||isDone) return;
@@ -145,8 +158,7 @@ public class ZipLine : MonoBehaviour
             initialPlayerOffset = playerTransform.position - zipLineHandler.position;
         }
         //设置为zipline子物体
-        Transform originalParent = playerTransform.parent;
-        playerTransform.SetParent(zipLineHandler);
+   
 
         //取消交互以防止位置偏移
         grabInteractable.interactionLayers = 0;
@@ -161,9 +173,10 @@ public class ZipLine : MonoBehaviour
         Coroutine setPlayerPosition =StartCoroutine(setSlideringPlayerposition());
         yield return setPlayerPosition;
 
-
+        Transform originalParent = playerTransform.parent;
+        playerTransform.SetParent(zipLineHandler);
         // 初始化：移动到第一个点
-       
+
         // 遍历所有路径段
         while (currentWaypointIndex < waypoints.Length)
         {
@@ -214,15 +227,16 @@ public class ZipLine : MonoBehaviour
     }
     public IEnumerator setSlideringPlayerposition()
     {
-       
-       
-        while (Vector3.Distance(playerTransform.localPosition, sliderPlayerposition) > 0.01f)
+        resetPlayerPostion();
+        yield return null;
+
+        while (Vector3.Distance(playerTransform.localPosition, sliderPlayerposition) > 0.001f)
         {
             // 加速逻辑
             playerTransform.localPosition = Vector3.MoveTowards(
                   playerTransform.localPosition,
                   sliderPlayerposition,
-                  0.5f * Time.deltaTime
+                  0.8f * Time.deltaTime
               );
             yield return null;
         }

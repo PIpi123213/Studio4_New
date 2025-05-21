@@ -1,4 +1,5 @@
 using AmazingAssets.DynamicRadialMasks;
+using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,8 +24,9 @@ public class Trigger2 : MonoBehaviour
     public GameObject VFX;
     public GameObject Arinteraction;
     public GameObject FirstRope;
+    public GameObject LastRope;
     //public GameObject postprocess;
-
+    
     private void Awake()
     {
         lake.transform.position = lakeStartPosition;
@@ -40,8 +42,8 @@ public class Trigger2 : MonoBehaviour
         RenderSettings.skybox.SetFloat("_Exposure", 0);
         lake.SetActive(false);
         VFX.SetActive(false);
+        LastRope.SetActive(false);
 
-       
 
 
 
@@ -56,6 +58,7 @@ public class Trigger2 : MonoBehaviour
         {
             //StartCoroutine(AnimateRadius());
             //StartCoroutine(AnimateOpacity());
+            
             StartCoroutine(RunBothAnimations());
         }
     }
@@ -71,9 +74,10 @@ public class Trigger2 : MonoBehaviour
         // �ȴ�������ɣ���ʱ��ȡ���ֵ��
         yield return radiusRoutine;
         yield return opacityRoutine;
+        LastRope.SetActive(true);
         //��������
 
-        
+
         //MoveManager.Instance.OnSceneIn();//��¼λ��
         // ��ɺ�ִ�г����л��������߼�
         Debug.Log("All animations completed!");

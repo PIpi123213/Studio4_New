@@ -36,7 +36,7 @@ public class ARInteractionManager : MonoBehaviour
         
          Transform parentTransform = interactableObjects[1].transform.parent;
          GameObject parentObject = parentTransform.gameObject;
-        Debug.Log(parentObject);
+       // Debug.Log(parentObject);
          Rigidbody rb = parentObject.GetComponent<Rigidbody>();
          rb.useGravity = false;
 

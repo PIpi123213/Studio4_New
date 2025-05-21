@@ -36,6 +36,7 @@ public class Vfxtrigger : MonoBehaviour
         {
             if (!particleSystemToControl.isPlaying)
             {
+                Debug.Log("Á£×Ó´¥·¢");
                 particleSystemToControl.Play();
             }
         }
@@ -76,7 +77,8 @@ public class Vfxtrigger : MonoBehaviour
         if (!trigger)
         {
             trigger = true;
-
+            particleSystemToControl.Play();
+            Debug.Log("Touch");
         }
     }
 
