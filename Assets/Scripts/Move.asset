@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c25f904ed0a8944885b8594ec1a9177, type: 3}
   m_Name: Move
   m_EditorClassIdentifier: 
-  _ignoreVertical: 1
+  _ignoreVertical: 0
   _debugOffset: {x: 0, y: 0, z: 0}
+  _debugrotation: {x: 0, y: 0, z: 0, w: 1}

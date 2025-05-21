@@ -15,6 +15,7 @@ public class MoveManager : MonoBehaviour
     public Vector3 CurrentWorldPosition = Vector3.zero;
     public Quaternion CurrentWorldRotation = Quaternion.identity;
     public Transform player;
+    private float verticalSpeed = 0.05f;
     private void Awake()
     {
         if (Instance == null)
@@ -50,17 +51,14 @@ public class MoveManager : MonoBehaviour
             localPosition = TrackingObject.localPosition;
             
         }
-     /*   if (Input.GetKeyDown(KeyCode.Space))
+     if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            *//* player.position = new Vector3(-TrackingObject.transform.localPosition.x *4f, player.position.y, -TrackingObject.transform.localPosition.z * 4f);
-             float yAngle = TrackingObject.transform.localEulerAngles.y;
-             player.rotation = Quaternion.Euler(0f, -yAngle, 0f);*//*
-            OnSceneIn();
+            transform.position += Vector3.up * verticalSpeed;
         }
-        if (Input.GetKeyDown(KeyCode.N))
+     if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            OnSceneOut();
-        }*/
+            transform.position += Vector3.down * verticalSpeed;
+        }
     }
     private bool TryGetDevicePosition(out Vector3 position)
     {
