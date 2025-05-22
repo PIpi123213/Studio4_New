@@ -21,7 +21,7 @@ public class WingSuitMoveController : MonoBehaviour
     #region 移动参数
     [Header("移动参数")]
     [SerializeField] private float glideSpeed = 1000f;
-    [SerializeField] private float defaultVerticalSpeed;
+    [SerializeField] private float defaultVerticalSpeed = 0f;
     [SerializeField] private float gravityFactor = 10f;
     [SerializeField] private float maxTiltAngle = 30f;
     [SerializeField] private float rotationSensitivity = 1.5f;
@@ -30,6 +30,8 @@ public class WingSuitMoveController : MonoBehaviour
     [SerializeField] private float speedUpGravityFactor = 1.5f;  // 加速时的重力倍数
     [SerializeField] private float pillarSideBoostForce = 500f;  // 柱子碰撞后的横向推力
     [SerializeField] private float pillarBoostDuration = 1f;  // 柱子碰撞后的加速持续时间
+    [SerializeField] private Transform Head;  // 基准高度
+    [SerializeField] private float tiltDeadZone = 0.05f; // 倾斜死区阈值
     #endregion
 
     #region 私有变量
@@ -113,17 +115,24 @@ public class WingSuitMoveController : MonoBehaviour
 
         // 计算左右手高度差和平均高度
         float heightDifference = leftController.position.y - rightController.position.y;
-        float averageHeight = (leftController.position.y + rightController.position.y);
+        float averageHeight = (leftController.position.y + rightController.position.y) * 0.5f;
+
+        // 死区处理：如果高度差绝对值小于阈值，则不倾斜
+        float tiltAngle = 0f;
+        if (Mathf.Abs(heightDifference) > tiltDeadZone)
+        {
+            tiltAngle = CalculateTiltAngle(heightDifference);
+        }
 
         // 更新偏航角
         UpdateYaw(heightDifference);
 
-        // 计算倾斜和俯仰角度
-        float tiltAngle = CalculateTiltAngle(heightDifference);
+        // 计算俯仰角度
         float pitchAngle = CalculatePitchAngle(averageHeight);
 
         // 应用旋转
-        ApplyRotations(-0.5f*tiltAngle, -pitchAngle);
+        Debug.Log("tiltAngle: " + tiltAngle + " pitchAngle: " + pitchAngle);
+        ApplyRotations(-0.5f * tiltAngle, -pitchAngle);
     }
 
     private void UpdateYaw(float heightDifference)
@@ -140,10 +149,21 @@ public class WingSuitMoveController : MonoBehaviour
 
     private float CalculatePitchAngle(float averageHeight)
     {
-        // 计算双手平均高度与头部高度的差值
-        float heightDiff = averageHeight - trackingSpace.position.y;
-        // 根据高度差计算俯仰角度，正值表示抬头，负值表示低头
-        float pitchAngle = heightDiff * maxTiltAngle;
+        // 将Head的位置转换到trackingSpace的局部坐标系中
+        Vector3 headLocalPos = trackingSpace.InverseTransformPoint(Head.position);
+        // 将控制器位置转换到trackingSpace的局部坐标系中
+        Vector3 leftLocalPos = trackingSpace.InverseTransformPoint(leftController.position);
+        Vector3 rightLocalPos = trackingSpace.InverseTransformPoint(rightController.position);
+        float averageLocalHeight = (leftLocalPos.y + rightLocalPos.y) * 0.5f;
+
+        Debug.Log("Head Local Y: " + headLocalPos.y);
+        Debug.Log("Average Controller Local Y: " + averageLocalHeight);
+        Debug.Log("Height Difference: " + (averageLocalHeight - headLocalPos.y));
+
+        float heightScaleFactor = 0.5f;  // 缩放因子
+        float pitchAngle = (averageLocalHeight - headLocalPos.y) * heightScaleFactor * maxTiltAngle;
+        Debug.Log("Final Pitch Angle: " + pitchAngle);
+
         return Mathf.Clamp(pitchAngle, -maxTiltAngle, maxTiltAngle);
     }
 
@@ -170,11 +190,13 @@ public class WingSuitMoveController : MonoBehaviour
         if (averageHeight >= 0.05f)
         {
             verticalSpeed = defaultVerticalSpeed - averageHeight * gravityFactor;
+            Debug.Log($"DetectDive: averageHeight={averageHeight}, defaultVerticalSpeed={defaultVerticalSpeed}, gravityFactor={gravityFactor}, verticalSpeed={verticalSpeed}");
         }
         else
         {
             float speedMultiplier = Mathf.Lerp(1f, 0.5f, Mathf.Abs(averageHeight) / 0.5f);
             verticalSpeed = defaultVerticalSpeed * speedMultiplier - averageHeight * gravityFactor;
+            Debug.Log($"DetectDive: averageHeight={averageHeight}, speedMultiplier={speedMultiplier}, defaultVerticalSpeed={defaultVerticalSpeed}, gravityFactor={gravityFactor}, verticalSpeed={verticalSpeed}");
         }
     }
 
@@ -204,9 +226,10 @@ public class WingSuitMoveController : MonoBehaviour
     #endregion
 
     #region 碰撞处理
-    private void OnColliderEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         HandleCollision(other);
+        Debug.Log("Detected object: " + other.name);
     }
 
     private void HandleCollision(Collider other)
@@ -217,6 +240,7 @@ public class WingSuitMoveController : MonoBehaviour
         {
             case "Wall":
                 HandleWallCollision(contactPoint);
+                Debug.Log("111");
                 break;
             case "pillar":
                 HandlePillarCollision(other);
@@ -276,16 +300,18 @@ public class WingSuitMoveController : MonoBehaviour
 
     private void HandleSpeedUpZone(bool enter)
     {
+        Debug.Log("enter: " + enter);
         isInSpeedUpZone = enter;
         if (enter)
         {
-            glideSpeed = originalGlideSpeed * speedUpMultiplier;
-            gravityFactor = originalGravityFactor * speedUpGravityFactor;
+            // glideSpeed = originalGlideSpeed * speedUpMultiplier;
+            defaultVerticalSpeed *= speedUpMultiplier;  // 增加垂直速度
+            Debug.Log("gravityFactor: " + gravityFactor + ", defaultVerticalSpeed: " + defaultVerticalSpeed);
         }
         else
         {
             glideSpeed = originalGlideSpeed;
-            gravityFactor = originalGravityFactor;
+            defaultVerticalSpeed /= speedUpMultiplier;  // 恢复原始垂直速度
         }
     }
 
@@ -390,9 +416,9 @@ public class WingSuitMoveController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.CompareTag("SpeedUp"))
+        if (other.gameObject.CompareTag("SpeedUp"))
         {
             HandleSpeedUpZone(false);
         }
