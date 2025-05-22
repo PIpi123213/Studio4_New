@@ -31,6 +31,7 @@ public class WingSuitMoveController : MonoBehaviour
     [SerializeField] private float pillarSideBoostForce = 500f;  // 柱子碰撞后的横向推力
     [SerializeField] private float pillarBoostDuration = 1f;  // 柱子碰撞后的加速持续时间
     [SerializeField] private Transform Head;  // 基准高度
+    [SerializeField] private float tiltDeadZone = 0.05f; // 倾斜死区阈值
     #endregion
 
     #region 私有变量
@@ -114,13 +115,19 @@ public class WingSuitMoveController : MonoBehaviour
 
         // 计算左右手高度差和平均高度
         float heightDifference = leftController.position.y - rightController.position.y;
-        float averageHeight = (leftController.position.y + rightController.position.y);
+        float averageHeight = (leftController.position.y + rightController.position.y) * 0.5f;
+
+        // 死区处理：如果高度差绝对值小于阈值，则不倾斜
+        float tiltAngle = 0f;
+        if (Mathf.Abs(heightDifference) > tiltDeadZone)
+        {
+            tiltAngle = CalculateTiltAngle(heightDifference);
+        }
 
         // 更新偏航角
         UpdateYaw(heightDifference);
 
-        // 计算倾斜和俯仰角度
-        float tiltAngle = CalculateTiltAngle(heightDifference);
+        // 计算俯仰角度
         float pitchAngle = CalculatePitchAngle(averageHeight);
 
         // 应用旋转
@@ -291,11 +298,13 @@ public class WingSuitMoveController : MonoBehaviour
 
     private void HandleSpeedUpZone(bool enter)
     {
+        Debug.Log("enter: " + enter);
         isInSpeedUpZone = enter;
         if (enter)
         {
             glideSpeed = originalGlideSpeed * speedUpMultiplier;
-            gravityFactor = originalGravityFactor * speedUpGravityFactor;
+            gravityFactor = 100f;
+            Debug.Log("gravityFactor" + gravityFactor);
         }
         else
         {
@@ -405,9 +414,9 @@ public class WingSuitMoveController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.CompareTag("SpeedUp"))
+        if (other.gameObject.CompareTag("SpeedUp"))
         {
             HandleSpeedUpZone(false);
         }
