@@ -7525,7 +7525,7 @@ MonoBehaviour:
   skullTransform: {fileID: 1759090810649190175}
   glideSpeed: 50
   defaultVerticalSpeed: 0
-  gravityFactor: 50
+  gravityFactor: 500
   maxTiltAngle: 10
   rotationSensitivity: 1.5
   maxHeightFromGround: 70

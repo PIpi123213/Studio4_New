@@ -21,8 +21,8 @@ public class WingSuitMoveController : MonoBehaviour
     #region 移动参数
     [Header("移动参数")]
     [SerializeField] private float glideSpeed = 1000f;
-    [SerializeField] private float defaultVerticalSpeed;
-    [SerializeField] private float gravityFactor = 100f;
+    [SerializeField] private float defaultVerticalSpeed = 0f;
+    [SerializeField] private float gravityFactor = 10f;
     [SerializeField] private float maxTiltAngle = 30f;
     [SerializeField] private float rotationSensitivity = 1.5f;
     [SerializeField] private float maxHeightFromGround = 70f;
@@ -190,11 +190,13 @@ public class WingSuitMoveController : MonoBehaviour
         if (averageHeight >= 0.05f)
         {
             verticalSpeed = defaultVerticalSpeed - averageHeight * gravityFactor;
+            Debug.Log($"DetectDive: averageHeight={averageHeight}, defaultVerticalSpeed={defaultVerticalSpeed}, gravityFactor={gravityFactor}, verticalSpeed={verticalSpeed}");
         }
         else
         {
             float speedMultiplier = Mathf.Lerp(1f, 0.5f, Mathf.Abs(averageHeight) / 0.5f);
             verticalSpeed = defaultVerticalSpeed * speedMultiplier - averageHeight * gravityFactor;
+            Debug.Log($"DetectDive: averageHeight={averageHeight}, speedMultiplier={speedMultiplier}, defaultVerticalSpeed={defaultVerticalSpeed}, gravityFactor={gravityFactor}, verticalSpeed={verticalSpeed}");
         }
     }
 
@@ -303,13 +305,13 @@ public class WingSuitMoveController : MonoBehaviour
         if (enter)
         {
             // glideSpeed = originalGlideSpeed * speedUpMultiplier;
-            verticalSpeed *= speedUpMultiplier;  // 增加垂直速度
+            defaultVerticalSpeed *= speedUpMultiplier;  // 增加垂直速度
             Debug.Log("gravityFactor: " + gravityFactor + ", defaultVerticalSpeed: " + defaultVerticalSpeed);
         }
         else
         {
             glideSpeed = originalGlideSpeed;
-            verticalSpeed /= speedUpMultiplier;  // 恢复原始垂直速度
+            defaultVerticalSpeed /= speedUpMultiplier;  // 恢复原始垂直速度
         }
     }
 
