@@ -33,7 +33,7 @@ public class GrabTransition : MonoBehaviour
    
 
     }
-    public IEnumerator AnimateSkyboxExposure(float startExposure, float endExposure, float duration)
+   /* public IEnumerator AnimateSkyboxExposure(float startExposure, float endExposure, float duration)
     {
         if (RenderSettings.skybox.HasProperty("_Exposure"))
         {
@@ -50,5 +50,5 @@ public class GrabTransition : MonoBehaviour
             // ȷ�������ع��ΪĿ��ֵ
             RenderSettings.skybox.SetFloat("_Exposure", endExposure);
         }
-    }
+    }*/
 }

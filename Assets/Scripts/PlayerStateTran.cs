@@ -93,7 +93,7 @@ public class PlayerStateTran : MonoBehaviour
     }
     public void StageToLevel1()
     {
-        playercamera.clearFlags = CameraClearFlags.Skybox;
+        
         StartCoroutine(StageToWingsuit());
         Debug.Log("Stage-Level1");
     }
@@ -105,9 +105,11 @@ public class PlayerStateTran : MonoBehaviour
 
     private IEnumerator StageToWingsuit()
     {
+        playercamera.clearFlags = CameraClearFlags.Skybox;
+      
         SceneTransitionManager.Instance.fadeScreen.FadeOut(0.1f);
         yield return new WaitForSeconds(0.3f);
-        Coroutine skyboxRoutine = StartCoroutine(AnimateSkyboxExposure(0f, 0.6f, 0.5f));
+       Coroutine skyboxRoutine = StartCoroutine(AnimateSkyboxExposure(0f, 0.6f, 0.5f));
         
         yield return skyboxRoutine;
         level0_scene.SetActive(false);

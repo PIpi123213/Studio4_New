@@ -7,13 +7,20 @@ public class ActiveCartonsController : MonoBehaviour
     public GameObject[] cartons; // 需要激活的纸箱数组
 
     private int currentIndex = 0; // 当前激活的纸箱索引
-    private void Start()
+
+
+    private void Awake()
     {
-        // 先全部隐藏
         for (int i = 0; i < cartons.Length; i++)
         {
             cartons[i].SetActive(false);
         }
+    }
+
+    private void Start()
+    {
+        // 先全部隐藏
+     
         
         EventManager.Instance.Subscribe(SignalReceiver.ToActiveCarton, ActivateCarton);
     }
