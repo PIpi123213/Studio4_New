@@ -142,16 +142,21 @@ public class WingSuitMoveController : MonoBehaviour
 
     private float CalculatePitchAngle(float averageHeight)
     {
-        Debug.Log("averageHeight: " + averageHeight);
-        Debug.Log("Head.transform.position.y: " + Head.transform.position.y);
-        Debug.Log("averageHeight - Head.transform.position.y: " + (averageHeight - Head.transform.position.y));
-        Debug.Log("maxTiltAngle: " + maxTiltAngle);
-        // 直接使用averageHeight来计算俯仰角度
-        // 添加一个基准高度，可以根据需要调整
+        // 将Head的位置转换到trackingSpace的局部坐标系中
+        Vector3 headLocalPos = trackingSpace.InverseTransformPoint(Head.position);
+        // 将控制器位置转换到trackingSpace的局部坐标系中
+        Vector3 leftLocalPos = trackingSpace.InverseTransformPoint(leftController.position);
+        Vector3 rightLocalPos = trackingSpace.InverseTransformPoint(rightController.position);
+        float averageLocalHeight = (leftLocalPos.y + rightLocalPos.y) * 0.5f;
+
+        Debug.Log("Head Local Y: " + headLocalPos.y);
+        Debug.Log("Average Controller Local Y: " + averageLocalHeight);
+        Debug.Log("Height Difference: " + (averageLocalHeight - headLocalPos.y));
+
         float heightScaleFactor = 0.5f;  // 缩放因子
-        // 计算与基准高度的差值，并转换为俯仰角度
-        float pitchAngle = (averageHeight - Head.transform.position.y) * heightScaleFactor * maxTiltAngle;
-        Debug.Log("pitchAngle: " + pitchAngle);
+        float pitchAngle = (averageLocalHeight - headLocalPos.y) * heightScaleFactor * maxTiltAngle;
+        Debug.Log("Final Pitch Angle: " + pitchAngle);
+
         return Mathf.Clamp(pitchAngle, -maxTiltAngle, maxTiltAngle);
     }
 
