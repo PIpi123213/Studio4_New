@@ -217,9 +217,10 @@ public class WingSuitMoveController : MonoBehaviour
     #endregion
 
     #region 碰撞处理
-    private void OnColliderEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         HandleCollision(other);
+        Debug.Log("Detected object: " + other.name);
     }
 
     private void HandleCollision(Collider other)
@@ -230,6 +231,7 @@ public class WingSuitMoveController : MonoBehaviour
         {
             case "Wall":
                 HandleWallCollision(contactPoint);
+                Debug.Log("111");
                 break;
             case "pillar":
                 HandlePillarCollision(other);
