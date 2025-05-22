@@ -22,7 +22,7 @@ public class WingSuitMoveController : MonoBehaviour
     [Header("移动参数")]
     [SerializeField] private float glideSpeed = 1000f;
     [SerializeField] private float defaultVerticalSpeed;
-    [SerializeField] private float gravityFactor = 10f;
+    [SerializeField] private float gravityFactor = 100f;
     [SerializeField] private float maxTiltAngle = 30f;
     [SerializeField] private float rotationSensitivity = 1.5f;
     [SerializeField] private float maxHeightFromGround = 70f;
@@ -302,14 +302,14 @@ public class WingSuitMoveController : MonoBehaviour
         isInSpeedUpZone = enter;
         if (enter)
         {
-            glideSpeed = originalGlideSpeed * speedUpMultiplier;
-            gravityFactor = 100f;
-            Debug.Log("gravityFactor" + gravityFactor);
+            // glideSpeed = originalGlideSpeed * speedUpMultiplier;
+            verticalSpeed *= speedUpMultiplier;  // 增加垂直速度
+            Debug.Log("gravityFactor: " + gravityFactor + ", defaultVerticalSpeed: " + defaultVerticalSpeed);
         }
         else
         {
             glideSpeed = originalGlideSpeed;
-            gravityFactor = originalGravityFactor;
+            verticalSpeed /= speedUpMultiplier;  // 恢复原始垂直速度
         }
     }
 
