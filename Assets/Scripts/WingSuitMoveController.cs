@@ -35,7 +35,7 @@ public class WingSuitMoveController : MonoBehaviour
     #endregion
 
     #region 私有变量
-    private float verticalSpeed;
+    private float verticalSpeed=0f;
     private float yaw = 0f;
     private float currentYaw;
     private float yawVelocity = 0f;
@@ -305,15 +305,15 @@ public class WingSuitMoveController : MonoBehaviour
         if (enter)
         {
             // glideSpeed = originalGlideSpeed * speedUpMultiplier;
-            defaultVerticalSpeed *= speedUpMultiplier;  // 增加垂直速度
-            gravityFactor *= speedUpGravityFactor;  // 增加重力因子
+            defaultVerticalSpeed *= -speedUpMultiplier;  // 增加垂直速度
+            gravityFactor = -16f;  // 增加重力因子
             Debug.Log("gravityFactor: " + gravityFactor + ", defaultVerticalSpeed: " + defaultVerticalSpeed);
         }
         else
         {
             glideSpeed = originalGlideSpeed;
-            defaultVerticalSpeed /= speedUpMultiplier;  // 恢复原始垂直速度
-            gravityFactor /= speedUpGravityFactor;  // 恢复原始重力因子
+            defaultVerticalSpeed /= -speedUpMultiplier;  // 恢复原始垂直速度
+            gravityFactor = 0f;  // 恢复原始重力因子
         }
     }
 
