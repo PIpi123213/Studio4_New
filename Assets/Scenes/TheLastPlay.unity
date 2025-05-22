@@ -713,7 +713,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 277356108}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6802465983738247702}
+        m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
+        m_MethodName: GoToScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Ocean
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &277356108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70355,6 +70367,11 @@ PrefabInstance:
       propertyPath: level2_scene
       value: 
       objectReference: {fileID: 8506618315002436330}
+    - target: {fileID: 3032879412932927506, guid: 0f8edef8d3b3e314abac045ee715f6fb,
+        type: 3}
+      propertyPath: playercamera
+      value: 
+      objectReference: {fileID: 3532064467274429307}
     - target: {fileID: 3032879412932927506, guid: 0f8edef8d3b3e314abac045ee715f6fb,
         type: 3}
       propertyPath: wingsuitplayer

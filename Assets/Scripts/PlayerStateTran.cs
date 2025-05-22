@@ -8,6 +8,7 @@ public class PlayerStateTran : MonoBehaviour
     public static PlayerStateTran Instance { get; private set; }
     public int Stage = 0;
     public bool isStart = false;
+    public Camera playercamera = null;
 
     [Header("Level0 Settings")]
     [Tooltip("level0_scene")]
@@ -92,7 +93,7 @@ public class PlayerStateTran : MonoBehaviour
     }
     public void StageToLevel1()
     {
-        
+        playercamera.clearFlags = CameraClearFlags.Skybox;
         StartCoroutine(StageToWingsuit());
         Debug.Log("Stage-Level1");
     }
