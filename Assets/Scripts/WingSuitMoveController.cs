@@ -306,12 +306,14 @@ public class WingSuitMoveController : MonoBehaviour
         {
             // glideSpeed = originalGlideSpeed * speedUpMultiplier;
             defaultVerticalSpeed *= speedUpMultiplier;  // 增加垂直速度
+            gravityFactor *= speedUpGravityFactor;  // 增加重力因子
             Debug.Log("gravityFactor: " + gravityFactor + ", defaultVerticalSpeed: " + defaultVerticalSpeed);
         }
         else
         {
             glideSpeed = originalGlideSpeed;
             defaultVerticalSpeed /= speedUpMultiplier;  // 恢复原始垂直速度
+            gravityFactor /= speedUpGravityFactor;  // 恢复原始重力因子
         }
     }
 
