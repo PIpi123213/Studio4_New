@@ -35,7 +35,7 @@ public class WingSuitMoveController : MonoBehaviour
     #endregion
 
     #region 私有变量
-    private float verticalSpeed=0f;
+    private float verticalSpeed = 0f;
     private float yaw = 0f;
     private float currentYaw;
     private float yawVelocity = 0f;
@@ -56,6 +56,13 @@ public class WingSuitMoveController : MonoBehaviour
         SubscribeToEvents();
         originalGlideSpeed = glideSpeed;
         originalGravityFactor = gravityFactor;
+
+        // 添加碰撞检测设置
+        if (rb != null)
+        {
+            // rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            // rb.interpolation = RigidbodyInterpolation.Interpolate;
+        }
     }
 
     private void Update()
@@ -65,6 +72,17 @@ public class WingSuitMoveController : MonoBehaviour
         HandleMovement();
         UpdatePillarBoost();
     }
+    void FixedUpdate()
+    {
+        Vector3 move = rb.velocity * Time.fixedDeltaTime;
+        if (Physics.Raycast(transform.position, move.normalized, out RaycastHit hit, move.magnitude + 1f))
+        {
+            // 撞上了什么，处理碰撞（可以改为击退、停止、播放动画等）
+            Debug.Log("即将穿模撞击: " + hit.collider.name);
+            rb.velocity = Vector3.zero;
+        }
+    }
+
     #endregion
 
     #region 初始化
@@ -229,7 +247,7 @@ public class WingSuitMoveController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         HandleCollision(other);
-        Debug.Log("Detected object: " + other.name);
+        // Debug.Log("Detected object: " + other.name);
     }
 
     private void HandleCollision(Collider other)
