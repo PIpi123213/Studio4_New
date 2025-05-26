@@ -77,6 +77,10 @@ public class WingSuitMoveController : MonoBehaviour
         Vector3 move = rb.velocity * Time.fixedDeltaTime;
         if (Physics.Raycast(transform.position, move.normalized, out RaycastHit hit, move.magnitude + 1f))
         {
+            if(hit.collider.CompareTag("DeadEnd")||hit.collider.CompareTag("SpeedUp")||hit.collider.name=="RushToDeathArea")
+            {
+                return;
+            }
             // 撞上了什么，处理碰撞（可以改为击退、停止、播放动画等）
             Debug.Log("即将穿模撞击: " + hit.collider.name);
             rb.velocity = Vector3.zero;
