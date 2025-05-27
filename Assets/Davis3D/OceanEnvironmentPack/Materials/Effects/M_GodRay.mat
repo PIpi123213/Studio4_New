@@ -80,7 +80,7 @@ Material:
     - _EnvironmentReflections: 1
     - _FadeSurfaceDistance: 0
     - _FoamDist: 19
-    - _Glow: 0.69
+    - _Glow: 0.19
     - _GlowAmount: 1
     - _QueueControl: 0
     - _QueueOffset: 0
