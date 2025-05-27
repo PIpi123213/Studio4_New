@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3323039507085216124}
   - component: {fileID: 4999766302801132435}
   - component: {fileID: 4063997225674156604}
+  - component: {fileID: 4613737576092348074}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentSceneName: 
+  fadeScreen: {fileID: 0}
+  fadeScreen_Black: {fileID: 0}
 --- !u!114 &4063997225674156604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,3 +61,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740f16b6eb3a58941a7068f18210126f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4613737576092348074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7944127276440167226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59db54068f8d60043b0a28c60979ce21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetCanvas: {fileID: 0}
+  dynamicMoveProvider: {fileID: 0}
+  turnProvider: {fileID: 0}

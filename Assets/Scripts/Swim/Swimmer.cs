@@ -36,25 +36,9 @@ public class Swimmer : MonoBehaviour
     private void FixedUpdate()
     {
         _cooldownTimer += Time.fixedDeltaTime;
-     /*   if(_cooldownTimer>minTimeBetweenStrokes
-            &&(leftControllerSwimReference.action.IsPressed()
-            ||rightControllerSwimReference.action.IsPressed()))
-        {
-            var leftHandVelocity = leftControllerVelocity.action.ReadValue<Vector3>();
-            var rightHandVelocity = rightControllerVelocity.action.ReadValue<Vector3>();
-            Vector3 loaclVelocity = leftHandVelocity + rightHandVelocity;
-            loaclVelocity *= -1;
-
-            if(loaclVelocity.sqrMagnitude > minForce * minForce)
-            {
-                Vector3 worldVelocity = trackingReference.TransformDirection(loaclVelocity);
-                _rigidbody.AddForce(worldVelocity * swimForce, ForceMode.Acceleration);
-                _cooldownTimer = 0f;
-            }
-        }
-*/
-
-        if (_cooldownTimer > minTimeBetweenStrokes)
+        if (_cooldownTimer > minTimeBetweenStrokes
+            && (leftControllerSwimReference.action.IsPressed()
+            || rightControllerSwimReference.action.IsPressed()))
         {
             var leftHandVelocity = leftControllerVelocity.action.ReadValue<Vector3>();
             var rightHandVelocity = rightControllerVelocity.action.ReadValue<Vector3>();
@@ -68,6 +52,22 @@ public class Swimmer : MonoBehaviour
                 _cooldownTimer = 0f;
             }
         }
+
+
+      /*  if (_cooldownTimer > minTimeBetweenStrokes)
+        {
+            var leftHandVelocity = leftControllerVelocity.action.ReadValue<Vector3>();
+            var rightHandVelocity = rightControllerVelocity.action.ReadValue<Vector3>();
+            Vector3 loaclVelocity = leftHandVelocity + rightHandVelocity;
+            loaclVelocity *= -1;
+
+            if (loaclVelocity.sqrMagnitude > minForce * minForce)
+            {
+                Vector3 worldVelocity = trackingReference.TransformDirection(loaclVelocity);
+                _rigidbody.AddForce(worldVelocity * swimForce, ForceMode.Acceleration);
+                _cooldownTimer = 0f;
+            }
+        }*/
         if (_rigidbody.velocity.sqrMagnitude > 0.01f)
         {
             _rigidbody.AddForce(-_rigidbody.velocity*dragForce,ForceMode.Acceleration);

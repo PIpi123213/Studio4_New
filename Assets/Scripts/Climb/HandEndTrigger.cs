@@ -17,6 +17,9 @@ public class HandEndTrigger : MonoBehaviour
     public GameObject model;
     public Collider model_coll;
     public Rigidbody model_rigibody;
+    public GameObject scene;
+    public GameObject scenetool;
+    public GameObject rock;
     void Start()
     {
         //ClimbInteractable1 = GetComponent<CustomClimbInteractable>();
@@ -42,18 +45,25 @@ public class HandEndTrigger : MonoBehaviour
     private IEnumerator End()
     {
         model.SetActive(true);
+        scenetool.SetActive(false);
         yield return new WaitForSeconds(0.3f);
         handend.SetActive(false);
-        model_coll.isTrigger = false;
+       // model_coll.isTrigger = false;
         model_rigibody.isKinematic = false;
         
         
         trigger2.Endanimation();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3.5f);
+
+
+        rock.SetActive(false);
         StaticPoint.target = StaticPoint.gameObject.transform;
         StaticPoint.attachmentType = ObiParticleAttachment.AttachmentType.Dynamic;
         yield return null;
 
+        yield return new WaitForSeconds(2f);
+        scene.SetActive(false);
+        
     }
 
 

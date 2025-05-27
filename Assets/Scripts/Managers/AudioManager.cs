@@ -51,9 +51,6 @@ public class AudioManager : MonoBehaviour
 
         InitSounds(bgmSounds);
         InitSounds(sfxSounds);
-
-
-
     }
 
     private void OnEnable()

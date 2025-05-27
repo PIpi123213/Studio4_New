@@ -31,14 +31,7 @@ public class SceneTransitionManager : MonoBehaviour
             //GoToScene("New Scene");
 
         }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            
-            StartCoroutine(FadeOutAndGoToSceneRoutine("TheLastPlay"));
-
-
-        }
-
+     
 
 
     }
