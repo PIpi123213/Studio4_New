@@ -1,3 +1,4 @@
+using OVR.OpenVR;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -105,10 +106,20 @@ public class PlayerStateTran : MonoBehaviour
         // sliderPlayerposition = sliderPlayerposition - (aRotation*new Vector3(MoveManager.Instance.TrackingObject.transform.localPosition.x , 0f, MoveManager.Instance.TrackingObject.transform.localPosition.z)) ;
 
         this.transform.position = desiredAWorldPos;
+
+       
         transform.SetParent(wingsuitplayer.transform);
-        transform.localRotation = StartLocalRot;
+
+        StartLocalRot.x = 0f;
+        StartLocalRot.z = 0f;
+        float targetY = -MoveManager.Instance.TrackingObject.localRotation.eulerAngles.y;
+        //StartLocalRot.y = -MoveManager.Instance.TrackingObject.localRotation.y;
+        Debug.Log(StartLocalRot.y);
+        Debug.Log(-MoveManager.Instance.TrackingObject.localRotation.y);
+        transform.localRotation = Quaternion.Euler(StartLocalRot.x, targetY, StartLocalRot.z);
+
         //transform.localPosition = StartLocalPos;
-       // transform.localRotation = StartLocalRot;
+        // transform.localRotation = StartLocalRot;
 
         yield return new WaitForSeconds(1f);
         isStart = true;
@@ -122,19 +133,18 @@ public class PlayerStateTran : MonoBehaviour
 
 
         //level1_scene.SetActive(false);
-        transform.SetParent(null);
+       
         //level2_scene.SetActive(true);
         SceneTransitionManager.Instance.fadeScreen_Black.FadeOut(0.8f);
         //yield return new WaitForSeconds(0.3f);
-        
+
         //ChangeSkyboxLevel2();
-        
-        //level0_Drm.SetActive(false);
+
         //level2_Drm.SetActive(true);
         Stage = 2;
-        
-        
-        SceneTransitionManager.Instance.GoToSceneAsync("New Scene");
+
+        SceneTransitionManager.Instance.GoToSceneAsync("New Scene"); 
+        //SceneTransitionManager.Instance.GoToScene("New Scene");
         yield return null;
         
        

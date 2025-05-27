@@ -9,11 +9,12 @@ public class PhotoGrabTrigger : MonoBehaviour
     private bool hasTriggered = false;
     
     public const string OnPhotoGrabbed = "OnPhotoGrabbed";
-    
+    private Rigidbody _rigidbody;
     void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
-
+        _rigidbody = GetComponent<Rigidbody>();
+        //_rigidbody.isKinematic = true;
         // 订阅 Select Enter 事件
         grabInteractable.selectEntered.AddListener(OnSelectEnter);
     }
@@ -21,7 +22,7 @@ public class PhotoGrabTrigger : MonoBehaviour
     private void OnSelectEnter(SelectEnterEventArgs args)
     {
         Debug.Log("Photo grabbed!");
-
+       // _rigidbody.isKinematic = false;
         if (!hasTriggered)
         {
             hasTriggered = true;

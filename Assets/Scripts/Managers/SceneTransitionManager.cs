@@ -82,17 +82,52 @@ public class SceneTransitionManager : MonoBehaviour
         float timer = 0;
 
 
-        operation.allowSceneActivation = true;
+       
 
         // �ȴ�������ȫ����
         while (!operation.isDone)
         {
             yield return null;
         }
-
+        operation.allowSceneActivation = true;
         UpdateCurrentScene();
     }
+    private AsyncOperation asyncLoad;
 
-  
+    public void StartPreloading(string sceneName)
+    {
+        StartCoroutine(PreloadScene(sceneName));
+    }
+
+    private IEnumerator PreloadScene(string sceneName)
+    {
+        asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false; // 不立即激活
+
+        while (!asyncLoad.isDone)
+        {
+            // 这个值最多只会到 0.9，除非你允许激活
+            float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
+            Debug.Log("Loading Progress: " + (progress * 100f) + "%");
+
+            // 当 asyncLoad.progress 到 0.9，表示场景已经加载完毕，只差激活
+            if (asyncLoad.progress >= 0.9f)
+            {
+                Debug.Log("Scene is ready to activate.");
+                yield break; // 可以在这里等待触发激活
+            }
+
+            yield return null;
+        }
+    }
+
+    public void ActivateScene()
+    {
+        if (asyncLoad != null)
+        {
+            asyncLoad.allowSceneActivation = true;
+        }
+    }
+
 
 }
