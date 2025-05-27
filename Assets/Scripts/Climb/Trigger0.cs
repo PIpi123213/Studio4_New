@@ -23,7 +23,7 @@ public class Trigger0 : MonoBehaviour
     public GameObject VFX;
     public GameObject Camera_cube;
     //public GameObject postprocess;
-
+    public GameObject letter;
     private void Awake()
     {
         RenderSettings.skybox.SetFloat("_Exposure", 0f);
@@ -62,7 +62,6 @@ public class Trigger0 : MonoBehaviour
         yield return new WaitForSeconds(20f);
         Coroutine radiusRoutine = StartCoroutine(AnimateRadius());
         Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
-
         // �ȴ�������ɣ���ʱ��ȡ���ֵ��
         yield return radiusRoutine;
         yield return opacityRoutine;
@@ -128,6 +127,7 @@ public class Trigger0 : MonoBehaviour
             {
                 VFX.SetActive(true);
                 Camera_cube.SetActive(true);
+                letter.SetActive(false);
             }
             if (drmGameObject.radius > 250)
             {
@@ -137,7 +137,7 @@ public class Trigger0 : MonoBehaviour
 
                 // ���Ӷ���İ뾶����
                 drmGameObject.radius += Mathf.Lerp(0, endRadius - startRadius, extraT) * Time.deltaTime;
-                VFX.SetActive(true);
+                //VFX.SetActive(true);
             }
             if (drmGameObject.radius > 450)
             {

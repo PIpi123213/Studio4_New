@@ -69,7 +69,7 @@ public class ARInteractionManager : MonoBehaviour
                 GameObject parentObject = parentTransform.gameObject;
 
                 Rigidbody rb = parentObject.GetComponent<Rigidbody>();
-                rb.useGravity = true;
+                //rb.useGravity = true;
 
                 Collider parentCollider = parentObject.GetComponent<Collider>();
                 parentCollider.enabled = true;

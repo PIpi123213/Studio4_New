@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.47051543, g: 0.2792896, b: 0.11115117, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1226,6 +1226,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1123606570975782620, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
+      propertyPath: letter
+      value: 
+      objectReference: {fileID: 661207799}
+    - target: {fileID: 1123606570975782620, guid: e4cfa9a36860ee045a4af52d12c009e8,
+        type: 3}
       propertyPath: ptLayer
       value: 
       objectReference: {fileID: 3508366114893777828}
@@ -1857,57 +1862,57 @@ PrefabInstance:
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_Phase.Array.data[0]
-      value: 0
+      value: 157.58665
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_Radius.Array.data[0]
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_Smooth.Array.data[0]
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_EdgeSize.Array.data[0]
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_Frequency.Array.data[0]
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_Intensity.Array.data[0]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_RingCount.Array.data[0]
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_Position.Array.data[0].x
-      value: 0
+      value: 0.8857422
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_Position.Array.data[0].y
-      value: 0
+      value: -13.899902
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_Position.Array.data[0].z
-      value: 0
+      value: -15.604492
       objectReference: {fileID: 0}
     - target: {fileID: 3481496647151141610, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
       propertyPath: shaderData_NoiseStrength.Array.data[0]
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3509045100275370352, guid: e4cfa9a36860ee045a4af52d12c009e8,
         type: 3}
@@ -6343,8 +6348,8 @@ MonoBehaviour:
   dead: {fileID: 8300000, guid: 76492c86c26493544b80b1694b0929ab, type: 3}
   fadeScreen: {fileID: 1545410471}
   skullTransform: {fileID: 3971951652851571796}
-  glideSpeed: 10
-  defaultVerticalSpeed: -5
+  glideSpeed: 50
+  defaultVerticalSpeed: 0
   gravityFactor: 0
   maxTiltAngle: 10
   rotationSensitivity: 1.5
@@ -48438,12 +48443,13 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: 7417331f96c97ca49be14ecfad466496, type: 2}
+    - {fileID: 11400000, guid: 254b034bdc296a3449adc506c253fc77, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1842390879}
-          m_TargetAssemblyTypeName: PlayerStateTran, Assembly-CSharp
-          m_MethodName: Level1ToStage2
+        - m_Target: {fileID: 6802465983738247702}
+          m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
+          m_MethodName: ActivateScene
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -48451,6 +48457,20 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6802465983738247702}
+          m_TargetAssemblyTypeName: SceneTransitionManager, Assembly-CSharp
+          m_MethodName: StartPreloading
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: New Scene
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!4 &8452737864158698266
