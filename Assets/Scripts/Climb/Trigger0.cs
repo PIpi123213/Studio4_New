@@ -21,7 +21,7 @@ public class Trigger0 : MonoBehaviour
     public PlayableDirector letterTimeline;
 
     public GameObject VFX;
-
+    public GameObject Camera_cube;
     //public GameObject postprocess;
 
     private void Awake()
@@ -38,7 +38,7 @@ public class Trigger0 : MonoBehaviour
         drmGameObject.radius = 0;
         //RenderSettings.skybox.SetFloat("_Exposure", 0);
         VFX.SetActive(false);
-
+        Camera_cube.SetActive(false);
 
     }
 
@@ -124,9 +124,10 @@ public class Trigger0 : MonoBehaviour
             // ʹ�÷����Բ�ֵ����
             float t = Mathf.Pow(elapsedTime / RadiusDuration, 2); // ��������
             drmGameObject.radius = Mathf.Lerp(startRadius, endRadius, t);
-            if(drmGameObject.radius > 20)
+            if(drmGameObject.radius > 15)
             {
                 VFX.SetActive(true);
+                Camera_cube.SetActive(true);
             }
             if (drmGameObject.radius > 250)
             {

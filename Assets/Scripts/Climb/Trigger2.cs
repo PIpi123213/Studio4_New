@@ -9,6 +9,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Trigger2 : MonoBehaviour
 {
     // Start is called before the first frame update
+    //private CustomClimbInteractable grabInteractable;
     private XRGrabInteractable grabInteractable;
     // [SerializeField] private GameObject         DissolveEffectTool;
     [SerializeField] private DRMGameObject drmGameObject;
@@ -25,7 +26,12 @@ public class Trigger2 : MonoBehaviour
     public GameObject Arinteraction;
     public GameObject FirstRope;
     public GameObject LastRope;
+    public GameObject hand_naiv;
+    public GameObject hand_naiv2;
+    public GameObject hand_naiv3;
+   
     //public GameObject postprocess;
+
     
     private void Awake()
     {
@@ -34,7 +40,8 @@ public class Trigger2 : MonoBehaviour
     }
     void Start()
     {
-        grabInteractable = GetComponent<XRGrabInteractable>();
+       grabInteractable = GetComponent<XRGrabInteractable>();
+        //grabInteractable = GetComponent<CustomClimbInteractable>();
         //StartCoroutine(findCamera());
         // ���� Select Enter �¼�
         grabInteractable.selectEntered.AddListener(OnSelectEnter);
@@ -43,7 +50,9 @@ public class Trigger2 : MonoBehaviour
         lake.SetActive(false);
         VFX.SetActive(false);
         LastRope.SetActive(false);
-
+        
+        hand_naiv2.SetActive(false);
+        hand_naiv3.SetActive(false);
 
 
 
@@ -52,6 +61,7 @@ public class Trigger2 : MonoBehaviour
     private void OnSelectEnter(SelectEnterEventArgs args)
     {
         Debug.Log("catch it��");
+        hand_naiv.SetActive(false);
         // ���磺�ı������ɫ
         GetComponent<Renderer>().material.color = Color.red;
         if (!hasTriggered)
@@ -128,12 +138,13 @@ public class Trigger2 : MonoBehaviour
         float elapsedTime = 0f;
         
         float remainingMovementTime = 0f;
-
+       
         while (elapsedTime < RadiusDuration)
         {
             // ʹ�÷����Բ�ֵ����
             float t = Mathf.Pow(elapsedTime / RadiusDuration, 2); // ��������
             drmGameObject.radius = Mathf.Lerp(startRadius, endRadius, t);
+          
             if (drmGameObject.radius > 250)
             {
                 Arinteraction.SetActive(false);
@@ -144,6 +155,12 @@ public class Trigger2 : MonoBehaviour
                 // ���Ӷ���İ뾶����
                 drmGameObject.radius += Mathf.Lerp(0, endRadius - startRadius, extraT) * Time.deltaTime;
                 VFX.SetActive(true);
+                if (hand_naiv3.activeSelf == false)
+                {
+                    hand_naiv2.SetActive(true);
+                    hand_naiv3.SetActive(true);
+                }
+
             }
             if (drmGameObject.radius > 450)
             {
