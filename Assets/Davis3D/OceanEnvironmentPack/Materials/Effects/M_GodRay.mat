@@ -19,7 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _TilingB
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -80,7 +80,7 @@ Material:
     - _EnvironmentReflections: 1
     - _FadeSurfaceDistance: 0
     - _FoamDist: 19
-    - _Glow: 0.1
+    - _Glow: 0.19
     - _GlowAmount: 1
     - _QueueControl: 0
     - _QueueOffset: 0
