@@ -6,7 +6,7 @@ public class showfirstrope : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject rope;
-    public GameObject trigger;
+   
     public Collider trigger_coll;
 
     void Start()

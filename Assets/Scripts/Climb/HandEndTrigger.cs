@@ -50,12 +50,10 @@ public class HandEndTrigger : MonoBehaviour
         handend.SetActive(false);
        // model_coll.isTrigger = false;
         model_rigibody.isKinematic = false;
-        
-        
+
+        yield return new WaitForSeconds(1.5f);
         trigger2.Endanimation();
-        yield return new WaitForSeconds(3.5f);
-
-
+        yield return new WaitForSeconds(3f);
         rock.SetActive(false);
         StaticPoint.target = StaticPoint.gameObject.transform;
         StaticPoint.attachmentType = ObiParticleAttachment.AttachmentType.Dynamic;

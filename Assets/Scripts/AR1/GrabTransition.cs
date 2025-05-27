@@ -8,6 +8,7 @@ public class GrabTransition : MonoBehaviour
     public GrabHandPose handPoseGrab;
     private bool istrigger = false;
     public FadeScreen fadeScreen;
+    public GameObject letter;
     [SerializeField] private AudioSource audioSource; 
     //public Camera playercamera;
     //public GameObject scene;

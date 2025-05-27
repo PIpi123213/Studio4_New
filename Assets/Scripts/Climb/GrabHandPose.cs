@@ -7,11 +7,20 @@ public class GrabHandPose : MonoBehaviour
 {
     public bool ifTwoHandGrab = false;
     public int HandGrabing = 0;
+
+    public bool ifneedNavi = false;
     public handDataPose rightHandPose;
     public handDataPose leftHandPose;
+    private Material rightHand_material;
+    private Material leftHand_material;
+    private bool isrightOn = false;
+    private bool isleftOn = false;
     public GameObject leftHandModel_Geom;
     public GameObject rightHandModel_Geom;
-    
+    public float minAlpha = 0.1f;          // 最低透明度
+    public float maxAlpha = 0.6f;            // 最高透明度
+    public float fadeSpeed = 1f;           // 变化速率（控制呼吸速度）
+    private float timeCounter = 0f;
 
     private Vector3 startingHandPosition_left;
     private Vector3 finalHandPosition_left;
@@ -33,14 +42,28 @@ public class GrabHandPose : MonoBehaviour
     private XRGrabInteractable grabInteractable;
     void Start()
     {
-         grabInteractable = GetComponent<XRGrabInteractable>();
+        grabInteractable = GetComponent<XRGrabInteractable>();
 
         grabInteractable.selectEntered.AddListener(SetupPose);
         grabInteractable.selectExited.AddListener(UnSetPose);
         grabInteractable.hoverEntered.AddListener(SetupAttachPos);
 
-        rightHandPose.gameObject.SetActive(false);
-        leftHandPose.gameObject.SetActive(false);
+        if (!ifneedNavi)
+        {
+            rightHandPose.gameObject.SetActive(false);
+            leftHandPose.gameObject.SetActive(false);
+        }
+        else
+        {
+            Transform child_left = FindDeepChild(leftHandPose.transform, "hands:Lhand");
+            Transform child_right = FindDeepChild(rightHandPose.transform, "hands:Rhand");
+            //Transform child_left = leftHandPose.transform.Find("hands:Lhand");
+            //Transform child_right = rightHandPose.transform.Find("hands:Rhand");
+            Renderer renderer_left = child_left.GetComponent<SkinnedMeshRenderer>();
+            Renderer renderer_right = child_right.GetComponent<SkinnedMeshRenderer>();
+            leftHand_material = renderer_left.material;
+            rightHand_material = renderer_right.material;
+        }
         //StartCoroutine(findGeom());
     }
     public void SetupAttachPos(BaseInteractionEventArgs arg)
@@ -48,23 +71,7 @@ public class GrabHandPose : MonoBehaviour
         if (grabInteractable.interactorsHovering.Count == 2 ) return;
 
 
-     /*   if (arg.interactorObject is XRDirectInteractor)
-        {
-            handDataPose handData = arg.interactorObject.transform.GetComponentInChildren<handDataPose>();
-         
-            if (handData.type == handDataPose.HandModelType.Right && rightHandPose != null)
-            {
-                Attachpoint.transform.position = rightHandPose.transform.position;
-            }
-            else if (handData.type == handDataPose.HandModelType.Left && leftHandPose != null)
-            {
-                Attachpoint.transform.position = leftHandPose.transform.position;
-            }
 
-
-
-        }
-*/
     }
 
     public void SetupPose(BaseInteractionEventArgs arg)
@@ -86,13 +93,13 @@ public class GrabHandPose : MonoBehaviour
                 
                SetRightHandDataValues(handData, rightHandPose);
                SendHandData(handData, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right);
-               
 
+                isrightOn = true;
                 //StartCoroutine(SetHandDataRoutine(handData, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right));
 
                 
-                    rightHandPose.gameObject.SetActive(true);
-                    rightHandModel_Geom.SetActive(false);
+                rightHandPose.gameObject.SetActive(true);
+                rightHandModel_Geom.SetActive(false);
                 
                 
                 
@@ -103,7 +110,7 @@ public class GrabHandPose : MonoBehaviour
                 SetLeftHandDataValues(handData, leftHandPose);
                 SendHandData(handData, finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left);
                 //StartCoroutine(SetHandDataRoutine(handData, finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left));
-                
+                isleftOn = true; 
                     leftHandPose.gameObject.SetActive(true);
                     leftHandModel_Geom.SetActive(false);
                 
@@ -134,8 +141,10 @@ public class GrabHandPose : MonoBehaviour
                 SendHandData(handData, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right);
                 //StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_right, startingHandRotation_right, startingFingerRotations_right, finalHandPosition_right, finalHandRotation_right, finalFingerRotations_right));
                 SetHandDataBack_Right();
-                    rightHandPose.gameObject.SetActive(false);
-                    rightHandModel_Geom.SetActive(true);
+                isrightOn = false;
+                if(!ifneedNavi) rightHandPose.gameObject.SetActive(false);
+
+                rightHandModel_Geom.SetActive(true);
                 
 
             }
@@ -144,7 +153,8 @@ public class GrabHandPose : MonoBehaviour
                 SendHandData(handData, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left);
                 //StartCoroutine(SetHandDataRoutine(handData, startingHandPosition_left, startingHandRotation_left, startingFingerRotations_left,finalHandPosition_left, finalHandRotation_left, finalFingerRotations_left));
                 SetHandDataBack_Left();
-                    leftHandPose.gameObject.SetActive(false);
+                isleftOn = false;
+                if (!ifneedNavi) leftHandPose.gameObject.SetActive(false);
                     leftHandModel_Geom.SetActive(true);
                 
 
@@ -281,8 +291,72 @@ public class GrabHandPose : MonoBehaviour
             Debug.LogError("仍然未找到！");
     }
 
+    void Update()
+    {
+       
+        if (ifneedNavi)
+        {
+            if (isleftOn)
+            {
+                maxendAlpha(leftHand_material);
+            }
+            else
+            {
+                Debug.Log(leftHand_material);
+                UpdateAlpha(leftHand_material);
+            }
+
+            if (isrightOn)
+            {
+                maxendAlpha(rightHand_material);
+            }
+            else
+            {
+                UpdateAlpha(rightHand_material);
+            }
+
+        }
 
 
+    }
+
+    public void UpdateAlpha(Material targetMaterial)
+    {
+        
+
+        timeCounter += Time.deltaTime * fadeSpeed;
+
+        // 正弦波输出范围是 [-1, 1]，将其映射到 [0, 1]
+        float t = (Mathf.Sin(timeCounter) + 1f) / 2f;
+
+        // 再映射到 [minAlpha, maxAlpha]
+        float alpha = Mathf.Lerp(minAlpha, maxAlpha, t);
+
+        Color color = targetMaterial.color;
+        color.a = alpha;
+        targetMaterial.color = color;
+    }
+
+    public void maxendAlpha(Material targetMaterial)
+    {
+        if (targetMaterial == null) return;
+        Color color = targetMaterial.color;
+        color.a = 1f;
+        targetMaterial.color = color;
+    }
+    public static Transform FindDeepChild(Transform parent, string name)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == name)
+                return child;
+
+            Transform result = FindDeepChild(child, name);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
     // Update is called once per frame
 
 }

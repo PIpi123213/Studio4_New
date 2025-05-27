@@ -309,6 +309,7 @@ public class WingSuitMoveController : MonoBehaviour
         {
             playableDirector.Play();
             fadeScreen.Fade(0f, 1f, 0.001f);
+            RenderSettings.skybox.SetFloat("_Exposure", 0f);
         }
     }
 
@@ -436,7 +437,7 @@ public class WingSuitMoveController : MonoBehaviour
     {
         if (director == playableDirector)
         {
-            PlayerStateTran.Instance.Level1ToStage2();
+           // PlayerStateTran.Instance.Level1ToStage2();
         }
     }
 
