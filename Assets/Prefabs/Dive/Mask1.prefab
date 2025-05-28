@@ -133,10 +133,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4adaca3e6db70d54ebc2bd3ccd14ad04,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8542653014068234240}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4adaca3e6db70d54ebc2bd3ccd14ad04,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5363749661931385672}
   m_SourcePrefab: {fileID: 100100000, guid: 4adaca3e6db70d54ebc2bd3ccd14ad04, type: 3}
 --- !u!1 &5965739800392751972 stripped
@@ -320,21 +316,6 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!114 &8542653014068234240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5965739800392751972}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b7b3e938a4da8443bd5cc41aa4509a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mask: {fileID: 0}
-  mask1: {fileID: 5965739800392751972}
-  playerCamera: {fileID: 0}
 --- !u!65 &5363749661931385672
 BoxCollider:
   m_ObjectHideFlags: 0

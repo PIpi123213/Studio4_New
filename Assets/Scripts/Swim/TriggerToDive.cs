@@ -13,6 +13,10 @@ public class TriggerToDive : MonoBehaviour
     public GameObject mask;/*抓取*/
     public GameObject mask1;/*眼前替代*/
     public GameObject playerCamera;
+    public GameObject oceanPlane;
+    
+    public float riseSpeed = 0.5f; // 上升速度
+    public float targetHeight = 5f; // 目标高度
     
     void Start()
     {
@@ -24,11 +28,15 @@ public class TriggerToDive : MonoBehaviour
         {
             mask1.SetActive(false);
         }
+        if(oceanPlane != null)
+        {
+            oceanPlane.SetActive(false);
+        }
     }
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject==playerCamera.gameObject)
+        if (other.gameObject==mask.gameObject)
         {
             isCollided = true;
             Debug.Log("Player camera collided with mask!");
@@ -36,14 +44,48 @@ public class TriggerToDive : MonoBehaviour
             {
                 mask.SetActive(false);
             }
+            else
+            {
+                Debug.LogWarning("Mask is not assigned!");         
+            }
             
             if (mask1 != null)
             {
                 mask1.SetActive(true);
             }
+            
+            if (oceanPlane != null)
+            {
+                Debug.Log("Starting to raise ocean plane...");
+                oceanPlane.SetActive(true); // 确保在开始时隐藏海洋平面
+            }
+            else
+            {
+                Debug.LogWarning("Ocean plane is not assigned!");
+            }
         }
     }
     
+    /*IEnumerator WaitAndRaiseOceanPlane()
+    {
+        yield return new WaitForSeconds(2f); // 等待2秒
+        
+        Vector3 startPosition = oceanPlane.transform.position;
+        Vector3 targetPosition = new Vector3(startPosition.x, startPosition.y + targetHeight, startPosition.z);
+        if (oceanPlane != null)
+        {
+            /*oceanPlane.SetActive(true);#1#
+            while (oceanPlane.transform.position.y < startPosition.y +targetHeight)
+            {
+                oceanPlane.transform.position = Vector3.MoveTowards(
+                    oceanPlane.transform.position,
+                    targetPosition,
+                    riseSpeed * Time.deltaTime
+                );
+                yield return null; // 等待下一帧
+            }
+        }
+    }*/
     /*private void OnSelectEnter(SelectEnterEventArgs args)
     {
         Debug.Log("Photo grabbed!");
