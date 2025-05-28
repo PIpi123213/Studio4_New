@@ -1,0 +1,1226 @@
+fileFormatVersion: 2
+guid: 22d0ffca8d4aaf249bfe159ffddfcc1f
+timeCreated: 1519263980
+licenseType: Store
+SubstanceImporter:
+  externalObjects: {}
+  serializedVersion: 5
+  materialInstances:
+  - serializedVersion: 16
+    name: anglerfish_maps
+    prototypeName: anglerfish_maps
+    shaderName: 
+    shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: _METALLICGLOSSMAP _NORMALMAP _SPECGLOSSMAP
+    renderQueue: -1
+    lightmapFlags: 4
+    inputs:
+    - name: HighlightEdges
+      value:
+        scalar[0]: 0.05
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: DarkenCavities
+      value:
+        scalar[0]: 0.1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: PolishEdges
+      value:
+        scalar[0]: 0.05
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: RoughenCavities
+      value:
+        scalar[0]: 0.1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Body_Antenna_Tip_Color
+      value:
+        scalar[0]: 0.874998
+        scalar[1]: 0.867552
+        scalar[2]: 0.836393
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Body_Head_Color
+      value:
+        scalar[0]: 0.737255
+        scalar[1]: 0.72549
+        scalar[2]: 0.682353
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Body_Chin_Color
+      value:
+        scalar[0]: 0.666667
+        scalar[1]: 0.623331
+        scalar[2]: 0.535943
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Body_Roughness
+      value:
+        scalar[0]: 0.6
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Body_Metallic
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Glowbit_Glowbit_Color_High
+      value:
+        scalar[0]: 0.941176
+        scalar[1]: 0.880079
+        scalar[2]: 0.387549
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Glowbit_Glowbit_Color_Low
+      value:
+        scalar[0]: 0.941176
+        scalar[1]: 0.811521
+        scalar[2]: 0.388235
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Glowbit_Roughness
+      value:
+        scalar[0]: 0.2
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Glowbit_Metallic
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Glowbit_Emissive_Intensity
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Eyes_Eyes_Color_High
+      value:
+        scalar[0]: 0.941176
+        scalar[1]: 0.920134
+        scalar[2]: 0.755764
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Eyes_Eyes_Color_Low
+      value:
+        scalar[0]: 0.941176
+        scalar[1]: 0.765759
+        scalar[2]: 0.388235
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Eyes_Roughness
+      value:
+        scalar[0]: 0.25
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Eyes_Metallic
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Eyes_Emissive_Intensity
+      value:
+        scalar[0]: 0.55
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Mouth_Mouth_Inside_Color_Low
+      value:
+        scalar[0]: 0.666667
+        scalar[1]: 0.65098
+        scalar[2]: 0.596078
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Mouth_Mouth_Inside_Color_High
+      value:
+        scalar[0]: 0.666667
+        scalar[1]: 0.65098
+        scalar[2]: 0.596078
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Mouth_Throat_Color_Low
+      value:
+        scalar[0]: 0.477943
+        scalar[1]: 0.453727
+        scalar[2]: 0.368994
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Mouth_Throat_Color_High
+      value:
+        scalar[0]: 0.666667
+        scalar[1]: 0.65098
+        scalar[2]: 0.596078
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Mouth_Roughness
+      value:
+        scalar[0]: 0.7
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Mouth_Metallic
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Teeth_Bottom_Teeth_Color_High
+      value:
+        scalar[0]: 0.87451
+        scalar[1]: 0.860792
+        scalar[2]: 0.80592
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Teeth_Bottom_Teeth_Color_Low
+      value:
+        scalar[0]: 0.666667
+        scalar[1]: 0.65098
+        scalar[2]: 0.596078
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Teeth_Upper_Teeth_Color_High
+      value:
+        scalar[0]: 0.87451
+        scalar[1]: 0.860792
+        scalar[2]: 0.80592
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Teeth_Upper_Teeth_Color_Low
+      value:
+        scalar[0]: 0.627451
+        scalar[1]: 0.61268
+        scalar[2]: 0.561013
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Teeth_Roughness
+      value:
+        scalar[0]: 0.3
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Teeth_Metallic
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Shoulder_Color_High
+      value:
+        scalar[0]: 0.941176
+        scalar[1]: 0.764706
+        scalar[2]: 0.388235
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Shoulder_Color_Low
+      value:
+        scalar[0]: 0.901961
+        scalar[1]: 0.845518
+        scalar[2]: 0.725109
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Shoulder_Roughness
+      value:
+        scalar[0]: 0.35
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Shoulder_Metallic
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Fin_Color_High
+      value:
+        scalar[0]: 0.87451
+        scalar[1]: 0.835721
+        scalar[2]: 0.80592
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Fin_Color_Low
+      value:
+        scalar[0]: 0.705882
+        scalar[1]: 0.676219
+        scalar[2]: 0.567468
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Fin_Roughness
+      value:
+        scalar[0]: 0.45
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Fin_Metallic
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Segments_Color_High
+      value:
+        scalar[0]: 0.897063
+        scalar[1]: 0.88397
+        scalar[2]: 0.844297
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Segments_Color_Low
+      value:
+        scalar[0]: 0.941176
+        scalar[1]: 0.764706
+        scalar[2]: 0.388235
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Segments_Roughness
+      value:
+        scalar[0]: 0.25
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Segments_Metallic
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Back_Fin_Segments_Emissive_Intensity
+      value:
+        scalar[0]: 0.4
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Use_Back_Fin_Values
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Shoulders_Color_High
+      value:
+        scalar[0]: 0.294118
+        scalar[1]: 0.294118
+        scalar[2]: 0.294118
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Shoulders_Color_Low
+      value:
+        scalar[0]: 0.196078
+        scalar[1]: 0.196078
+        scalar[2]: 0.196078
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Shoulder_Roughness
+      value:
+        scalar[0]: 0.27451
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Shoulders_Metallic
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Flippers_Color_High
+      value:
+        scalar[0]: 0.54902
+        scalar[1]: 0.54902
+        scalar[2]: 0.54902
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Flippers_Color_Low
+      value:
+        scalar[0]: 0.333333
+        scalar[1]: 0.333333
+        scalar[2]: 0.333333
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Flippers_Metallic
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Flipper_Roughness
+      value:
+        scalar[0]: 0.156863
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Segments_Color_High
+      value:
+        scalar[0]: 0.588235
+        scalar[1]: 0.588235
+        scalar[2]: 0.588235
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Segments_Color_Low
+      value:
+        scalar[0]: 0.470588
+        scalar[1]: 0.470588
+        scalar[2]: 0.470588
+        scalar[3]: 1
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Segments_Roughness
+      value:
+        scalar[0]: 0.0784314
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Segments_Metallic
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Base_Values_Flippers_Segments_Emissive_Intensity
+      value:
+        scalar[0]: 0.58
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Curvature_Curvature_Curvature_Type
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Curvature_Curvature_Blur
+      value:
+        scalar[0]: 0.2
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Curvature_Curvature_Intensity
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Body_Level_In_Low
+      value:
+        scalar[0]: 0.22
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Body_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Body_Level_Mid
+      value:
+        scalar[0]: 0.634
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Body_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Body_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Head_Level_In_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Head_Level_In_HIgh
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Head_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Head_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Head_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Mouth_Inside_Level_In_Low
+      value:
+        scalar[0]: 0.15
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Mouth_Inside_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Mouth_Inside_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Mouth_Inside_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Mouth_Inside_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Top_Teeth_Level_In_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Top_Teeth_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Top_Teeth_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Top_Teeth_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Top_Teeth_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Bottom_Teeth_Level_In_Low
+      value:
+        scalar[0]: 0.2
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Bottom_Teeth_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Bottom_Teeth_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Bottom_Teeth_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Bottom_Teeth_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Shoulder_Level_In_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Shoulder_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Shoulder_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Shoulder_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Shoulder_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Level_In_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Segments_Alternate__Gradient
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Segments_Level_In_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Segments_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Segments_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Segments_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Back_Fin_Segments_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flippers_Level_In_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flippers_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flippers_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flippers_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flippers_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Shoulders_Level_In_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Shoulders_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Shoulders_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Shoulders_Level_Out_Low
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Shoulders_Level_Out_High
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Segments_Level_In_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Segments_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Segments_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Segments_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Flipper_Segments_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Eyes_Level_In_Low
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Eyes_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Eyes_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Eyes_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Eyes_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Antenna_Level_In_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Antenna_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Antenna_Level_In_Mid
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Antenna_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Antenna_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Glowbit_Level_In_Low
+      value:
+        scalar[0]: 0.32
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Glowbit_Level_In_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Glowbit_Level_In_Mid
+      value:
+        scalar[0]: 0.55
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Glowbit_Level_Out_Low
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    - name: Gradients_Glowbit_Level_Out_High
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+        stringvalue: 
+    materialInformation:
+      serializedVersion: 5
+      offset: {x: 0, y: 0}
+      scale: {x: 1, y: 1}
+      generateMipmaps: 1
+      generateAllOutputs: 1
+      animationUpdateRate: 42
+    materialProperties:
+      serializedVersion: 3
+      texEnvs:
+      - _BumpMap:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - _DetailAlbedoMap:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - _DetailMask:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - _DetailNormalMap:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - _EmissionMap:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - _MainTex:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - _MetallicGlossMap:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - _OcclusionMap:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - _ParallaxMap:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - _SpecGlossMap:
+          texture: {instanceID: 0}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      floats:
+      - _BumpScale: 1
+      - _Cutoff: 0.5
+      - _DetailNormalMapScale: 1
+      - _DstBlend: 0
+      - _GlossMapScale: 1
+      - _Glossiness: 1
+      - _GlossyReflections: 1
+      - _Metallic: 0
+      - _Mode: 0
+      - _OcclusionStrength: 1
+      - _Parallax: 0.02
+      - _SmoothnessTextureChannel: 0
+      - _SpecularHighlights: 1
+      - _SrcBlend: 1
+      - _UVSec: 0
+      - _ZWrite: 1
+      colors:
+      - _Color: {r: 1, g: 1, b: 1, a: 1}
+      - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    textureParameters:
+    - name: anglerfish_maps_basecolor
+      alphaSource: 6
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_normal
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_metallic
+      alphaSource: 7
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_emissive
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_roughness
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_normalsWS
+      alphaSource: 6
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_curvature
+      alphaSource: 6
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_position
+      alphaSource: 6
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_gradientMap
+      alphaSource: 6
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_MaterialMasks
+      alphaSource: 6
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: anglerfish_maps_uvCoverage
+      alphaSource: 6
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    textureAssignments:
+    - shaderProp: _MainTex
+      material: {instanceID: 0}
+      baseUID: 964664077
+    - shaderProp: _BumpMap
+      material: {instanceID: 0}
+      baseUID: 964664079
+    - shaderProp: _MetallicGlossMap
+      material: {instanceID: 0}
+      baseUID: 964664075
+    - shaderProp: _EmissionMap
+      material: {instanceID: 0}
+      baseUID: 1057642938
+    - shaderProp: _SpecGlossMap
+      material: {instanceID: 0}
+      baseUID: 964664073
+    buildTargetSettings:
+    - serializedVersion: 2
+      buildTarget: 
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 1
+      loadingBehavior: 1
+  deletedPrototypes: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
