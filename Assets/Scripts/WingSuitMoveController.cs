@@ -24,7 +24,7 @@ public class WingSuitMoveController : MonoBehaviour
     [SerializeField] private float defaultVerticalSpeed = 0f;
     [SerializeField] private float gravityFactor = 10f;
     [SerializeField] private float maxTiltAngle = 30f;
-    [SerializeField] private float rotationSensitivity = 1.5f;
+    [SerializeField] private float rotationSensitivity = 1f;
     [SerializeField] private float maxHeightFromGround = 70f;
     [SerializeField] private float speedUpMultiplier = 1.5f;  // 加速倍数
     [SerializeField] private float speedUpGravityFactor = 1.5f;  // 加速时的重力倍数
@@ -137,7 +137,7 @@ public class WingSuitMoveController : MonoBehaviour
 
         // 计算左右手高度差和平均高度
         float heightDifference = leftController.position.y - rightController.position.y;
-        float averageHeight = (leftController.position.y + rightController.position.y) * 0.5f;
+        float averageHeight = (leftController.position.y + rightController.position.y) * 0.04f;
 
         // 死区处理：如果高度差绝对值小于阈值，则不倾斜
         float tiltAngle = 0f;
@@ -153,7 +153,9 @@ public class WingSuitMoveController : MonoBehaviour
         float pitchAngle = CalculatePitchAngle(averageHeight);
 
         // 应用旋转
+        /*
         Debug.Log("tiltAngle: " + tiltAngle + " pitchAngle: " + pitchAngle);
+        */
         ApplyRotations(-0.5f * tiltAngle, -pitchAngle);
     }
 
@@ -178,9 +180,9 @@ public class WingSuitMoveController : MonoBehaviour
         Vector3 rightLocalPos = trackingSpace.InverseTransformPoint(rightController.position);
         float averageLocalHeight = (leftLocalPos.y + rightLocalPos.y) * 0.5f;
 
-        Debug.Log("Head Local Y: " + headLocalPos.y);
+        /*Debug.Log("Head Local Y: " + headLocalPos.y);
         Debug.Log("Average Controller Local Y: " + averageLocalHeight);
-        Debug.Log("Height Difference: " + (averageLocalHeight - headLocalPos.y));
+        Debug.Log("Height Difference: " + (averageLocalHeight - headLocalPos.y));*/
 
         float heightScaleFactor = 0.5f;  // 缩放因子
         float pitchAngle = (averageLocalHeight - headLocalPos.y) * heightScaleFactor * maxTiltAngle;
@@ -218,7 +220,9 @@ public class WingSuitMoveController : MonoBehaviour
         {
             float speedMultiplier = Mathf.Lerp(1f, 0.5f, Mathf.Abs(averageHeight) / 0.5f);
             verticalSpeed = defaultVerticalSpeed * speedMultiplier - averageHeight * gravityFactor;
+            /*
             Debug.Log($"DetectDive: averageHeight={averageHeight}, speedMultiplier={speedMultiplier}, defaultVerticalSpeed={defaultVerticalSpeed}, gravityFactor={gravityFactor}, verticalSpeed={verticalSpeed}");
+        */
         }
     }
 
@@ -329,7 +333,7 @@ public class WingSuitMoveController : MonoBehaviour
         {
             // glideSpeed = originalGlideSpeed * speedUpMultiplier;
             defaultVerticalSpeed *= -speedUpMultiplier;  // 增加垂直速度
-            gravityFactor = -16f;  // 增加重力因子
+            gravityFactor = -55f;  // 增加重力因子
             Debug.Log("gravityFactor: " + gravityFactor + ", defaultVerticalSpeed: " + defaultVerticalSpeed);
         }
         else
