@@ -289,8 +289,8 @@ Material:
     - _FishScale: 0.64
     - _FishSpeed: 0.85
     - _FlowMultiplier: 0
-    - _FogIntensity: 1
-    - _FogScale: 0.28
+    - _FogIntensity: 0
+    - _FogScale: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

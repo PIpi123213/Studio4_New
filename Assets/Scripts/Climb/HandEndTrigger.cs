@@ -53,7 +53,7 @@ public class HandEndTrigger : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
         trigger2.Endanimation();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         rock.SetActive(false);
         StaticPoint.target = StaticPoint.gameObject.transform;
         StaticPoint.attachmentType = ObiParticleAttachment.AttachmentType.Dynamic;
