@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.47051543, g: 0.2792896, b: 0.11115117, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6569,7 +6569,7 @@ MonoBehaviour:
   defaultVerticalSpeed: 0
   gravityFactor: 0
   maxTiltAngle: 10
-  rotationSensitivity: 1.5
+  rotationSensitivity: 0.5
   maxHeightFromGround: 70
   speedUpMultiplier: 1.5
   speedUpGravityFactor: 1.5
