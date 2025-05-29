@@ -1,0 +1,269 @@
+fileFormatVersion: 2
+guid: ab3176b3a32649442bdf043bfbd9ae12
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lights
+    second: {fileID: 2100000, guid: e69dc457e445f174f9ad428b20ff2c15, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalGalvanized
+    second: {fileID: 2100000, guid: ef90fac94a713a0489fcbb7032b2fa48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalLight
+    second: {fileID: 2100000, guid: b15d1441c34261846be8ddf54b00f55d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalLight2
+    second: {fileID: 2100000, guid: a82777194ae53c340acdc5d7a297cf08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlasticBrown
+    second: {fileID: 2100000, guid: 6451a2a166b3d144790bd003ed442980, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cgaxis_models_113_29_01
+    second: {fileID: 2100000, guid: b965a79db7616ae46b27a4bee5f521dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: guanggaopai
+    second: {fileID: 2100000, guid: 23167deec1cc98048ab3625456208ebe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: guanggaopai1
+    second: {fileID: 2100000, guid: a79b6ae2693156049b7c310af2f37d0d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: guanggaopai2
+    second: {fileID: 2100000, guid: c01fa5fe679d4254aa1df6d11da2b7b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: guanggaopai3
+    second: {fileID: 2100000, guid: 4f1ed453cec3327408304f9315f5fd7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: guanggaopai4
+    second: {fileID: 2100000, guid: 8e0bf8d21bfd6454bb55ffb98303c33d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: guanggaopai5
+    second: {fileID: 2100000, guid: a9c18c4133ffc31428efc17605f680e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: guanggaopai6
+    second: {fileID: 2100000, guid: dde7f4a99ccf45748930b4e791a1bc68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: guanggaopai7
+    second: {fileID: 2100000, guid: 8162b6b34b9468f4081005a00a389bb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: guanggaopai8
+    second: {fileID: 2100000, guid: b6b5b201231087d4fb7562700485f4e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: langanjins
+    second: {fileID: 2100000, guid: 0e813ba3812a6bb46b5f99d24bc2cd08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: langanjins3
+    second: {fileID: 2100000, guid: ced8922475a6d6e41b89d4759336db1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: langanjins44
+    second: {fileID: 2100000, guid: fef3679a528eced46ad624ab97773800, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 392_Z5ytBoY6OMZM
+    second: {fileID: 2800000, guid: 967e9e2304dea2e498b2420761cc7981, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_AccentPlastic_DiffuseBrown
+    second: {fileID: 2800000, guid: b2d4dce91bc17454cb51cb359f5889dc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: KB3D_AccentPlastic_DiffuseBrown-1
+    second: {fileID: 2800000, guid: fdc5d5a4b0b2f0147a5f5f8271acb0e0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Map #1960
+    second: {fileID: 2800000, guid: 33ff1b13d3939e144a88d008bdce0b8a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Map #1960-1
+    second: {fileID: 2800000, guid: 2cadd6efd00d6d3449430c22d1bcb3e1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Map #1960-2
+    second: {fileID: 2800000, guid: 4596fdcc93fd5e444b67c91023afebf8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: guanggaoz11
+    second: {fileID: 2800000, guid: 261b6dfb3ef953945bfe8baf8332f09d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: guanggaoz110
+    second: {fileID: 2800000, guid: 47fceb9777fe55b43adb3ed1c1d698ec, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: guanggaoz112
+    second: {fileID: 2800000, guid: 6d848e035eebcbf4cb606f36d3354d72, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: guanggaoz114
+    second: {fileID: 2800000, guid: 3e1f30d01af100d4db516ee9ab281e8e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: guanggaoz115
+    second: {fileID: 2800000, guid: 03ed6f9fd25036141bdb24c94bbe417c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: guanggaoz35
+    second: {fileID: 2800000, guid: 01d7aa11a9027de43a029daa187a64e8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: guanggaoz39
+    second: {fileID: 2800000, guid: 9b85249c47e896442802200f98e679cc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: guanggaoz5
+    second: {fileID: 2800000, guid: dece89f73929eeb4a9fe658b9fcf42f3, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
