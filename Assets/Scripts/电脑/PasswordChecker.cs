@@ -10,7 +10,7 @@ public class AutoPasswordChecker : MonoBehaviour
     public GameObject inputField;
     public GameObject decideButton;
 
-    private string correctPassword = "1234";
+    private string correctPassword = "5499";
 
     void Start()
     {
@@ -56,8 +56,8 @@ public class AutoPasswordChecker : MonoBehaviour
     
     IEnumerator ResetInputField()
     {
-        passwordInput.text = ""; // 清空输入框
         yield return new WaitForSeconds(2f);
+        passwordInput.text = ""; // 清空输入框
         feedbackText.text = "";  // 清空提示文本
     }
 }
