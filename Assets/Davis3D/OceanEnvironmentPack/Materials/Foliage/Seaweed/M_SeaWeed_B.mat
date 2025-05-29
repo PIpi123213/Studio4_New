@@ -120,7 +120,7 @@ Material:
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _Glow_Intensity: 10
+    - _Glow_Intensity: 80.7
     - _Glow_Minimum: 1
     - _Keyword0: 0
     - _NormalDetailIntensity: 0.2
