@@ -3,6 +3,7 @@ using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class HandEndTrigger : MonoBehaviour
@@ -20,6 +21,7 @@ public class HandEndTrigger : MonoBehaviour
     public GameObject scene;
     public GameObject scenetool;
     public GameObject rock;
+    public PlayableDirector deadtimeline;
     void Start()
     {
         //ClimbInteractable1 = GetComponent<CustomClimbInteractable>();
@@ -46,7 +48,8 @@ public class HandEndTrigger : MonoBehaviour
     {
         model.SetActive(true);
         scenetool.SetActive(false);
-        yield return new WaitForSeconds(0.3f);
+        deadtimeline.Play();
+        yield return new WaitForSeconds(0.5f);
         handend.SetActive(false);
        // model_coll.isTrigger = false;
         model_rigibody.isKinematic = false;
@@ -54,7 +57,9 @@ public class HandEndTrigger : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         trigger2.Endanimation();
         yield return new WaitForSeconds(4f);
-        rock.SetActive(false);
+        MeshCollider meshCollider = rock.GetComponent<MeshCollider>();
+        meshCollider.enabled = false;
+       // rock.SetActive(false);
         StaticPoint.target = StaticPoint.gameObject.transform;
         StaticPoint.attachmentType = ObiParticleAttachment.AttachmentType.Dynamic;
         yield return null;
