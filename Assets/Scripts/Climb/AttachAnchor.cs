@@ -15,7 +15,7 @@ public class AttachAnchor : MonoBehaviour
     public GameObject playerAnchor;
 
     public bool hasAttached = false;
-   
+    public AudioSource audioSource=null;
     void Start()
     {
         // 从第一个 attachment 获取 actor 和 solver
@@ -32,11 +32,41 @@ public class AttachAnchor : MonoBehaviour
         {
             StartCoroutine(InitializeRope());
         }
+        audioSource = GetComponent<AudioSource>();
 
-       
         //Rope.SetActive(false);
     }
+    private void Update()
+    {
+        if (hasAttached && AnchorPoint.instance.isCurrentParent)
+        {
+            if (audioSource != null)
+            {
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                    Debug.Log("swingrope audio play");
+                }
+            }
+            else return;
 
+
+        }
+        else
+        {
+            if (audioSource != null)
+            {
+                if (audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                    Debug.Log("swingrope audio stop");
+                }
+            }
+            else return;
+        }
+
+
+    }
     private void OnTriggerEnter(Collider other)
     {
         // 如果已经绑定过一次，就直接返回

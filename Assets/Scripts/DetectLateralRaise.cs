@@ -8,7 +8,7 @@ public class DetectLateralRaise : MonoBehaviour
     [SerializeField] private Transform leftHand; // 左手控制器
     [SerializeField] private Transform rightHand; // 右手控制器
     [SerializeField] private Slider progressBar; // 进度条
-    [SerializeField] private float requiredHeight = 1.5f; // 侧平举所需的最低高度
+    [SerializeField] private float requiredHeight = 1.2f; // 侧平举所需的最低高度
     [SerializeField] private float requiredDuration = 3f; // 需要保持的时间
     [SerializeField] private WingSuitMoveController wingsuitController; // 添加翼装控制器引用
     [SerializeField] private GameObject tutorialCanvas; // 添加翼装对象引用
@@ -55,12 +55,14 @@ public class DetectLateralRaise : MonoBehaviour
         if (leftHand == null || rightHand == null) return;
 
         // 检查双手是否达到侧平举高度
-        bool leftHandRaised = leftHand.position.y >= requiredHeight;
-        bool rightHandRaised = rightHand.position.y >= requiredHeight;
+        bool leftHandRaised = leftHand.localPosition.y >= requiredHeight;
+        bool rightHandRaised = rightHand.localPosition.y >= requiredHeight;
 
         // 检查双手是否在身体两侧
-        bool handsAtSides = Mathf.Abs(leftHand.position.x) > 0.3f && Mathf.Abs(rightHand.position.x) > 0.3f;
-
+        bool handsAtSides = Mathf.Abs(leftHand.position.x) > 0.1f && Mathf.Abs(rightHand.position.x) > 0.1f;
+        Debug.Log("leftHandRaised"+ leftHandRaised+", "+"RightHandRaised" + rightHandRaised+", "+"handsAtSides" + handsAtSides);
+        Debug.Log($"左手高度: {leftHand.localPosition.y}, 右手高度: {rightHand.localPosition.y}");
+        Debug.Log($"左手X位置: {leftHand.localPosition.x}, 右手X位置: {rightHand.localPosition.x}");
         isLateralRaise = leftHandRaised && rightHandRaised && handsAtSides;
 
         if (isLateralRaise)

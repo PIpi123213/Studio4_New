@@ -12,10 +12,21 @@ public class RandomRockFalling : MonoBehaviour
     {
         foreach (var source in audioSources)
         {
-            float delay = Random.Range(minDelay, maxDelay);
-            source.PlayDelayed(delay);
+            StartCoroutine(PlayWithLoopDelay(source));
         }
     }
 
+    IEnumerator PlayWithLoopDelay(AudioSource source)
+    {
+        while (true) // 无限循环
+        {
+            float delay = Random.Range(minDelay, maxDelay);
+            yield return new WaitForSeconds( delay);
+            source.Play();
+
+            // 等待音效播放完毕 + 随机延迟
+            yield return new WaitForSeconds(source.clip.length);
+        }
+    }
 
 }

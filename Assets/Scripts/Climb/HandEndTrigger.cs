@@ -65,7 +65,7 @@ public class HandEndTrigger : MonoBehaviour
         yield return null;
 
         yield return new WaitForSeconds(2f);
-        scene.SetActive(false);
+        //scene.SetActive(false);
         
     }
 

@@ -7,7 +7,7 @@ public class AnchorPoint : MonoBehaviour
     public Transform otherObject;
     public Transform target;// 另一个物体
     public bool isCurrentParent = true; // 当前是否是父物体
-
+    public static AnchorPoint instance;
     private Collider myCollider;
     private Rigidbody myRigidbody;
 
@@ -29,6 +29,7 @@ public class AnchorPoint : MonoBehaviour
             Debug.LogError("Other object not assigned!");
             return;
         }
+        instance = this;
         myCollider = GetComponent<Collider>();
         myRigidbody = GetComponent<Rigidbody>();
         // 记录初始的相对变换
