@@ -69,7 +69,7 @@ public class WingSuitMoveController : MonoBehaviour
     {
         if (!PlayerStateTran.Instance.isStart) return;
 
-        //HandleMovement();//
+        HandleMovement();
         UpdatePillarBoost();
     }
     void FixedUpdate()
