@@ -148,7 +148,7 @@ public class Trigger2 : MonoBehaviour
             if (drmGameObject.radius > 250)
             {
                 Arinteraction.SetActive(false);
-                playercamera.clearFlags = CameraClearFlags.Skybox;
+                
                 float extraSpeedFactor = 5f; // �ɸ�����Ҫ�������ٱ���
                 float extraT = Mathf.Pow(elapsedTime / RadiusDuration, 2) * extraSpeedFactor;
                 
@@ -279,6 +279,7 @@ public class Trigger2 : MonoBehaviour
             ptLayer.enabled = false;
            // Destroy(ptLayer);
         }
+        playercamera.clearFlags = CameraClearFlags.Skybox;
         //SetupPostprocess();
         Coroutine skyboxRoutine = StartCoroutine(AnimateSkyboxExposure(0f, 1f, skyboxFadeDuration));
         yield return skyboxRoutine;

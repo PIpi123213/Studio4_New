@@ -103,7 +103,7 @@ public class Trigger3 : MonoBehaviour
     [SerializeField] float endOpacity = 0f;
     private IEnumerator AnimateOpacity()
     {
-
+        resetSkybox();
         float elapsedTime = 0f;
 
 
@@ -148,8 +148,7 @@ public class Trigger3 : MonoBehaviour
 
     public void resetSkybox()
     {
-        RenderSettings.skybox.SetFloat("_Exposure", 1f);
-        playercamera.clearFlags = CameraClearFlags.Skybox;
+        playercamera.clearFlags = CameraClearFlags.SolidColor;
 
     }
   
