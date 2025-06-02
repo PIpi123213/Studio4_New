@@ -16,6 +16,8 @@ public class WingSuitMoveController : MonoBehaviour
     [SerializeField] private AudioClip dead;
     [SerializeField] private FadeScreen fadeScreen;
     [SerializeField] private Transform skullTransform;
+
+    [SerializeField] private GameObject SpeedLine;
     #endregion
 
     #region 移动参数
@@ -323,6 +325,7 @@ public class WingSuitMoveController : MonoBehaviour
         Vector3 directionToSkull = (skullTransform.position - transform.position).normalized;
         StartCoroutine(SmoothRotateToDirection(directionToSkull, 2f));
         PlaySound(dead);
+        SpeedLine.SetActive(false);
     }
 
     private void HandleSpeedUpZone(bool enter)
