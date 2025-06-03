@@ -18,6 +18,7 @@ public class WingSuitMoveController : MonoBehaviour
     [SerializeField] private Transform skullTransform;
 
     [SerializeField] private GameObject SpeedLine;
+    [SerializeField] private GameObject AudioManager;
     #endregion
 
     #region 移动参数
@@ -79,7 +80,7 @@ public class WingSuitMoveController : MonoBehaviour
         Vector3 move = rb.velocity * Time.fixedDeltaTime;
         if (Physics.Raycast(transform.position, move.normalized, out RaycastHit hit, move.magnitude + 1f))
         {
-            if(hit.collider.CompareTag("DeadEnd")||hit.collider.CompareTag("SpeedUp")||hit.collider.name=="RushToDeathArea")
+            if (hit.collider.CompareTag("DeadEnd") || hit.collider.CompareTag("SpeedUp") || hit.collider.name == "RushToDeathArea")
             {
                 return;
             }
@@ -326,6 +327,7 @@ public class WingSuitMoveController : MonoBehaviour
         StartCoroutine(SmoothRotateToDirection(directionToSkull, 2f));
         PlaySound(dead);
         SpeedLine.SetActive(false);
+        AudioManager.SetActive(false);
     }
 
     private void HandleSpeedUpZone(bool enter)
@@ -444,7 +446,7 @@ public class WingSuitMoveController : MonoBehaviour
     {
         if (director == playableDirector)
         {
-           // PlayerStateTran.Instance.Level1ToStage2();
+            // PlayerStateTran.Instance.Level1ToStage2();
         }
     }
 
