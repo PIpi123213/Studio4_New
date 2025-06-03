@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: shelfMaterial 1
+  m_Name: DoorMaterial
   m_Shader: {fileID: 4800000, guid: 17542ac212a6bf04a83375ef59ecca6e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -143,7 +143,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GradientPos: 0.45
+    - _GradientPos: -1
     - _GradientRotation: 0
     - _GradientSize: 2.01
     - _HoloEffect: 1

@@ -269,10 +269,7 @@ public class AnchorPoint : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ToggleParenting();
-        }
+     
     }
 
 
