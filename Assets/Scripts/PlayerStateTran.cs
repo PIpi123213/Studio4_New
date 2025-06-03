@@ -114,8 +114,8 @@ public class PlayerStateTran : MonoBehaviour
         StartLocalRot.z = 0f;
         float targetY = -MoveManager.Instance.TrackingObject.localRotation.eulerAngles.y;
         //StartLocalRot.y = -MoveManager.Instance.TrackingObject.localRotation.y;
-        Debug.Log(StartLocalRot.y);
-        Debug.Log(-MoveManager.Instance.TrackingObject.localRotation.y);
+        //Debug.Log(StartLocalRot.y);
+        //Debug.Log(-MoveManager.Instance.TrackingObject.localRotation.y);
         transform.localRotation = Quaternion.Euler(StartLocalRot.x, targetY, StartLocalRot.z);
 
         //transform.localPosition = StartLocalPos;

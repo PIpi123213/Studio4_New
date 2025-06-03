@@ -28,8 +28,7 @@ public class Trigger3 : MonoBehaviour
     }
     void Start()
     {
-        grabInteractable = GetComponent<XRGrabInteractable>();
-        grabInteractable.selectEntered.AddListener(OnSelectEnter);
+     
       
     }
 

@@ -9,6 +9,7 @@ public class ShaderController : MonoBehaviour
     public float endValue = -0.87f;
     public float duration = 2f;
 
+    public GameObject shelf;
     public GameObject sofaConner;
     public GameObject bookShelf;
     
@@ -48,7 +49,17 @@ public class ShaderController : MonoBehaviour
         sofaConner.SetActive(true);
         StartCoroutine(GradientTransition(sofaMaterial));
     }
-    
+    public void ChangeshelvingMaterial_out()
+    {
+   
+        StartCoroutine(ShelvingDissapear());
+    }
+    public void ChangesofaMaterial_out()
+    {
+
+        StartCoroutine(sofaDissapear());
+    }
+
     public void ChangeBookShelfMaterial()
     {
         bookShelf.SetActive(true);
@@ -70,6 +81,39 @@ public class ShaderController : MonoBehaviour
         // Ensure the final value is set
         targetMaterial.SetFloat("_GradientPos", endValue);
     }
-    
 
+
+    private IEnumerator ShelvingDissapear()
+    {
+        StartCoroutine(GradientTransition_out(shelfMaterial));
+ 
+        yield return new WaitForSeconds(duration);
+        shelf.SetActive(false);
+    
+        yield return null;
+    }
+    private IEnumerator sofaDissapear()
+    {
+        StartCoroutine(GradientTransition_out(sofaMaterial));
+
+        yield return new WaitForSeconds(duration);
+        sofaConner.SetActive(false);
+
+        yield return null;
+    }
+    private IEnumerator GradientTransition_out(Material targetMaterial)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            float currentValue = Mathf.Lerp( endValue, startValue, elapsedTime / duration);
+            targetMaterial.SetFloat("_GradientPos", currentValue);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the final value is set
+        targetMaterial.SetFloat("_GradientPos", startValue);
+    }
 }
