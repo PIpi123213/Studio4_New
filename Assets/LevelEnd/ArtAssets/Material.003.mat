@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6793167287926300382
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,25 +7,29 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hologram_02
-  m_Shader: {fileID: 4800000, guid: 17542ac212a6bf04a83375ef59ecca6e, type: 3}
+  m_Name: Material.003
+  m_Shader: {fileID: -6465566751694194690, guid: 79e85552f7143784eb20b823b3483587,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _CHANGEAXIS_ON
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  - _TRIPLANAR_SPACE_WORLD
+  - _USE_DISSOLVE
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2450
+  stringTagMap:
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 4cdf7432b770cbd45a1340a2b4548a82, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -61,19 +52,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _HoloTexture:
-        m_Texture: {fileID: 2800000, guid: 9133922f86a7d6641a9fb94343b6644a, type: 3}
+    - _GuideTexture:
+        m_Texture: {fileID: 2800000, guid: 7f638561451144849b787c4da84ee333, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4cdf7432b770cbd45a1340a2b4548a82, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Mask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -93,22 +76,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture0:
-        m_Texture: {fileID: 2800000, guid: 4cdf7432b770cbd45a1340a2b4548a82, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture1:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TextureSample2:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _texcoord:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -123,56 +90,73 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
-    - _AlphaCutoff: 0.5
-    - _Bias: 0.435
+    - _AlphaClip: 1
+    - _AlphaToMask: 1
     - _Blend: 0
+    - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
-    - _ChangeAxis: 1
+    - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DissolveAmount: 0
     - _DstBlend: 0
+    - _DstBlendAlpha: 0
+    - _EdgeWidth: 0
     - _EnvironmentReflections: 1
-    - _Glitch: 0
-    - _GlitchSeed: 9.3
-    - _GlitchStrength: 0.1
-    - _GlossMapScale: 0
-    - _Glossiness: 0
-    - _GlossyReflections: 0
-    - _GradientPos: 28.2
-    - _GradientRotation: 62
-    - _GradientSize: 1
-    - _HoloEffect: 0
-    - _HoloScale: 4
-    - _HoloSpeed: 1.58
-    - _HoloSpeedX: 0
-    - _HoloSpeedY: 0.05
+    - _GlossMapScale: 1
+    - _Glossiness: 0.84999996
+    - _GlossyReflections: 1
+    - _GuideTilling: 1
+    - _Hardness: 0
     - _Metallic: 0
+    - _Mode: 0
     - _OcclusionStrength: 1
-    - _Parallax: 0.005
-    - _Power: 4.07
+    - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Scale: 1
-    - _Smoothness: 0.5
+    - _Smoothness: 0.44
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0
     - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
+    - _Strength: 0
     - _Surface: 0
-    - _ToggleSwitch0: 1
+    - _TRIPLANAR_SPACE: 0
+    - _USE_BACK_COLOR: 0
+    - _USE_DISSOLVE: 1
+    - _USE_TRIPLANAR_UVS: 0
+    - _USE_VERTEX_DISPLACEMENT: 0
+    - _UVSec: 0
+    - _Use_Metallic_Texture: 0
+    - _Width: 0
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
-    - _vertex: -0.78
+    - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Back_Color: {r: 2.5190158, g: 0.44665352, b: 0, a: 0}
+    - _BaseColor: {r: 0.745283, g: 0.44637248, b: 0, a: 1}
+    - _Color: {r: 0.34919012, g: 0.34919012, b: 0.34919012, a: 1}
+    - _DissolveColor: {r: 4.7357492, g: 1.2749584, b: 0.022338493, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Emission_Back_Color: {r: 3.9999995, g: 0.4677679, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Vector1: {r: 6.49, g: -1.3, b: -2.34, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &6199060412979092336
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
