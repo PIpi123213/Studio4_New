@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Level3_Ocean/Ocean.unity
     guid: b6419374c2d214341afb78a1efab92e0
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 3d1337c82b6787f46885d726e6e7d93a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2c21f1d188e4faa43a363b1ce325d20c,
       type: 2}

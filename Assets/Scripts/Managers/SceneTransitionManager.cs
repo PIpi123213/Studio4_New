@@ -80,17 +80,13 @@ public class SceneTransitionManager : MonoBehaviour
         operation.allowSceneActivation = false;
 
         float timer = 0;
-
-
-       
-
         // �ȴ�������ȫ����
         while (!operation.isDone)
         {
             yield return null;
         }
         operation.allowSceneActivation = true;
-        UpdateCurrentScene();
+        //UpdateCurrentScene();
     }
     private AsyncOperation asyncLoad;
 
