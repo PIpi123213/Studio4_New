@@ -19,7 +19,7 @@ public class End_Trigger : MonoBehaviour
     {
         if (other.CompareTag("Player")&&!isEnd)
         {
-            Debug.Log("ÓÎÏ·½áÊø");
+            Debug.Log("ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½");
 
             StartCoroutine(AnimateOpacity(Global_ptLayer));
             isEnd = true;
@@ -36,7 +36,7 @@ public class End_Trigger : MonoBehaviour
     private void Start()
     {
        
-        WindosShowup();
+        
     }
     public void WindosShowup()
     {
