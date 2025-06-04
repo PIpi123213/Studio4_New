@@ -143,7 +143,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GradientPos: -1.98
+    - _GradientPos: -1
     - _GradientRotation: 0
     - _GradientSize: 2.01
     - _HoloEffect: 1
