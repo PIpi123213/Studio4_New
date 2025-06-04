@@ -17,7 +17,7 @@ public class TriggerToDive : MonoBehaviour
     
     public float riseSpeed = 0.5f; // 上升速度
     public float targetHeight = 5f; // 目标高度
-    
+    public GrabHandPose poseGrab;
     void Start()
     {
         /*grabInteractable = GetComponent<XRGrabInteractable>();
@@ -36,6 +36,8 @@ public class TriggerToDive : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if (poseGrab.HandGrabing == 0) return;
+
         if (other.gameObject==mask.gameObject)
         {
             isCollided = true;
