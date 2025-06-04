@@ -29,15 +29,16 @@ public class ShaderController_Stage0 : MonoBehaviour
 
     [Header("Letter")]
     public GameObject letter;
-
+    public GameObject Hand_navi_letter;
     void Start()
     {
-       // initalMaterial(doorMaterial);
+        initalMaterial(doorMaterial);
         initalMaterial(deskMaterial);
         initalMaterial(sofaMaterial);
         initalMaterial(bookshelfMaterial);
         initalMaterial(shelvingMaterial);
         letter.SetActive(false);
+        Hand_navi_letter.SetActive(false);
     }
 
     private void Update()
@@ -101,10 +102,12 @@ public class ShaderController_Stage0 : MonoBehaviour
 
     private IEnumerator StartGameShowUp()
     {
+        StartCoroutine(GradientTransition(doorMaterial));
         StartCoroutine(GradientTransition(sofaMaterial));
         StartCoroutine(GradientTransition(bookshelfMaterial));
         StartCoroutine(GradientTransition(deskMaterial));
         StartCoroutine(GradientTransition(shelvingMaterial));
+
         yield return new WaitForSeconds(duration+2f);
 
         StartCoroutine(GradientTransition_Out(sofaMaterial));
@@ -115,7 +118,8 @@ public class ShaderController_Stage0 : MonoBehaviour
         bookShelf.SetActive(false);
         shelving.SetActive(false);
         letter.SetActive(true);
-
+        yield return new WaitForSeconds(0.1f);
+        Hand_navi_letter.SetActive(false);
         yield return null;
     }
 

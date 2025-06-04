@@ -13,7 +13,7 @@ public class EndingTrigger : MonoBehaviour
     {
         if (HospitalScene != null)
         {
-            HospitalScene.SetActive(false); // 初始时隐藏医院场景
+            //HospitalScene.SetActive(false); // 初始时隐藏医院场景
         }
         else
         {
@@ -22,7 +22,7 @@ public class EndingTrigger : MonoBehaviour
 
         if (Door != null)
         {
-            Door.SetActive(false); // 初始时隐藏门
+           // Door.SetActive(false); // 初始时隐藏门
         }
         else
         {
