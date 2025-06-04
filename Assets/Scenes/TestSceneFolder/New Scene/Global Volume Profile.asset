@@ -28,14 +28,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   intensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   center:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: 0}
+    m_OverrideState: 1
+    m_Value: {x: 0, y: 4.63}
   delay:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.1
   numberOfSamples:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 16
