@@ -19,14 +19,14 @@ namespace INab.Dissolve
             dissolver = GetComponent<Dissolver>();
             lastState = dissolver.initialState;
             /*if(!onEnableStart)StartCoroutine(StartDelayedUpdate());*/
-            /*
             dissolver.Materialize();
-        */
         }
 
         private void OnEnable()
         {
+            /*
             dissolver.Materialize();
+        */
         }
         
         public void StartDissolve()
