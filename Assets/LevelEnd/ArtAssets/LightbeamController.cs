@@ -17,7 +17,6 @@ public class LightbeamController : MonoBehaviour
        // Lightbeam.SetActive(false);
     }
     
-    
     public void ChangeLightbeamTweak()
     {
         if (LightbeamMaterial != null)
