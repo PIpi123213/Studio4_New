@@ -3383,7 +3383,7 @@ SpriteRenderer:
   m_Size: {x: 204.89021, y: 158.97}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &473283033
@@ -9364,7 +9364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHand: {fileID: 4879858051072330478}
   rightHand: {fileID: 7471328914565576323}
-  progressBar: {fileID: 0}
+  progressObject: {fileID: 0}
   requiredHeight: 1.5
   requiredDuration: 3
   wingsuitController: {fileID: 1487929285}
@@ -11672,7 +11672,7 @@ MonoBehaviour:
   speedUpGravityFactor: 1.5
   pillarSideBoostForce: 500
   pillarBoostDuration: 1
-  Head: {fileID: 673897404}
+  Head: {fileID: 2323238377859570956}
   tiltDeadZone: 0.1
 --- !u!4 &1487929286
 Transform:
