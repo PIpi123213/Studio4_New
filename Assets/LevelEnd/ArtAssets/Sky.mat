@@ -206,7 +206,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.6666667, g: 0.7925935, b: 1, a: 1}
-    - _Color: {r: 0, g: 0, b: 0, a: 0.03529412}
+    - _Color: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 0.03529412}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _GroundColor: {r: 1, g: 1, b: 1, a: 1}
