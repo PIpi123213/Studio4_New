@@ -119,7 +119,7 @@ public class ShaderController_Stage0 : MonoBehaviour
         shelving.SetActive(false);
         letter.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        Hand_navi_letter.SetActive(false);
+        Hand_navi_letter.SetActive(true);
         yield return null;
     }
 
