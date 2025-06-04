@@ -6,13 +6,14 @@ public class ColliderTrigger : MonoBehaviour
 {
     // Start is called before the first frame update
     public ShaderController_Stage0 trigger;
+    private bool isStart = false;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!isStart&&other.CompareTag("Player"))
         {
             Debug.Log("ÓÎÏ·¿ªÊ¼");
             trigger.Startgame();
-
+            isStart = true;
 
         }
 

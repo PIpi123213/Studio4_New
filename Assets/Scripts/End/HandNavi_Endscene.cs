@@ -9,14 +9,14 @@ public class HandNavi_Endscene : MonoBehaviour
     // Start is called before the first frame update
     private XRGrabInteractable grabInteractable;
     public GameObject Hand_Navi;
-    private Rigidbody _rigidbody;
+
     void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
 
         grabInteractable.selectEntered.AddListener(SetupPose);
         grabInteractable.selectExited.AddListener(UnSetPose);
-        _rigidbody = GetComponent<Rigidbody>();
+    
     }
     public void SetupPose(BaseInteractionEventArgs arg)
     {

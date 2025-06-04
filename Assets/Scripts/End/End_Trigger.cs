@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 public class End_Trigger : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private OVRPassthroughLayer Windows_ptLayer;
     [SerializeField] private OVRPassthroughLayer Global_ptLayer;
+    private bool isEnd = false;
     public void Awake()
     {
         Windows_ptLayer.textureOpacity = 0f;
@@ -16,11 +17,12 @@ public class End_Trigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")&&!isEnd)
         {
             Debug.Log("”Œœ∑Ω· ¯");
 
             StartCoroutine(AnimateOpacity(Global_ptLayer));
+            isEnd = true;
         }
 
 
