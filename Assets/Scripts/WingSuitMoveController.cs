@@ -19,6 +19,7 @@ public class WingSuitMoveController : MonoBehaviour
 
     [SerializeField] private GameObject SpeedLine;
     [SerializeField] private GameObject AudioManager;
+    //[SerializeField] private PlayerStateTran playerStateTran; // 添加玩家状态引用
     #endregion
 
     #region 移动参数
@@ -59,6 +60,7 @@ public class WingSuitMoveController : MonoBehaviour
         SubscribeToEvents();
         originalGlideSpeed = glideSpeed;
         originalGravityFactor = gravityFactor;
+        AudioManager.SetActive(false);
 
         // 添加碰撞检测设置
         if (rb != null)
@@ -71,6 +73,14 @@ public class WingSuitMoveController : MonoBehaviour
     private void Update()
     {
         if (!PlayerStateTran.Instance.isStart) return;
+        if (PlayerStateTran.Instance.Stage == 1)
+        {
+            AudioManager.SetActive(true);
+        }
+        else
+        {
+            AudioManager.SetActive(false);
+        }
 
         HandleMovement();
         UpdatePillarBoost();
