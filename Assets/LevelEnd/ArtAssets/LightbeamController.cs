@@ -14,7 +14,7 @@ public class LightbeamController : MonoBehaviour
     
     void Start()
     {
-        Lightbeam.SetActive(false);
+       // Lightbeam.SetActive(false);
     }
     
     

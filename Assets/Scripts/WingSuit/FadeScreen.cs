@@ -7,10 +7,21 @@ public class FadeScreen : MonoBehaviour
     public  float    FadeDuration = 2f; // Fade duration in seconds
     private Renderer renderer;
     [SerializeField] bool fadeOnStart = true;
-
-    void Start()
+    private void Awake()
     {
         renderer = GetComponent<Renderer>();
+        if (fadeOnStart)
+        {
+            renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1f);
+           
+        }
+
+
+
+    }
+    void Start()
+    {
+ 
         if (fadeOnStart)
         {
             FadeIn(FadeDuration);
@@ -21,6 +32,10 @@ public class FadeScreen : MonoBehaviour
     void Update()
     {
 
+    }
+    public void FadeIn_Start(float duration)
+    {
+        StartCoroutine(FadeRoutine_Start(1f, 0f, duration));
     }
     public void FadeIn(float duration)
     {
@@ -61,5 +76,33 @@ public class FadeScreen : MonoBehaviour
             yield return null;
         }
         renderer.material.color = new Color(initialColor.r, initialColor.g, initialColor.b, alphaOut); // 确保最终颜色为目标颜色
+    }
+    private IEnumerator FadeRoutine_Start(float alphaIn, float alphaOut, float duration)
+    {
+        if (renderer == null || renderer.material == null)
+        {
+            Debug.LogError("WhiteFadeIn does not have a Renderer or Material.");
+            yield break;
+        }
+
+        Material material = renderer.material;
+        Color initialColor = material.color;
+        Color targetColor = new Color(initialColor.r, initialColor.g, initialColor.b, 0f); // Alpha = 0 (完全透明)
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            targetColor.a = Mathf.Lerp(alphaIn, alphaOut, t);
+            renderer.material.color = targetColor;
+            //Debug.Log("透明度："+renderer.material.color.a);
+            elapsedTime += Time.deltaTime;
+
+
+            yield return null;
+        }
+        renderer.material.color = new Color(initialColor.r, initialColor.g, initialColor.b, alphaOut);
+        this.gameObject.SetActive(false);// 确保最终颜色为目标颜色
     }
 }

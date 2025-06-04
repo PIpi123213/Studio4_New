@@ -38,7 +38,8 @@ public class GrabHandPose : MonoBehaviour
     private Quaternion[] startingFingerRotations_right;
     private Quaternion[] finalFingerRotations_right;
 
-
+    private Rigidbody _rigidbody;
+    public bool isKinematic_atFirst = true;
     private XRGrabInteractable grabInteractable;
     void Start()
     {
@@ -47,7 +48,7 @@ public class GrabHandPose : MonoBehaviour
         grabInteractable.selectEntered.AddListener(SetupPose);
         grabInteractable.selectExited.AddListener(UnSetPose);
         grabInteractable.hoverEntered.AddListener(SetupAttachPos);
-
+        _rigidbody = GetComponent<Rigidbody>();
         if (!ifneedNavi)
         {
             rightHandPose.gameObject.SetActive(false);
@@ -64,6 +65,12 @@ public class GrabHandPose : MonoBehaviour
             leftHand_material = renderer_left.material;
             rightHand_material = renderer_right.material;
         }
+        if (isKinematic_atFirst)
+        {
+            _rigidbody.isKinematic = true;
+
+        }
+
         //StartCoroutine(findGeom());
     }
     public void SetupAttachPos(BaseInteractionEventArgs arg)
@@ -132,6 +139,11 @@ public class GrabHandPose : MonoBehaviour
         else
         {
             HandGrabing = 0;
+            if (isKinematic_atFirst)
+            {
+                _rigidbody.isKinematic = false;
+
+            }
         }
         if (arg.interactorObject is XRDirectInteractor)
         {
