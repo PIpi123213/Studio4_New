@@ -59,7 +59,7 @@ public class Trigger0 : MonoBehaviour
     {
         // ͬʱ������������
         hasTriggered = true;
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(30f);
         Coroutine radiusRoutine = StartCoroutine(AnimateRadius());
         Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
         // �ȴ�������ɣ���ʱ��ȡ���ֵ��

@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
-    volume: 0.152
+    volume: 0.5
 --- !u!114 &5708386364940614126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -646,7 +646,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: letter
   - m_Version: 1
-    m_Start: 36.86938775510204
+    m_Start: 32.36666666666667
     m_ClipIn: 0
     m_Asset: {fileID: -7509232387976148186}
     m_Duration: 3.288
@@ -715,7 +715,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: "23\u5C81"
   - m_Version: 1
-    m_Start: 40.56666666666667
+    m_Start: 36.0639455782313
     m_ClipIn: 0
     m_Asset: {fileID: 5822726358364347700}
     m_Duration: 5.664
@@ -784,7 +784,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: "\u7FFC\u88C5\u98DE\u884C\u7206\u706B"
   - m_Version: 1
-    m_Start: 46.23066666666667
+    m_Start: 41.7279455782313
     m_ClipIn: 0
     m_Asset: {fileID: -5095858664773191217}
     m_Duration: 8.808
@@ -968,6 +968,6 @@ MonoBehaviour:
   m_Markers:
     m_Objects: []
   m_TrackProperties:
-    volume: 1
+    volume: 0.18367338
     stereoPan: 0
     spatialBlend: 0

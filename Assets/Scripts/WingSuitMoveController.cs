@@ -53,6 +53,7 @@ public class WingSuitMoveController : MonoBehaviour
     private float pillarBoostTimer = 0f;  // 柱子碰撞后的加速计时器
     private float accelerationTimer = 0f; // 初始加速计时器
     private bool isInitialAcceleration = true;
+    private float initialAccelerationTime = 3f;
     #endregion
 
     #region Unity生命周期
