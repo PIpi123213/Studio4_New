@@ -36,6 +36,7 @@ public class WingSuitMoveController : MonoBehaviour
     [SerializeField] private float pillarBoostDuration = 1f;  // 柱子碰撞后的加速持续时间
     [SerializeField] private Transform Head;  // 基准高度
     [SerializeField] private float tiltDeadZone = 0.05f; // 倾斜死区阈值
+    [SerializeField] private float initialAccelerationTime = 3f; // 初始加速时间
     #endregion
 
     #region 私有变量
@@ -53,7 +54,6 @@ public class WingSuitMoveController : MonoBehaviour
     private float pillarBoostTimer = 0f;  // 柱子碰撞后的加速计时器
     private float accelerationTimer = 0f; // 初始加速计时器
     private bool isInitialAcceleration = true;
-    private float initialAccelerationTime = 3f;
     #endregion
 
     #region Unity生命周期
@@ -64,6 +64,7 @@ public class WingSuitMoveController : MonoBehaviour
         originalGlideSpeed = glideSpeed;
         originalGravityFactor = gravityFactor;
         AudioManager.SetActive(false);
+
 
         // 添加碰撞检测设置
         if (rb != null)
@@ -148,7 +149,7 @@ public class WingSuitMoveController : MonoBehaviour
             accelerationTimer += Time.deltaTime;
             float t = Mathf.Clamp01(accelerationTimer / initialAccelerationTime);
             float currentSpeed = Mathf.Lerp(0, glideSpeed, t);
-            
+
             Vector3 glideVelocity = transform.forward * currentSpeed;
             glideVelocity.y = verticalSpeed;
             rb.velocity = glideVelocity;
@@ -255,12 +256,8 @@ public class WingSuitMoveController : MonoBehaviour
         {
             float speedMultiplier = Mathf.Lerp(1f, 0.5f, Mathf.Abs(averageHeight) / 0.5f);
             verticalSpeed = defaultVerticalSpeed * speedMultiplier - averageHeight * gravityFactor;
-            /*
-            Debug.Log($"DetectDive: averageHeight={averageHeight}, speedMultiplier={speedMultiplier}, defaultVerticalSpeed={defaultVerticalSpeed}, gravityFactor={gravityFactor}, verticalSpeed={verticalSpeed}");
-        */
         }
     }
-
     private void LimitPlayerHeight()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit))
