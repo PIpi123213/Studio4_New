@@ -5,8 +5,11 @@ using UnityEngine;
 public class SwimTutorialDetectPlayer : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
     private float fadeSpeed = 1f; // 渐变速度
     private bool isFading = false;
+
+    [SerializeField] private AudioClip swimTutorialAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +19,8 @@ public class SwimTutorialDetectPlayer : MonoBehaviour
         {
             Debug.LogError("未找到SpriteRenderer组件！");
         }
+        audioSource = GetComponent<AudioSource>();
+        StartCoroutine(PlayAudioAfterDelay());
     }
 
     // Update is called once per frame
@@ -39,6 +44,8 @@ public class SwimTutorialDetectPlayer : MonoBehaviour
 
         isFading = true;
         Color color = spriteRenderer.color;
+        audioSource.clip = swimTutorialAudio;
+        audioSource.Play();
 
         while (color.a > 0)
         {
@@ -52,6 +59,17 @@ public class SwimTutorialDetectPlayer : MonoBehaviour
         spriteRenderer.color = color;
 
         // 可选：完全隐藏物体
-        gameObject.SetActive(false);
+        if (!audioSource.isPlaying){
+         gameObject.SetActive(false);
+        }
     }
+    private IEnumerator PlayAudioAfterDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        if (audioSource != null && !hasPlayed)
+        {
+        audioSource.Play();
+        hasPlayed = true;
+    }
+}
 }
