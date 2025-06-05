@@ -141,31 +141,33 @@ public class WingSuitMoveController : MonoBehaviour
     }
 
     private void ApplyMovement()
+{
+    DetectDive();
+
+    // 处理初始加速
+    if (isInitialAcceleration)
     {
-        DetectDive();
-        // 处理初始加速
-        if (isInitialAcceleration)
-        {
-            accelerationTimer += Time.deltaTime;
-            float t = Mathf.Clamp01(accelerationTimer / initialAccelerationTime);
-            float currentSpeed = Mathf.Lerp(0, glideSpeed, t);
+        accelerationTimer += Time.deltaTime;
 
-            Vector3 glideVelocity = transform.forward * currentSpeed;
-            glideVelocity.y = verticalSpeed;
-            rb.velocity = glideVelocity;
+        float t = Mathf.Clamp01(accelerationTimer / initialAccelerationTime);  // 0 到 1 之间
+        float currentSpeed = Mathf.Lerp(0f, glideSpeed, t);  // 从0平滑过渡到glideSpeed
 
-            if (accelerationTimer >= initialAccelerationTime)
-            {
-                isInitialAcceleration = false;
-            }
-        }
-        else
+        Vector3 glideVelocity = transform.forward * currentSpeed;
+        glideVelocity.y = verticalSpeed;
+        rb.velocity = glideVelocity;
+
+        if (t >= 1f)
         {
-            Vector3 glideVelocity = transform.forward * glideSpeed;
-            glideVelocity.y = verticalSpeed;
-            rb.velocity = glideVelocity;
+            isInitialAcceleration = false; // 加速完成
         }
     }
+    else
+    {
+        Vector3 glideVelocity = transform.forward * glideSpeed;
+        glideVelocity.y = verticalSpeed;
+        rb.velocity = glideVelocity;
+    }
+}
 
     private void ApplyRotation()
     {
