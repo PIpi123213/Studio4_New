@@ -14409,7 +14409,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487929281}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f797ca6c91532f44a4064c142256413, type: 3}
   m_Name: 
@@ -14437,6 +14437,7 @@ MonoBehaviour:
   pillarBoostDuration: 1
   Head: {fileID: 2323238377859570956}
   tiltDeadZone: 0.1
+  initialAccelerationTime: 3
 --- !u!4 &1487929286
 Transform:
   m_ObjectHideFlags: 0
@@ -22094,6 +22095,7 @@ MonoBehaviour:
   pillarBoostDuration: 1
   Head: {fileID: 0}
   tiltDeadZone: 0.05
+  initialAccelerationTime: 3
 --- !u!4 &1098565728390242862
 Transform:
   m_ObjectHideFlags: 0
