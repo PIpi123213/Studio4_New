@@ -23,7 +23,7 @@ public class TriggerToDive : MonoBehaviour
         /*grabInteractable = GetComponent<XRGrabInteractable>();
         // 订阅 Select Enter 事件
         grabInteractable.selectEntered.AddListener(OnSelectEnter);*/
-        
+        mask.SetActive(false);
         if (mask1 != null)
         {
             mask1.SetActive(false);

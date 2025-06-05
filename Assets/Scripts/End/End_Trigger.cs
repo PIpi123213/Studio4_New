@@ -9,12 +9,19 @@ public class End_Trigger : MonoBehaviour
     [SerializeField] private OVRPassthroughLayer Windows_ptLayer;
     [SerializeField] private OVRPassthroughLayer Global_ptLayer;
     private bool isEnd = false;
+    
+    public GameObject Logo;
     public void Awake()
     {
         Windows_ptLayer.textureOpacity = 0f;
         Global_ptLayer.textureOpacity = 0f;
     }
 
+    void Start()
+    {
+        Logo.SetActive(false);
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")&&!isEnd)
@@ -25,33 +32,20 @@ public class End_Trigger : MonoBehaviour
             isEnd = true;
         }
 
-
-
     }
 
     [SerializeField] float opacityDuration = 100f;
     [SerializeField] float startOpacity = 1f;
     [SerializeField] float endOpacity = 0f;
-
-    private void Start()
-    {
-       
-        
-    }
+    
     public void WindosShowup()
     {
-
         StartCoroutine(AnimateOpacity(Windows_ptLayer));
-
-
     }
 
     private IEnumerator AnimateOpacity(OVRPassthroughLayer ptLayer)
     {
-
         float elapsedTime = 0f;
-
-
 
         while (elapsedTime < opacityDuration)
         {
@@ -61,8 +55,8 @@ public class End_Trigger : MonoBehaviour
         }
       
         ptLayer.textureOpacity = endOpacity;
-      
 
-
+        yield return new WaitForSeconds(2f);
+        Logo.SetActive(true);
     }
 }
