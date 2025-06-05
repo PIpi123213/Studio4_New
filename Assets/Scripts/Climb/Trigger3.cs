@@ -17,9 +17,10 @@ public class Trigger3 : MonoBehaviour
     //public GameObject Arinteraction;
     [SerializeField] float skyboxFadeDuration = 10f;
 
-
-
-
+    public GameObject Level2;
+    public GameObject BCI;
+    public GameObject Arinteraction;
+    public GameObject Locker;
 
 
     private void Awake()
@@ -42,7 +43,15 @@ public class Trigger3 : MonoBehaviour
 
         }
     }
-    
+    public void Level2ChangeToStage3()
+    {
+        SceneTransitionManager.Instance.StartPreloading("Ocean");
+        Level2.SetActive(false);
+        BCI.SetActive(true);
+        Arinteraction.SetActive(false);
+        Locker.SetActive(false);
+
+    }
 
     public void StartAnimate()
     {
