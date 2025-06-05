@@ -19,7 +19,7 @@ public class DetectLateralRaise : MonoBehaviour
     private float currentDuration = 0f;
     private bool isLateralRaise = false;
     private bool hasActivatedWingsuit = false; // 添加标志位，确保只激活一次
-    private Material progressMaterial; // 用于存储shader材质
+    private Slider slider; // 用于存储shader材质
 
     // 公共属性，供其他脚本访问
     public bool IsLateralRaising => isLateralRaise;
@@ -44,9 +44,9 @@ public class DetectLateralRaise : MonoBehaviour
     {
         currentDuration = 0f;
         hasActivatedWingsuit = false;
-        if (progressMaterial != null)
+        if (slider != null)
         {
-            progressMaterial.SetFloat("_Progress", 0f);
+            slider.value = 0f;
         }
         if (progressObject != null)
         {
@@ -67,17 +67,25 @@ public class DetectLateralRaise : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 获取进度显示物体的材质
+        // 获取进度显示物体的Slider组件
         if (progressObject != null)
         {
-            progressMaterial = progressObject.GetComponent<Renderer>().material;
-            // 初始化进度为0
-            if (progressMaterial != null)
+            slider = progressObject.GetComponent<Slider>();
+            if (slider != null)
             {
-                progressMaterial.SetFloat("_Progress", 0f);
+                // 初始化进度为0
+                slider.value = 0f;
+            }
+            else
+            {
+                Debug.LogError("进度显示物体没有Slider组件！");
             }
             // 初始时隐藏进度物体
             progressObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("进度显示物体未设置！请在Inspector中设置Progress Object引用。");
         }
 
         // 确保开始时翼装控制器是禁用的
@@ -112,10 +120,7 @@ public class DetectLateralRaise : MonoBehaviour
         bool rightHandRaised = rightHand.localPosition.y >= requiredHeight;
 
         // 检查双手是否在身体两侧
-        bool handsAtSides = Mathf.Abs(leftHand.position.x) > 0.1f && Mathf.Abs(rightHand.position.x) > 0.1f;
-        Debug.Log("leftHandRaised" + leftHandRaised + ", " + "RightHandRaised" + rightHandRaised + ", " + "handsAtSides" + handsAtSides);
-        Debug.Log($"左手高度: {leftHand.localPosition.y}, 右手高度: {rightHand.localPosition.y}");
-        Debug.Log($"左手X位置: {leftHand.localPosition.x}, 右手X位置: {rightHand.localPosition.x}");
+        bool handsAtSides = true;
         isLateralRaise = leftHandRaised && rightHandRaised && handsAtSides;
 
         // 检测侧平举状态变化
@@ -170,10 +175,15 @@ public class DetectLateralRaise : MonoBehaviour
         }
 
         // 更新进度显示
-        if (progressMaterial != null)
+        if (slider != null)
         {
             float progress = currentDuration / requiredDuration;
-            progressMaterial.SetFloat("_Progress", progress);
+            slider.value = progress;
+            if (slider.value == 1)
+            {
+                wingsuitController.enabled = true;
+                tutorialCanvas.SetActive(false);
+            }
         }
     }
 }
