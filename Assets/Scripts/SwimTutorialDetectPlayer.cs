@@ -8,6 +8,7 @@ public class SwimTutorialDetectPlayer : MonoBehaviour
     private AudioSource audioSource;
     private float fadeSpeed = 1f; // 渐变速度
     private bool isFading = false;
+    private bool hasPlayed = false; // 确保音频只播放一次
 
     [SerializeField] private AudioClip swimTutorialAudio;
 
