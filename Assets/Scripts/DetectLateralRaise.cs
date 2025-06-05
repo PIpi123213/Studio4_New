@@ -1,30 +1,83 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // 添加UI命名空间
+using UnityEngine.UI;
 
 public class DetectLateralRaise : MonoBehaviour
 {
+    public static DetectLateralRaise Instance { get; private set; } // 单例实例
+
     [SerializeField] private Transform leftHand; // 左手控制器
     [SerializeField] private Transform rightHand; // 右手控制器
-    [SerializeField] private Slider progressBar; // 进度条
+    [SerializeField] private GameObject progressObject; // 带有shader的进度显示物体
     [SerializeField] private float requiredHeight = 1.2f; // 侧平举所需的最低高度
     [SerializeField] private float requiredDuration = 3f; // 需要保持的时间
     [SerializeField] private WingSuitMoveController wingsuitController; // 添加翼装控制器引用
-    [SerializeField] private GameObject tutorialCanvas; // 添加翼装对象引用
+    [SerializeField] private GameObject tutorialCanvas;
     [SerializeField] private PlayerStateTran playerStateTran; // 添加玩家状态引用
 
     private float currentDuration = 0f;
     private bool isLateralRaise = false;
     private bool hasActivatedWingsuit = false; // 添加标志位，确保只激活一次
+    private Material progressMaterial; // 用于存储shader材质
+
+    // 公共属性，供其他脚本访问
+    public bool IsLateralRaising => isLateralRaise;
+    public float CurrentProgress => currentDuration / requiredDuration;
+    public bool HasCompletedLateralRaise => hasActivatedWingsuit;
+
+    void Awake()
+    {
+        // 设置单例
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // 公共方法，供其他脚本调用
+    public void ResetProgress()
+    {
+        currentDuration = 0f;
+        hasActivatedWingsuit = false;
+        if (progressMaterial != null)
+        {
+            progressMaterial.SetFloat("_Progress", 0f);
+        }
+        if (progressObject != null)
+        {
+            progressObject.SetActive(false);
+        }
+    }
+
+    public void SetRequiredDuration(float duration)
+    {
+        requiredDuration = duration;
+    }
+
+    public void SetRequiredHeight(float height)
+    {
+        requiredHeight = height;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (progressBar != null)
+        // 获取进度显示物体的材质
+        if (progressObject != null)
         {
-            progressBar.maxValue = requiredDuration;
-            progressBar.value = 0f;
+            progressMaterial = progressObject.GetComponent<Renderer>().material;
+            // 初始化进度为0
+            if (progressMaterial != null)
+            {
+                progressMaterial.SetFloat("_Progress", 0f);
+            }
+            // 初始时隐藏进度物体
+            progressObject.SetActive(false);
         }
 
         // 确保开始时翼装控制器是禁用的
@@ -60,10 +113,30 @@ public class DetectLateralRaise : MonoBehaviour
 
         // 检查双手是否在身体两侧
         bool handsAtSides = Mathf.Abs(leftHand.position.x) > 0.1f && Mathf.Abs(rightHand.position.x) > 0.1f;
-        Debug.Log("leftHandRaised"+ leftHandRaised+", "+"RightHandRaised" + rightHandRaised+", "+"handsAtSides" + handsAtSides);
+        Debug.Log("leftHandRaised" + leftHandRaised + ", " + "RightHandRaised" + rightHandRaised + ", " + "handsAtSides" + handsAtSides);
         Debug.Log($"左手高度: {leftHand.localPosition.y}, 右手高度: {rightHand.localPosition.y}");
         Debug.Log($"左手X位置: {leftHand.localPosition.x}, 右手X位置: {rightHand.localPosition.x}");
         isLateralRaise = leftHandRaised && rightHandRaised && handsAtSides;
+
+        // 检测侧平举状态变化
+        if (isLateralRaise && !hasActivatedWingsuit)
+        {
+            // 开始侧平举时显示进度物体
+            if (progressObject != null)
+            {
+                progressObject.SetActive(true);
+            }
+        }
+        else if (!isLateralRaise && hasActivatedWingsuit)
+        {
+            // 结束侧平举时隐藏进度物体
+            if (progressObject != null)
+            {
+                progressObject.SetActive(false);
+            }
+        }
+
+        hasActivatedWingsuit = isLateralRaise;
 
         if (isLateralRaise)
         {
@@ -77,7 +150,7 @@ public class DetectLateralRaise : MonoBehaviour
                 {
                     wingsuitController.enabled = true;
                     hasActivatedWingsuit = true;
-                    
+
                     // 确保tutorialCanvas存在后再禁用
                     if (tutorialCanvas != null)
                     {
@@ -96,10 +169,11 @@ public class DetectLateralRaise : MonoBehaviour
             currentDuration = 0f;
         }
 
-        // 更新进度条
-        if (progressBar != null)
+        // 更新进度显示
+        if (progressMaterial != null)
         {
-            progressBar.value = currentDuration;
+            float progress = currentDuration / requiredDuration;
+            progressMaterial.SetFloat("_Progress", progress);
         }
     }
 }
