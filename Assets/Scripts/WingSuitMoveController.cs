@@ -51,6 +51,8 @@ public class WingSuitMoveController : MonoBehaviour
     private float originalGravityFactor;  // 原始重力因子
     private Vector3 pillarBoostDirection;  // 柱子碰撞后的推力方向
     private float pillarBoostTimer = 0f;  // 柱子碰撞后的加速计时器
+    private float accelerationTimer = 0f; // 初始加速计时器
+    private bool isInitialAcceleration = true;
     #endregion
 
     #region Unity生命周期
@@ -87,17 +89,17 @@ public class WingSuitMoveController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector3 move = rb.velocity * Time.fixedDeltaTime;
-        if (Physics.Raycast(transform.position, move.normalized, out RaycastHit hit, move.magnitude + 1f))
-        {
-            if (hit.collider.CompareTag("DeadEnd") || hit.collider.CompareTag("SpeedUp") || hit.collider.name == "RushToDeathArea")
-            {
-                return;
-            }
-            // 撞上了什么，处理碰撞（可以改为击退、停止、播放动画等）
-            Debug.Log("即将穿模撞击: " + hit.collider.name);
-            rb.velocity = Vector3.zero;
-        }
+        // Vector3 move = rb.velocity * Time.fixedDeltaTime;
+        // if (Physics.Raycast(transform.position, move.normalized, out RaycastHit hit, move.magnitude + 1f))
+        // {
+        //     if (hit.collider.CompareTag("DeadEnd") || hit.collider.CompareTag("SpeedUp") || hit.collider.name == "RushToDeathArea")
+        //     {
+        //         return;
+        //     }
+        //     // 撞上了什么，处理碰撞（可以改为击退、停止、播放动画等）
+        //     Debug.Log("即将穿模撞击: " + hit.collider.name);
+        //     rb.velocity = Vector3.zero;
+        // }
     }
 
     #endregion
@@ -139,9 +141,28 @@ public class WingSuitMoveController : MonoBehaviour
     private void ApplyMovement()
     {
         DetectDive();
-        Vector3 glideVelocity = transform.forward * glideSpeed;
-        glideVelocity.y = verticalSpeed;
-        rb.velocity = glideVelocity;
+        // 处理初始加速
+        if (isInitialAcceleration)
+        {
+            accelerationTimer += Time.deltaTime;
+            float t = Mathf.Clamp01(accelerationTimer / initialAccelerationTime);
+            float currentSpeed = Mathf.Lerp(0, glideSpeed, t);
+            
+            Vector3 glideVelocity = transform.forward * currentSpeed;
+            glideVelocity.y = verticalSpeed;
+            rb.velocity = glideVelocity;
+
+            if (accelerationTimer >= initialAccelerationTime)
+            {
+                isInitialAcceleration = false;
+            }
+        }
+        else
+        {
+            Vector3 glideVelocity = transform.forward * glideSpeed;
+            glideVelocity.y = verticalSpeed;
+            rb.velocity = glideVelocity;
+        }
     }
 
     private void ApplyRotation()
