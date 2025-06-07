@@ -21,7 +21,7 @@ public class AnchorPoint : MonoBehaviour
     private Quaternion initialRotationDifference;
     public static AttachAnchor attachAnchor = null;
     public Vector3 positionOffset = Vector3.zero;
-
+    public bool isEnd = false;
     void Start()
     {
         if (otherObject == null)
@@ -241,7 +241,7 @@ public class AnchorPoint : MonoBehaviour
     // Ê¾Àý£º°´¿Õ¸ñ¼üÇÐ»»
     void Update()
     {
-        if (!CharacterClimb.isStart) return;
+        if (!CharacterClimb.isStart||isEnd) return;
 
 
         if (CharacterClimb.isClimbing)
@@ -249,7 +249,7 @@ public class AnchorPoint : MonoBehaviour
             if (isCurrentParent)
             {
                 ToggleParentingB();
-                isCurrentParent = false;
+                //isCurrentParent = false;
             }
          
           
@@ -261,7 +261,7 @@ public class AnchorPoint : MonoBehaviour
             {
               
                 ToggleParentingA();
-                isCurrentParent = true;
+                //isCurrentParent = true;
             }
         
         }

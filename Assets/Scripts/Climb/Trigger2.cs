@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit;
+using static Obi.VoxelPathFinder;
 
 public class Trigger2 : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Trigger2 : MonoBehaviour
     public GameObject hand_naiv;
     public GameObject hand_naiv2;
     public GameObject hand_naiv3;
-   
+    public AudioSource BGM;
     //public GameObject postprocess;
 
     
@@ -53,10 +54,11 @@ public class Trigger2 : MonoBehaviour
         
         hand_naiv2.SetActive(false);
         hand_naiv3.SetActive(false);
-
+        BGM.volume = 0;
 
 
     }
+    [SerializeField] private AudioSource SceneTransitionAudioSource;
 
     private void OnSelectEnter(SelectEnterEventArgs args)
     {
@@ -71,13 +73,15 @@ public class Trigger2 : MonoBehaviour
             
             StartCoroutine(RunBothAnimations());
         }
+        SceneTransitionAudioSource.Play();
     }
     [SerializeField]float skyboxFadeDuration = 10f;
     private IEnumerator RunBothAnimations()
     {
         // ͬʱ������������
         hasTriggered = true;
-
+        StartFade(0.735f, 1f);
+        //BGM.volume = Mathf.MoveTowards(BGM.volume, 0.735f, 1f * Time.deltaTime);
         Coroutine radiusRoutine  = StartCoroutine(AnimateRadius());
         Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
         attachAnchor.Attach();
@@ -107,6 +111,10 @@ public class Trigger2 : MonoBehaviour
     {
        
         FirstRope.SetActive(false);
+        StartFade(0f, 1f);
+        //BGM.volume = Mathf.MoveTowards(BGM.volume, 0, 1f * Time.deltaTime);
+
+
         Coroutine radiusRoutine = StartCoroutine(AnimateRadius_out());
         //Coroutine opacityRoutine = StartCoroutine(AnimateOpacity_out());
         Coroutine SkyopacityRoutine = StartCoroutine(AnimateSkybox_out());
@@ -276,7 +284,7 @@ public class Trigger2 : MonoBehaviour
         ptLayer.textureOpacity = endOpacity;
         if (ptLayer != null)
         {
-            ptLayer.enabled = false;
+           // ptLayer.enabled = false;
            // Destroy(ptLayer);
         }
         playercamera.clearFlags = CameraClearFlags.Skybox;
@@ -303,7 +311,7 @@ public class Trigger2 : MonoBehaviour
         ptLayer.textureOpacity = startOpacity;
         if (ptLayer != null)
         {
-            ptLayer.enabled = true;
+            //ptLayer.enabled = true;
            // Destroy(ptLayer);
         }
         //SetupPostprocess();
@@ -359,7 +367,19 @@ public class Trigger2 : MonoBehaviour
         // ȡ�������¼�
         grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
     }
-   
+    public void StartFade(float targetVol, float speed)
+    {
+        StartCoroutine(FadeBGMVolume(targetVol, speed));
+    }
+
+    IEnumerator FadeBGMVolume(float targetVolume, float fadeSpeed)
+    {
+        while (BGM.volume != targetVolume)
+        {
+            BGM.volume = Mathf.MoveTowards(BGM.volume, targetVolume, fadeSpeed * Time.deltaTime);
+            yield return null;
+        }
+    }
     private IEnumerator findCamera()
     {
         yield return null;

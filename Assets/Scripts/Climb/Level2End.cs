@@ -6,6 +6,7 @@ public class Level2End : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject level2end;
+    public AnchorPoint anchorPoint;
     private void Start()
     {
         level2end.SetActive(false);
@@ -15,7 +16,17 @@ public class Level2End : MonoBehaviour
         if (collision.gameObject.CompareTag("DeadEnd"))
         {
             level2end.SetActive(true);
+         
         }
+    }
+
+    public void _EndTrigger()
+    {
+
+        anchorPoint.isEnd = true;
+        anchorPoint.ToggleParentingB();
+
+
     }
 
 }

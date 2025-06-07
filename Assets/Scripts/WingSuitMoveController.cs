@@ -239,7 +239,7 @@ public class WingSuitMoveController : MonoBehaviour
         if (trackingSpace != null)
         {
             Vector3 currentEuler = trackingSpace.eulerAngles;
-            trackingSpace.eulerAngles = new Vector3(pitchAngle, currentEuler.y, tiltAngle);
+            trackingSpace.eulerAngles = new Vector3(pitchAngle, currentEuler.y, -tiltAngle);
         }
     }
     #endregion

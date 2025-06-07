@@ -230,13 +230,13 @@ public class ZipLine : MonoBehaviour
         resetPlayerPostion();
         yield return null;
 
-        while (Vector3.Distance(playerTransform.localPosition, sliderPlayerposition) > 0.001f)
+        while (Vector3.Distance(playerTransform.position, sliderPlayerposition) > 0.001f)
         {
             // ¼ÓËÙÂß¼­
-            playerTransform.localPosition = Vector3.MoveTowards(
-                  playerTransform.localPosition,
+            playerTransform.position = Vector3.MoveTowards(
+                  playerTransform.position,
                   sliderPlayerposition,
-                  0.8f * Time.deltaTime
+                  1f * Time.deltaTime
               );
             yield return null;
         }

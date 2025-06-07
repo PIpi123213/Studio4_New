@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -91,7 +92,7 @@ public class DetectLateralRaise : MonoBehaviour
         // 确保开始时翼装控制器是禁用的
         if (wingsuitController != null)
         {
-            wingsuitController.enabled = false;
+            //wingsuitController.enabled = false;
         }
 
         // 检查tutorialCanvas是否正确设置
@@ -112,6 +113,7 @@ public class DetectLateralRaise : MonoBehaviour
     {
         // 检查PlayerStateTran的stage是否为1
         if (PlayerStateTran.Instance.Stage != 1) return;
+
 
         if (leftHand == null || rightHand == null) return;
 
@@ -183,6 +185,8 @@ public class DetectLateralRaise : MonoBehaviour
             {
                 wingsuitController.enabled = true;
                 tutorialCanvas.SetActive(false);
+                playerStateTran.isStart = true;
+
             }
         }
     }

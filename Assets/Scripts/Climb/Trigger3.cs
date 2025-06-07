@@ -127,7 +127,24 @@ public class Trigger3 : MonoBehaviour
         ptLayer.textureOpacity = endOpacity;
 
     }
-   
+    private IEnumerator AnimateOpacity_out()
+    {
+        resetSkybox();
+        float elapsedTime = 0f;
+
+
+
+        while (elapsedTime < opacityDuration_out)
+        {
+            ptLayer.textureOpacity = Mathf.Lerp(endOpacity, startOpacity, elapsedTime / opacityDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        opacityFinished = true;
+        hasTriggered = true;
+        ptLayer.textureOpacity = startOpacity;
+
+    }
     public IEnumerator AnimateSkybox_out()
     {
 

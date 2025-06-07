@@ -122,7 +122,7 @@ public class PlayerStateTran : MonoBehaviour
         // transform.localRotation = StartLocalRot;
 
         yield return new WaitForSeconds(1f);
-        isStart = true;
+        
         SceneTransitionManager.Instance.fadeScreen.FadeIn(3f);
         yield return null;
 
