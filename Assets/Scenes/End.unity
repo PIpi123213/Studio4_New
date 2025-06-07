@@ -4689,7 +4689,6 @@ MonoBehaviour:
   Windows_ptLayer: {fileID: 216227121}
   Global_ptLayer: {fileID: 271611093}
   Logo: {fileID: 1051262308}
-  fadeDuration: 2
   opacityDuration: 0
   startOpacity: 2
   endOpacity: 100
@@ -5951,7 +5950,7 @@ Transform:
   m_GameObject: {fileID: 635542596}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.12285716, w: 0.99242437}
-  m_LocalPosition: {x: -0.842, y: 4.716, z: 3.621}
+  m_LocalPosition: {x: -1.121, y: 4.72, z: 3.621}
   m_LocalScale: {x: 0.1312811, y: 0.1312811, z: 0.1312811}
   m_ConstrainProportionsScale: 0
   m_Children: []

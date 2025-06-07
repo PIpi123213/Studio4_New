@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Signal Emitter(Clone)(Clone)
   m_EditorClassIdentifier: 
-  m_Time: 79.34176649457464
+  m_Time: 73.49730907171963
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 0cd9a6d500978fe418bb53a2922e9b9f, type: 2}
@@ -462,25 +462,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_MixOutCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1084,7 +1066,7 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 78.34489962228886
+    m_Start: 72.50044219943385
     m_ClipIn: 0
     m_Asset: {fileID: 9110985586578654462}
     m_Duration: 4
@@ -1594,7 +1576,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: "end2.3-\u4E00\u5207\u9009\u62E9\u7686\u4EA4\u7531\u4F60"
   - m_Version: 1
-    m_Start: 79.34176649457464
+    m_Start: 73.49730907171963
     m_ClipIn: 0
     m_Asset: {fileID: -313261502559168090}
     m_Duration: 6.72

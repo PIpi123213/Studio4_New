@@ -72,8 +72,9 @@ public class Trigger2 : MonoBehaviour
             //StartCoroutine(AnimateOpacity());
             
             StartCoroutine(RunBothAnimations());
+            SceneTransitionAudioSource.Play();
         }
-        SceneTransitionAudioSource.Play();
+        
     }
     [SerializeField]float skyboxFadeDuration = 10f;
     private IEnumerator RunBothAnimations()
