@@ -51,11 +51,11 @@ public class MoveManager : MonoBehaviour
             localPosition = TrackingObject.localPosition;
             
         }
-     if (Input.GetKeyDown(KeyCode.UpArrow))
+     if (Input.GetKeyDown(KeyCode.W))
         {
             transform.position += Vector3.up * verticalSpeed;
         }
-     if (Input.GetKeyDown(KeyCode.DownArrow))
+     if (Input.GetKeyDown(KeyCode.S))
         {
             transform.position += Vector3.down * verticalSpeed;
         }

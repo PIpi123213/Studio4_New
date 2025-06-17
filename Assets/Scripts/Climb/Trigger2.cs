@@ -33,7 +33,9 @@ public class Trigger2 : MonoBehaviour
     public AudioSource BGM;
     //public GameObject postprocess;
 
-    
+    public Transform playerTrans;
+    public Transform target;
+    public GameObject Locker;
     private void Awake()
     {
         lake.transform.position = lakeStartPosition;
@@ -77,6 +79,19 @@ public class Trigger2 : MonoBehaviour
         
     }
     [SerializeField]float skyboxFadeDuration = 10f;
+
+
+    public void changeToEnd()
+    {
+        StartCoroutine(RunBothAnimations());
+        SceneTransitionAudioSource.Play();
+        playerTrans.position = target.position;
+        Arinteraction.SetActive(false);
+        Locker.SetActive(false);
+
+    }
+
+
     private IEnumerator RunBothAnimations()
     {
         // ͬʱ������������
