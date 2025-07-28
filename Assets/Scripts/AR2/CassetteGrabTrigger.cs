@@ -33,6 +33,6 @@ public class CassetteGrabTrigger : MonoBehaviour
     void OnDestroy()
     {
         // 取消订阅事件
-        grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        //grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
     }
 }

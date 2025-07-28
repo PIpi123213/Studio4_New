@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
@@ -12,8 +13,11 @@ public class ToggleCanvasOnEscape : MonoBehaviour
     [SerializeField] private GameObject targetCanvas; // ÍÏ×§ÄãµÄ Canvas µ½ Inspector
     public DynamicMoveProvider dynamicMoveProvider;
     public ActionBasedContinuousTurnProvider turnProvider;
-    
- 
+
+    public InputActionProperty buttonA;
+    public InputActionProperty buttonB;
+    private bool isCanvasVisible = false;
+    private bool cantrigger = true;
     void Start()
     {
         //dynamicMoveProvider.enabled = false;
@@ -24,15 +28,38 @@ public class ToggleCanvasOnEscape : MonoBehaviour
     }
     void Update()
     {
+        bool aPressed = buttonA.action.IsPressed();
+        bool bPressed = buttonB.action.IsPressed();
+        if (aPressed && bPressed  && cantrigger)
+        {
+            ShowCanvas();
+            cantrigger = false;
+        }
+        if (!aPressed && !bPressed)
+        {
+            cantrigger = true; 
+           // ·ÀÖ¹ÖØ¸´´¥·¢
+        }
+
         // ¼ì²â ESC °´¼ü
         if (Input.GetKeyDown(KeyCode.Escape))
         {
          
             ToggleCanvas();
         }
+
+
+
    
     }
-  
+    void ShowCanvas()
+    {
+        if (targetCanvas != null)
+        {
+            isCanvasVisible = !targetCanvas.activeSelf;
+            targetCanvas.SetActive(isCanvasVisible) ;
+        }
+    }
     void ToggleCanvas()
     {
         if (targetCanvas != null)

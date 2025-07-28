@@ -3555,7 +3555,7 @@ Canvas:
   m_GameObject: {fileID: 393416816}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1318919613}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -4689,6 +4689,7 @@ MonoBehaviour:
   Windows_ptLayer: {fileID: 216227121}
   Global_ptLayer: {fileID: 271611093}
   Logo: {fileID: 1051262308}
+  fadeDuration: 2
   opacityDuration: 0
   startOpacity: 2
   endOpacity: 100
@@ -11971,9 +11972,51 @@ PrefabInstance:
       objectReference: {fileID: 1318919618}
     - target: {fileID: 4613737576092348074, guid: fd0817a17bbbdf24dbf1316ae362c417,
         type: 3}
+      propertyPath: buttonA.m_Reference
+      value: 
+      objectReference: {fileID: -1258774187984822650, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
+    - target: {fileID: 4613737576092348074, guid: fd0817a17bbbdf24dbf1316ae362c417,
+        type: 3}
+      propertyPath: buttonB.m_Reference
+      value: 
+      objectReference: {fileID: -5948270986967930661, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
+    - target: {fileID: 4613737576092348074, guid: fd0817a17bbbdf24dbf1316ae362c417,
+        type: 3}
       propertyPath: dynamicMoveProvider
       value: 
       objectReference: {fileID: 1676466111}
+    - target: {fileID: 4613737576092348074, guid: fd0817a17bbbdf24dbf1316ae362c417,
+        type: 3}
+      propertyPath: buttonA.m_Action.m_Id
+      value: ac4207a9-d761-4b14-a82b-cda44384588d
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613737576092348074, guid: fd0817a17bbbdf24dbf1316ae362c417,
+        type: 3}
+      propertyPath: buttonB.m_Action.m_Id
+      value: e163ad48-ed2e-4c8b-98d4-297cfaf02425
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613737576092348074, guid: fd0817a17bbbdf24dbf1316ae362c417,
+        type: 3}
+      propertyPath: buttonA.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613737576092348074, guid: fd0817a17bbbdf24dbf1316ae362c417,
+        type: 3}
+      propertyPath: buttonB.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613737576092348074, guid: fd0817a17bbbdf24dbf1316ae362c417,
+        type: 3}
+      propertyPath: buttonA.m_Action.m_Name
+      value: Button A
+      objectReference: {fileID: 0}
+    - target: {fileID: 4613737576092348074, guid: fd0817a17bbbdf24dbf1316ae362c417,
+        type: 3}
+      propertyPath: buttonB.m_Action.m_Name
+      value: Button B
+      objectReference: {fileID: 0}
     - target: {fileID: 4999766302801132435, guid: fd0817a17bbbdf24dbf1316ae362c417,
         type: 3}
       propertyPath: fadeScreen
@@ -12046,6 +12089,58 @@ MonoBehaviour:
   - {fileID: 830604929}
   - {fileID: 222051802}
   - {fileID: 1734465248}
+  buttonA:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Button A
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 033cbb4c-0062-4402-8a47-cd7bf0700463
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -3882516632774811617, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  buttonB:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Button B
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9ea17b2a-4439-4254-bdff-44c992806d47
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 415455661006981191, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  rightbuttonA:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Rightbutton A
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: cca2f52b-733b-43e9-b055-315d044412d0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -1258774187984822650, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  rightbuttonB:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Rightbutton B
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: a4882f1e-a355-4ea6-af2b-70d9ad34aa29
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -5948270986967930661, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
 --- !u!1 &1543218016
 GameObject:
   m_ObjectHideFlags: 0

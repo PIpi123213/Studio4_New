@@ -71,7 +71,20 @@ public class MoveManager : MonoBehaviour
         position = Vector3.zero; // 确保所有路径都有赋值
         return false;
     }
+    public void upposition()
+    {
+        transform.position += Vector3.up * verticalSpeed;
 
+
+
+    }
+    public void downposition()
+    {
+        transform.position += Vector3.down * verticalSpeed;
+
+
+
+    }
     void LateUpdate()
     {
         // 当前 CenterEye 在本地空间的位置
