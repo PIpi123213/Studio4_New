@@ -261,7 +261,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: "\u5C71\u4E0B\u63D0\u53D6\u8111\u673A"
   - m_Version: 1
-    m_Start: 41.80800000000001
+    m_Start: 55.93333333333333
     m_ClipIn: 0
     m_Asset: {fileID: -2529103966018172575}
     m_Duration: 15.264
@@ -294,7 +294,7 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: "\u5BFB\u627E\u5404\u79CD\u6B7B\u4EA1\u7ECF\u5386"
   - m_Version: 1
-    m_Start: 57.072
+    m_Start: 71.19733333333335
     m_ClipIn: 0
     m_Asset: {fileID: -7807320577277417076}
     m_Duration: 11.568
