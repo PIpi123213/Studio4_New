@@ -48,7 +48,7 @@ public class Trigger2 : MonoBehaviour
         //StartCoroutine(findCamera());
         // ���� Select Enter �¼�
         grabInteractable.selectEntered.AddListener(OnSelectEnter);
-        drmGameObject.radius = 0;
+        drmGameObject.radius = 80f;
         RenderSettings.skybox.SetFloat("_Exposure", 0);
         lake.SetActive(false);
         VFX.SetActive(false);
@@ -146,7 +146,12 @@ public class Trigger2 : MonoBehaviour
 
     }
 
+    public void courtroomdissapear()
+    {
 
+        StartCoroutine(AnimateRadius_out_first());
+
+    }
 
 
 
@@ -155,7 +160,33 @@ public class Trigger2 : MonoBehaviour
     [SerializeField] float RadiusDuration_out = 5f;
     [SerializeField] float startRadius = 0f;
     [SerializeField] float endRadius = 100f;
+    private IEnumerator AnimateRadius_out_first()
+    {
+        float elapsedTime = 0f;
 
+        while (elapsedTime < 5f)
+        {
+            // ʹ�÷����Բ�ֵ����
+            float t = 1 - Mathf.Pow(1 - (elapsedTime / 5f), 2); // ��������
+            drmGameObject.radius = Mathf.Lerp(80f, startRadius, t);
+            
+                //playercamera.clearFlags = CameraClearFlags.Skybox;
+                float extraSpeedFactor = 5f; // �ɸ�����Ҫ�������ٱ���
+                float extraT = 1 - Mathf.Pow(1 - (elapsedTime / 5f), 2) * extraSpeedFactor;
+
+                // ���Ӷ���İ뾶����
+                drmGameObject.radius -= Mathf.Lerp(0, 80f - startRadius, extraT) * Time.deltaTime;
+               
+                //Debug.Log("vfx");
+         
+          
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        // ʾ�����룺����Passthrough��ָ�����
+
+        drmGameObject.radius = startRadius;
+    }
     private IEnumerator AnimateRadius()
     {
 

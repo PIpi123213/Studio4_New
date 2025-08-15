@@ -10,6 +10,13 @@ public class FixRotation : MonoBehaviour
     {
 
 
+        
+
+    }
+
+    public void fixRotation()
+    {
+
         StartCoroutine(fixrotation());
 
     }

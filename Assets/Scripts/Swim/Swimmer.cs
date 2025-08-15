@@ -27,6 +27,9 @@ public class Swimmer : MonoBehaviour
     [Header("Gravity")]
     public bool _useGravity = false;
     public float gravityMultiplier = 0.01f;
+    private bool isFix = false;
+
+    public Transform TrackingObject;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -35,6 +38,16 @@ public class Swimmer : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (PlayerStateTran.Instance.Stage != 1) return;
+
+        if (!isFix)
+        {
+            fixRotation();
+            isFix = true;
+        }
+        
+
+
         _cooldownTimer += Time.fixedDeltaTime;
         if (_cooldownTimer > minTimeBetweenStrokes
             && (leftControllerSwimReference.action.IsPressed()
@@ -78,6 +91,19 @@ public class Swimmer : MonoBehaviour
         }
 
     }
-    
 
+    public void fixRotation()
+    {
+
+        StartCoroutine(fixrotation());
+
+    }
+    private IEnumerator fixrotation()
+    {
+
+        yield return new WaitForSeconds(0.1f);
+        float targetY = -TrackingObject.localRotation.eulerAngles.y;
+        targetY = transform.localRotation.eulerAngles.y + targetY;
+        transform.localRotation = Quaternion.Euler(0f, targetY, 0f);
+    }
 }

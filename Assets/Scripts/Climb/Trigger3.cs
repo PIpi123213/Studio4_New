@@ -62,10 +62,10 @@ public class Trigger3 : MonoBehaviour
         // ͬʱ������������
         hasTriggered = true;
         Coroutine radiusRoutine = StartCoroutine(AnimateRadius());
-        Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
+       // Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
         // �ȴ�������ɣ���ʱ��ȡ���ֵ��
         yield return radiusRoutine;
-        yield return opacityRoutine;
+       // yield return opacityRoutine;
         Debug.Log("All animations completed!");
     }
 

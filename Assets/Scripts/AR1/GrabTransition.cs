@@ -30,7 +30,8 @@ public class GrabTransition : MonoBehaviour
     public void trantoFly()
     {
         audioSource.Play();
-        PlayerStateTran.Instance.StageToLevel1();
+        PlayerStateTran.Instance.pretoOcean();
+        //PlayerStateTran.Instance.StageToLevel1();
    
 
     }
