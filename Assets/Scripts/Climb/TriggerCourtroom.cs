@@ -30,8 +30,8 @@ public class TriggerCourtroom : MonoBehaviour
       
         drmGameObject.radius = 80f;
         RenderSettings.skybox.SetFloat("_Exposure", 0);
-     
 
+        ptLayer.textureOpacity = 0f;
 
     }
   
@@ -42,6 +42,9 @@ public class TriggerCourtroom : MonoBehaviour
     {
 
         StartCoroutine(AnimateRadius_out_first());
+
+
+
 
     }
 
@@ -78,10 +81,31 @@ public class TriggerCourtroom : MonoBehaviour
 
         drmGameObject.radius = startRadius;
     }
-  
-    
 
 
 
-   
+    [SerializeField] float opacityDuration = 5f;
+    [SerializeField] float startOpacity = 1f;
+    [SerializeField] float endOpacity = 0f;
+    private IEnumerator AnimateOpacity()
+    {
+
+        float elapsedTime = 0f;
+
+
+
+        while (elapsedTime < opacityDuration)
+        {
+            ptLayer.textureOpacity = Mathf.Lerp(endOpacity, startOpacity,  elapsedTime / opacityDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        opacityFinished = true;
+        hasTriggered = true;
+        ptLayer.textureOpacity = startOpacity;
+
+    }
+
+
+
 }
