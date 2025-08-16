@@ -47,10 +47,9 @@ public class ToggleCanvasOnEscape : MonoBehaviour
          
             ToggleCanvas();
         }
+        // ¼ì²â ESC °´¼ü
+     
 
-
-
-   
     }
     void ShowCanvas()
     {

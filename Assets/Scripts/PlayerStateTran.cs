@@ -2,6 +2,7 @@ using OVR.OpenVR;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerStateTran : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class PlayerStateTran : MonoBehaviour
     [Tooltip("Level1ÃÏø’∫–")]
     public Material skyboxMaterials;
 
-
+    private UniversalAdditionalCameraData cameraData;
 
 
 
@@ -43,22 +44,19 @@ public class PlayerStateTran : MonoBehaviour
     private void Start()
     {
         //level0_scene.SetActive(true);
-        /*level1_scene.SetActive(false);
-        level2_scene.SetActive(false);*/
+        level1_scene.SetActive(false);
+     
+        cameraData = playercamera.GetUniversalAdditionalCameraData();
+        cameraData.renderPostProcessing = false;
+        cameraData.renderPostProcessing = false;
+        RenderSettings.fog = false;
     }
 
     private void Update()
     {
-     /*   if (Input.GetKeyDown(KeyCode.A))
-        {
-            Level1ToStage2();
-            //StageToLevel1();
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            //Level1ToStage2();
-            StageToLevel1();
-        }*/
+    
+       
+        
     }
         public void restSkybox()
     {
@@ -71,10 +69,18 @@ public class PlayerStateTran : MonoBehaviour
        
         Stage = 0;
     }
+
+    public void pretoOcean()
+    {
+        level1_scene.SetActive(true);
+
+    }
+
+
     public void StageToLevel1()
     {
         
-        StartCoroutine(StageToWingsuit());
+        StartCoroutine(StageToOcean());
         Debug.Log("Stage-Level1");
     }
     public void Level1ToStage2()
@@ -82,7 +88,55 @@ public class PlayerStateTran : MonoBehaviour
         StartCoroutine(WingsuitToStage());
         Debug.Log("Level1-Level2");
     }
+    private IEnumerator StageToOcean()
+    {
+       // playercamera.clearFlags = CameraClearFlags.Skybox;
 
+        //SceneTransitionManager.Instance.fadeScreen.FadeOut(0.1f);
+     
+
+
+
+
+        yield return new WaitForSeconds(0.2f);
+        Stage = 1;
+        RenderSettings.fog = true;
+        cameraData.renderPostProcessing = true;
+        yield return new WaitForSeconds(0.3f);
+
+       // SceneTransitionManager.Instance.fadeScreen.FadeIn(0.2f);
+
+       
+
+        if (wingsuitplayer == null)
+            Debug.LogError("»‘»ªŒ¥’“µΩ£°wingsuitplayer");
+
+        Vector3 targetWorldPos = wingsuitplayer.transform.position ;
+        //Quaternion aRotation = playerTransform.rotation;
+        Vector3 worldOffsetFromAtoB = this.transform.TransformPoint(MoveManager.Instance.TrackingObject.localPosition) - this.transform.position;
+        Vector3 desiredAWorldPos = targetWorldPos - worldOffsetFromAtoB;
+        // sliderPlayerposition = sliderPlayerposition - (aRotation*new Vector3(MoveManager.Instance.TrackingObject.transform.localPosition.x , 0f, MoveManager.Instance.TrackingObject.transform.localPosition.z)) ;
+
+        this.transform.position = desiredAWorldPos;
+        transform.SetParent(wingsuitplayer.transform);
+
+        StartLocalRot.x = 0f;
+        StartLocalRot.z = 0f;
+        float targetY = -MoveManager.Instance.TrackingObject.localRotation.eulerAngles.y;
+        //StartLocalRot.y = -MoveManager.Instance.TrackingObject.localRotation.y;
+        //Debug.Log(StartLocalRot.y);
+        //Debug.Log(-MoveManager.Instance.TrackingObject.localRotation.y);
+        transform.localRotation = Quaternion.Euler(StartLocalRot.x, 0f, StartLocalRot.z);
+
+        //transform.localPosition = StartLocalPos;
+        // transform.localRotation = StartLocalRot;
+
+        yield return new WaitForSeconds(1f);
+
+        SceneTransitionManager.Instance.fadeScreen.FadeIn(3f);
+        yield return null;
+
+    }
     private IEnumerator StageToWingsuit()
     {
         playercamera.clearFlags = CameraClearFlags.Skybox;
@@ -94,7 +148,7 @@ public class PlayerStateTran : MonoBehaviour
         yield return skyboxRoutine;
        
         Stage = 1;
-        level1_scene.SetActive(true);
+        
        
         if (wingsuitplayer == null)
             Debug.LogError("»‘»ªŒ¥’“µΩ£°wingsuitplayer");
@@ -110,18 +164,18 @@ public class PlayerStateTran : MonoBehaviour
        
         transform.SetParent(wingsuitplayer.transform);
 
-        StartLocalRot.x = 0f;
+     /*   StartLocalRot.x = 0f;
         StartLocalRot.z = 0f;
-        float targetY = -MoveManager.Instance.TrackingObject.localRotation.eulerAngles.y;
+        float targetY = -MoveManager.Instance.TrackingObject.localRotation.eulerAngles.y;*/
         //StartLocalRot.y = -MoveManager.Instance.TrackingObject.localRotation.y;
         //Debug.Log(StartLocalRot.y);
         //Debug.Log(-MoveManager.Instance.TrackingObject.localRotation.y);
-        transform.localRotation = Quaternion.Euler(StartLocalRot.x, targetY, StartLocalRot.z);
+       // transform.localRotation = Quaternion.Euler(StartLocalRot.x, targetY, StartLocalRot.z);
 
         //transform.localPosition = StartLocalPos;
         // transform.localRotation = StartLocalRot;
 
-        yield return new WaitForSeconds(1f);
+      
         
         SceneTransitionManager.Instance.fadeScreen.FadeIn(3f);
         yield return null;

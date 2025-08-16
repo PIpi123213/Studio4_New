@@ -138,8 +138,8 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Glitch: 0
-    - _GlitchSeed: 9.3
-    - _GlitchStrength: 0.1
+    - _GlitchSeed: 12.35
+    - _GlitchStrength: 0.01
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

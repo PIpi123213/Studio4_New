@@ -21,15 +21,8 @@ public class ShaderController : MonoBehaviour
     {
         sofaConner.SetActive(false);
         bookShelf.SetActive(false);
-        
-        if (shelfMaterial != null)
-        {
-            StartCoroutine(GradientTransition(shelfMaterial));
-        }
-        else
-        {
-            Debug.LogWarning("Ghost Holo Material is not assigned!");
-        }
+        shelf.SetActive(false);   
+ 
     }
 
     private void Update()
@@ -48,6 +41,11 @@ public class ShaderController : MonoBehaviour
     {
         sofaConner.SetActive(true);
         StartCoroutine(GradientTransition(sofaMaterial));
+    }
+    public void ChangeshelvingMaterial()
+    {
+        shelf.SetActive(true);
+        StartCoroutine(GradientTransition(shelfMaterial));
     }
     public void ChangeshelvingMaterial_out()
     {

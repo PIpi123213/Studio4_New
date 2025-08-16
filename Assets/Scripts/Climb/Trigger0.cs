@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Playables;
-
+using UnityEngine.Rendering.Universal;
 
 public class Trigger0 : MonoBehaviour
 {
@@ -24,15 +24,22 @@ public class Trigger0 : MonoBehaviour
     public GameObject Camera_cube;
     //public GameObject postprocess;
     public GameObject letter;
+    private UniversalAdditionalCameraData cameraData;
     private void Awake()
     {
         RenderSettings.skybox.SetFloat("_Exposure", 0f);
     }
     void Start()
     {
-        StartCoroutine(findCamera());
-        grabInteractable = GetComponent<XRGrabInteractable>();
+        cameraData = playercamera.GetUniversalAdditionalCameraData();
+        if (cameraData != null)
+        {
+            cameraData.renderPostProcessing = false; // 默认关闭后处理
+        }
 
+
+        grabInteractable = GetComponent<XRGrabInteractable>();
+         
         // ���� Select Enter �¼�
         grabInteractable.selectEntered.AddListener(OnSelectEnter);
         drmGameObject.radius = 0;
@@ -62,14 +69,22 @@ public class Trigger0 : MonoBehaviour
         yield return new WaitForSeconds(30f);
         Coroutine radiusRoutine = StartCoroutine(AnimateRadius());
         Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
+
+
+       
         // �ȴ�������ɣ���ʱ��ȡ���ֵ��
         yield return radiusRoutine;
         yield return opacityRoutine;
         //��������
 
+       
+        if (cameraData != null)
+        {
+            cameraData.renderPostProcessing = true; // 开启后处理
+        }
 
-        //MoveManager.Instance.OnSceneIn();//��¼λ��
-        // ��ɺ�ִ�г����л��������߼�
+
+
         Debug.Log("All animations completed!");
 
 
@@ -230,8 +245,12 @@ public class Trigger0 : MonoBehaviour
             ptLayer.enabled = false;
             // Destroy(ptLayer);
         }
-        playercamera.clearFlags = CameraClearFlags.Skybox;
-        RenderSettings.skybox.SetFloat("_Exposure", 0f);
+        //playercamera.clearFlags = CameraClearFlags.Skybox;
+
+
+        //RenderSettings.skybox.SetFloat("_Exposure", 0f);
+        //新版的不需要变天空
+
 
         //SetupPostprocess();
         /* Coroutine skyboxRoutine = StartCoroutine(AnimateSkyboxExposure(0f, 1f, skyboxFadeDuration));
