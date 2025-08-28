@@ -12,7 +12,7 @@ public class TriggerToDive : MonoBehaviour
     private bool isCollided = false;
     public GameObject mask;/*抓取*/
     public GameObject mask1;/*眼前替代*/
-    public GameObject playerCamera;
+    //public GameObject playerCamera;
     public GameObject oceanPlane;
     
     public float riseSpeed = 0.5f; // 上升速度
@@ -23,7 +23,7 @@ public class TriggerToDive : MonoBehaviour
         /*grabInteractable = GetComponent<XRGrabInteractable>();
         // 订阅 Select Enter 事件
         grabInteractable.selectEntered.AddListener(OnSelectEnter);*/
-        mask.SetActive(false);
+       // mask.SetActive(false);
         if (mask1 != null)
         {
             mask1.SetActive(false);

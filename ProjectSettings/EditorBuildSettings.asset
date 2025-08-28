@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestSceneFolder/AR_ARfoundation_Test.unity
     guid: 035e6422d6a6e7f47885194c8433d280
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TheLastPlay.unity
     guid: 626ae0f7e270c2c4eaa236ce7d8ba451
   - enabled: 0
     path: Assets/Intro/Stage.unity
     guid: bfd5e502e7a8d074e81b0b71967d6516
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestSceneFolder/New Scene.unity
     guid: 5439a53777aaf4e4e80807b5697ab337
   - enabled: 0
@@ -26,12 +26,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Decide.unity
     guid: f915033a61d7c354387cb9ddbb4e8b77
-  - enabled: 1
+  - enabled: 0
     path: Assets/Level3_Ocean/Ocean.unity
     guid: b6419374c2d214341afb78a1efab92e0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/End.unity
     guid: 3d1337c82b6787f46885d726e6e7d93a
+  - enabled: 1
+    path: Assets/Scenes/2.0/scene1_2.0.unity
+    guid: 12f5460adb358844a81c31d4057dc60a
+  - enabled: 1
+    path: Assets/Scenes/2.0/scene2_2.0.unity
+    guid: 3ce5b94939db6f14ea71569ab945ef5e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2c21f1d188e4faa43a363b1ce325d20c,
       type: 2}

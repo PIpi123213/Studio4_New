@@ -27,6 +27,7 @@ public class Trigger0 : MonoBehaviour
     private UniversalAdditionalCameraData cameraData;
     private void Awake()
     {
+        RenderSettings.fog = false;
         RenderSettings.skybox.SetFloat("_Exposure", 0f);
     }
     void Start()
@@ -66,9 +67,11 @@ public class Trigger0 : MonoBehaviour
     {
         // ͬʱ������������
         hasTriggered = true;
-        yield return new WaitForSeconds(30f);
-        Coroutine radiusRoutine = StartCoroutine(AnimateRadius());
+        yield return new WaitForSeconds(25f);
         Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
+        yield return new WaitForSeconds(6f);
+        Coroutine radiusRoutine = StartCoroutine(AnimateRadius());
+       
 
 
        
@@ -77,11 +80,8 @@ public class Trigger0 : MonoBehaviour
         yield return opacityRoutine;
         //��������
 
-       
-        if (cameraData != null)
-        {
-            cameraData.renderPostProcessing = true; // 开启后处理
-        }
+   
+
 
 
 
@@ -141,7 +141,7 @@ public class Trigger0 : MonoBehaviour
             if(drmGameObject.radius > 15)
             {
                 VFX.SetActive(true);
-                Camera_cube.SetActive(true);
+                //Camera_cube.SetActive(true);
                 letter.SetActive(false);
             }
             if (drmGameObject.radius > 250)
@@ -245,6 +245,10 @@ public class Trigger0 : MonoBehaviour
             ptLayer.enabled = false;
             // Destroy(ptLayer);
         }
+        if (cameraData != null)
+        {
+            cameraData.renderPostProcessing = true; // 开启后处理
+        }
         //playercamera.clearFlags = CameraClearFlags.Skybox;
 
 
@@ -339,4 +343,12 @@ public class Trigger0 : MonoBehaviour
 
     }
 
+
+    public void enableFog()
+    {
+        RenderSettings.fog = true;
+
+
+
+    }
 }
