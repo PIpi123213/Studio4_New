@@ -49,7 +49,7 @@ public class PlayerStateTran : MonoBehaviour
         cameraData = playercamera.GetUniversalAdditionalCameraData();
         cameraData.renderPostProcessing = false;
         cameraData.renderPostProcessing = false;
-        RenderSettings.fog = false;
+        //RenderSettings.fog = false;
     }
 
     private void Update()
@@ -101,12 +101,15 @@ public class PlayerStateTran : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         Stage = 1;
         RenderSettings.fog = true;
-        cameraData.renderPostProcessing = true;
-        yield return new WaitForSeconds(0.3f);
+        RenderSettings.fogDensity = 0.05f;
+        yield return new WaitForSeconds(0.2f);
+        if (cameraData != null)
+        {
+            cameraData.renderPostProcessing = true; // 开启后处理
+        }
+        // SceneTransitionManager.Instance.fadeScreen.FadeIn(0.2f);
 
-       // SceneTransitionManager.Instance.fadeScreen.FadeIn(0.2f);
 
-       
 
         if (wingsuitplayer == null)
             Debug.LogError("仍然未找到！wingsuitplayer");

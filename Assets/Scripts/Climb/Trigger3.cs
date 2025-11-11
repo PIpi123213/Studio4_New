@@ -20,7 +20,8 @@ public class Trigger3 : MonoBehaviour
     public GameObject Level2;
     public GameObject BCI;
     public GameObject Arinteraction;
-    public GameObject Locker;
+    public GameObject courtRoom;
+    public GameObject book;
 
 
     private void Awake()
@@ -45,12 +46,14 @@ public class Trigger3 : MonoBehaviour
     }
     public void Level2ChangeToStage3()
     {
-        SceneTransitionManager.Instance.StartPreloading("Ocean");
+       // SceneTransitionManager.Instance.StartPreloading("Ocean");
+
         Level2.SetActive(false);
         BCI.SetActive(true);
         Arinteraction.SetActive(false);
-        Locker.SetActive(false);
-
+        courtRoom.SetActive(false);
+        book.SetActive(false);
+        drmGameObject.radius = 0f;
     }
 
     public void StartAnimate()
@@ -179,8 +182,10 @@ public class Trigger3 : MonoBehaviour
   
     void OnDestroy()
     {
-        // ȡ�������¼�
-        grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        }
     }
 
    

@@ -32,7 +32,7 @@ public class ToggleCanvasOnEscape : MonoBehaviour
         bool bPressed = buttonB.action.IsPressed();
         if (aPressed && bPressed  && cantrigger)
         {
-            ShowCanvas();
+            //ShowCanvas();
             cantrigger = false;
         }
         if (!aPressed && !bPressed)

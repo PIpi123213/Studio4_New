@@ -32,7 +32,9 @@ public class GameCartridgeGrabTrigger : MonoBehaviour
 
     void OnDestroy()
     {
-        // 取消订阅事件
-        grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        }
     }
 }

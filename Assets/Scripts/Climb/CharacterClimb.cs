@@ -12,6 +12,14 @@ public class CharacterClimb : MonoBehaviour
     public ZipLine zipline;
     public static bool isClimbing = false;
     public static bool isStart = false;
+
+
+    private void Awake()
+    {
+        isClimbing = false;
+        isStart = false;
+    }
+
     void Start()
     {
         if (climbProvider == null)

@@ -10,7 +10,7 @@ public class SwimTutorialDetectPlayer : MonoBehaviour
     private bool isFading = false;
     private bool hasPlayed = false; // 确保音频只播放一次
 
-    [SerializeField] private AudioClip swimTutorialAudio;
+    //[SerializeField] private AudioClip swimTutorialAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class SwimTutorialDetectPlayer : MonoBehaviour
             Debug.LogError("未找到SpriteRenderer组件！");
         }
         audioSource = GetComponent<AudioSource>();
-        StartCoroutine(PlayAudioAfterDelay());
+       // StartCoroutine(PlayAudioAfterDelay());
     }
 
     // Update is called once per frame
@@ -45,8 +45,8 @@ public class SwimTutorialDetectPlayer : MonoBehaviour
 
         isFading = true;
         Color color = spriteRenderer.color;
-        audioSource.clip = swimTutorialAudio;
-        audioSource.Play();
+        //audioSource.clip = swimTutorialAudio;
+        //audioSource.Play();
 
         while (color.a > 0)
         {
@@ -67,10 +67,10 @@ public class SwimTutorialDetectPlayer : MonoBehaviour
     private IEnumerator PlayAudioAfterDelay()
     {
         yield return new WaitForSeconds(3f);
-        if (audioSource != null && !hasPlayed)
+       /* if (audioSource != null && !hasPlayed)
         {
         audioSource.Play();
         hasPlayed = true;
-    }
+    }*/
 }
 }

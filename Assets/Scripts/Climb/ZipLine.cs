@@ -31,6 +31,8 @@ public class ZipLine : MonoBehaviour
     public AttachAnchor attachAnchor;
     private void Start()
     {
+        isDone = false;
+        isSliding = false;
         PrecalculateWaypointRotations();
         interactionManager = grabInteractable.interactionManager;
 
@@ -56,12 +58,7 @@ public class ZipLine : MonoBehaviour
 
         sliderPlayerposition = desiredAWorldPos;
     }
-    private void OnDestroy()
-    {
-        grabInteractable.selectEntered.RemoveListener(OnGrab);
-        grabInteractable.selectExited.RemoveListener(UnSetPose);
-    }
-     
+ 
     private void OnGrab(SelectEnterEventArgs args)
     {
         if (isSliding||isDone) return;

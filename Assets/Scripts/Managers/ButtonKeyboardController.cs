@@ -48,7 +48,7 @@ public class ButtonKeyboardController : MonoBehaviour
         }
 
         // 回车/空格/A/B：确认
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || aJustPressed || bJustPressed)
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) )
         {
             buttons[currentIndex].onClick.Invoke();
         }

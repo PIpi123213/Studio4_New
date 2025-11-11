@@ -9,7 +9,7 @@ public class OceanBGMSwitch : MonoBehaviour
     [SerializeField] private float fadeSpeed = 1f;    // 音量渐变速度
 
     private bool isInHorrorZone = false;             // 是否在恐怖区域
-    private bool isTransitioning = false;            // 是否正在切换BGM
+    public bool isTransitioning = false;            // 是否正在切换BGM
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class OceanBGMSwitch : MonoBehaviour
         // 初始化音量
         if (peacefulBGM != null && horrorBGM != null)
         {
-            peacefulBGM.volume = 1f;
+            peacefulBGM.volume = 0f;
             horrorBGM.volume = 0f;
             peacefulBGM.Play();
             horrorBGM.Play();
@@ -34,8 +34,8 @@ public class OceanBGMSwitch : MonoBehaviour
         if (isTransitioning)
         {
             // 根据是否在恐怖区域决定音量渐变方向
-            float targetPeacefulVolume = isInHorrorZone ? 0f : 1f;
-            float targetHorrorVolume = isInHorrorZone ? 1f : 0f;
+            float targetPeacefulVolume = isInHorrorZone ? 0f : 0.5f;
+            float targetHorrorVolume = isInHorrorZone ? 0.5f : 0f;
 
             // 平滑过渡音量
             peacefulBGM.volume = Mathf.MoveTowards(peacefulBGM.volume, targetPeacefulVolume, fadeSpeed * Time.deltaTime);
@@ -66,5 +66,17 @@ public class OceanBGMSwitch : MonoBehaviour
             isInHorrorZone = false;
             isTransitioning = true;
         }
+    }
+
+    public void ChangeIsTransition()
+    {
+        isInHorrorZone = true;
+        isTransitioning = true;
+    }
+
+
+    public void toPlay()
+    {
+        peacefulBGM.volume = 0.5f;
     }
 }

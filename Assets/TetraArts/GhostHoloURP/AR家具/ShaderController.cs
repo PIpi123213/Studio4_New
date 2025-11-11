@@ -27,14 +27,7 @@ public class ShaderController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            ChangeSofaMaterial();
-        }
-        else if(Input.GetKeyDown(KeyCode.W))
-        {
-            ChangeBookShelfMaterial();
-        }
+        
     }
 
     public void ChangeSofaMaterial()
@@ -63,7 +56,12 @@ public class ShaderController : MonoBehaviour
         bookShelf.SetActive(true);
         StartCoroutine(GradientTransition(bookshelfMaterial));
     }
-    
+
+    public void ChangeBookShelfMaterial_out()
+    {
+        
+        StartCoroutine(bookDissapear());
+    }
     private IEnumerator GradientTransition(Material targetMaterial)
     {
         float elapsedTime = 0f;
@@ -96,6 +94,15 @@ public class ShaderController : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
         sofaConner.SetActive(false);
+
+        yield return null;
+    }
+    private IEnumerator bookDissapear()
+    {
+        StartCoroutine(GradientTransition_out(bookshelfMaterial));
+
+        yield return new WaitForSeconds(duration);
+        bookShelf.SetActive(false);
 
         yield return null;
     }

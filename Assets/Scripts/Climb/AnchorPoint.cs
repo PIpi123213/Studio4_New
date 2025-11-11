@@ -22,6 +22,17 @@ public class AnchorPoint : MonoBehaviour
     public static AttachAnchor attachAnchor = null;
     public Vector3 positionOffset = Vector3.zero;
     public bool isEnd = false;
+
+    private void Awake()
+    {
+        
+    }
+
+
+
+
+
+
     void Start()
     {
         if (otherObject == null)
@@ -39,7 +50,7 @@ public class AnchorPoint : MonoBehaviour
 
         Vector3 localOffset = target.InverseTransformPoint(transform.position);
         initialLocalPosition = new Vector3(localOffset.x, 0, localOffset.z);
-
+        isCurrentParent = false;
         // ¼ÇÂ¼³õÊ¼Ðý×ª²îÒì
         initialRotationDifference = Quaternion.Inverse(target.rotation) * transform.rotation;
         UpdatePhysicsState();

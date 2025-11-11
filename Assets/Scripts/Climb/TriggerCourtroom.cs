@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class TriggerCourtroom : MonoBehaviour
@@ -16,13 +17,18 @@ public class TriggerCourtroom : MonoBehaviour
     private bool radiusFinished = false;
     private bool opacityFinished = false;
     public Camera playercamera;
-
+    private UniversalAdditionalCameraData cameraData;
 
     //public AudioSource BGM;
 
     private void Awake()
     {
-        
+        cameraData = playercamera.GetUniversalAdditionalCameraData();
+        if (cameraData != null)
+        {
+            cameraData.renderPostProcessing = false; // 默认关闭后处理
+        }
+      
         //ResetPostprocess();
     }
     void Start()
@@ -30,7 +36,7 @@ public class TriggerCourtroom : MonoBehaviour
       
         drmGameObject.radius = 80f;
         RenderSettings.skybox.SetFloat("_Exposure", 0);
-
+        playercamera.clearFlags = CameraClearFlags.SolidColor;
         ptLayer.textureOpacity = 0f;
 
     }
@@ -41,13 +47,34 @@ public class TriggerCourtroom : MonoBehaviour
     public void courtroomdissapear()
     {
 
-        StartCoroutine(AnimateRadius_out_first());
+        StartCoroutine(RunBothAnimations());
+  
+       
+
+    }
+    private IEnumerator RunBothAnimations()
+    {
+        // ͬʱ������������
+        hasTriggered = true;
+        Coroutine radiusRoutine = StartCoroutine(AnimateRadius_out_first());
+        yield return new WaitForSeconds(6f);
+        if (cameraData != null)
+        {
+            cameraData.renderPostProcessing = false; // 默认关闭后处理
+        }
+        Coroutine opacityRoutine = StartCoroutine(AnimateOpacity());
+
+        // �ȴ�������ɣ���ʱ��ȡ���ֵ��
+        yield return radiusRoutine;
+        yield return opacityRoutine;
+        //��������
+
+
 
 
 
 
     }
-
 
 
 
@@ -89,6 +116,7 @@ public class TriggerCourtroom : MonoBehaviour
     [SerializeField] float endOpacity = 0f;
     private IEnumerator AnimateOpacity()
     {
+ 
 
         float elapsedTime = 0f;
 
@@ -103,7 +131,7 @@ public class TriggerCourtroom : MonoBehaviour
         opacityFinished = true;
         hasTriggered = true;
         ptLayer.textureOpacity = startOpacity;
-
+    
     }
 
 

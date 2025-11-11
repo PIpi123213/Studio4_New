@@ -45,10 +45,10 @@ Material:
     - _DetailContrast: 1
     - _DustContrast: 0.6119403
     - _SoftEdge: 0.1
-    - _Tweak: 0.2
-    - _Width: 60.2
+    - _Tweak: 23.38
+    - _Width: 53.64
     m_Colors:
-    - _Color: {r: 1, g: 0.946816, b: 0.8066038, a: 0.7058824}
+    - _Color: {r: 1, g: 0.946816, b: 0.8066038, a: 0.45490196}
     - _DetailAnim: {r: 0, g: 0, b: 0, a: 0}
     - _DustAnim: {r: 0.3, g: 0.81, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -8,7 +8,7 @@ public class ActiveCartonsController : MonoBehaviour
 
     private int currentIndex = 0; // 当前激活的纸箱索引
 
-
+    public GameObject[] ArCass;
     private void Awake()
     {
         for (int i = 0; i < cartons.Length; i++)
@@ -27,7 +27,10 @@ public class ActiveCartonsController : MonoBehaviour
     
     private void OnDestroy()
     {
+        if (EventManager.Instance != null)
+        {
             EventManager.Instance.Unsubscribe(SignalReceiver.ToActiveCarton, ActivateCarton);
+        }
     }
     
     /*激活制定纸箱*/
@@ -45,5 +48,17 @@ public class ActiveCartonsController : MonoBehaviour
         {
             Debug.LogWarning("No more cartons to activate.");
         }
+    }
+    public void Cassdiss()
+    {
+        for (int i = 0; i < ArCass.Length; i++)
+        {
+            ArCass[i].SetActive(false);
+        }
+
+
+
+
+
     }
 }

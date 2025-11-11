@@ -10,7 +10,7 @@ public class ARInteractionManager : MonoBehaviour
     public List<GameObject> interactableObjects;
 
     private int currentIndex = 0;
-    
+    public GameObject[] ArCass;
     // 事件名
     public const string InteractionComplete = "InteractionComplete";
 
@@ -24,7 +24,18 @@ public class ARInteractionManager : MonoBehaviour
         }
         Instance = this;
     }
+    public void Cassdiss()
+    {
+        for (int i = 0; i < ArCass.Length; i++)
+        {
+            ArCass[i].SetActive(false);
+        }
 
+
+
+
+
+    }
     private void Start()
     {
         // 先全部隐藏
@@ -34,14 +45,14 @@ public class ARInteractionManager : MonoBehaviour
         }
         
         
-         Transform parentTransform = interactableObjects[1].transform.parent;
+       /*  Transform parentTransform = interactableObjects[1].transform.parent;
          GameObject parentObject = parentTransform.gameObject;
        // Debug.Log(parentObject);
          Rigidbody rb = parentObject.GetComponent<Rigidbody>();
          rb.useGravity = false;
 
         Collider parentCollider = parentObject.GetComponent<Collider>();
-        parentCollider.enabled = false;
+        parentCollider.enabled = false;*/
 
         // 订阅交互完成事件
         EventManager.Instance.Subscribe(InteractionComplete, OnInteractionComplete);
@@ -63,7 +74,7 @@ public class ARInteractionManager : MonoBehaviour
     {
         if (currentIndex >= 0 && currentIndex < interactableObjects.Count)
         {
-            if (currentIndex == 1)
+           /* if (currentIndex == 1)
             {
                 Transform parentTransform = interactableObjects[currentIndex].transform.parent;
                 GameObject parentObject = parentTransform.gameObject;
@@ -73,7 +84,7 @@ public class ARInteractionManager : MonoBehaviour
 
                 Collider parentCollider = parentObject.GetComponent<Collider>();
                 parentCollider.enabled = true;
-            }
+            }*/
             interactableObjects[currentIndex].SetActive(true);
         }
     }
@@ -86,7 +97,7 @@ public class ARInteractionManager : MonoBehaviour
           
           
            
-            if (currentIndex == 1)
+          /*  if (currentIndex == 1)
             {
                 Transform parentTransform = interactableObjects[currentIndex].transform.parent;
                 GameObject parentObject = parentTransform.gameObject;
@@ -99,7 +110,7 @@ public class ARInteractionManager : MonoBehaviour
 
                
                 
-            }
+            }*/
             interactableObjects[currentIndex].SetActive(false);
 
 

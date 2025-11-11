@@ -87,9 +87,14 @@ namespace AmazingAssets.DynamicRadialMasks
 
         private void OnDisable()
         {
+            // 防止场景卸载时访问已销毁的数据
+            if (shaderData1 == null)
+                return;
+
             ResetShaderData();
 
-            Update();
+            // 不再强制调用 Update()，避免空引用
+            // Update();
         }
 
         void Start()

@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Rendering.Universal;
 
 public class GrabTransition : MonoBehaviour
 {
     // Start is called before the first frame update
     public GrabHandPose handPoseGrab;
     private bool istrigger = false;
-    public FadeScreen fadeScreen;
-    public GameObject letter;
-    [SerializeField] private AudioSource audioSource; 
+
+
     //public Camera playercamera;
     //public GameObject scene;
+    public PlayableDirector falldowntimeline;
+
     void Start()
     {
 
@@ -23,14 +26,19 @@ public class GrabTransition : MonoBehaviour
         if (handPoseGrab.HandGrabing==2&&!istrigger)
         {
             istrigger = true;
+            //SceneTransitionManager.Instance.fadeScreen.FadeOut(0.1f);
             trantoFly();
         }
     }
 
     public void trantoFly()
     {
-        audioSource.Play();
-        PlayerStateTran.Instance.pretoOcean();
+        /*  audioSource.Play();
+          PlayerStateTran.Instance.pretoOcean();*/
+
+        falldowntimeline.Play(); 
+
+
         //PlayerStateTran.Instance.StageToLevel1();
    
 

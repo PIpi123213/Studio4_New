@@ -1,4 +1,5 @@
 using AmazingAssets.DynamicRadialMasks;
+using INab.Dissolve;
 using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class Trigger2 : MonoBehaviour
     private bool opacityFinished = false;
     public Camera playercamera;
     public AttachAnchor attachAnchor;
+    public AttachAnchor attachAnchorEnd;
     public GameObject lake;
     public Vector3 lakeTargetPosition = new Vector3(0, 0, 0);
     public Vector3 lakeStartPosition = new Vector3(0, 0, 0);
@@ -36,10 +38,22 @@ public class Trigger2 : MonoBehaviour
     public Transform playerTrans;
     public Transform target;
     public GameObject Locker;
+    public GameObject poster;
+    public DissolverAutomaticTest dissolverTest;
+    public Collider mushroom;
+    private UniversalAdditionalCameraData cameraData;
+
+    public showfirstrope _showfirstrope;
+    public GameObject sceneClimb;
+    public GameObject courtroom;
+
     private void Awake()
     {
         lake.transform.position = lakeStartPosition;
         //ResetPostprocess();
+        cameraData = playercamera.GetUniversalAdditionalCameraData();
+   
+
     }
     void Start()
     {
@@ -72,7 +86,7 @@ public class Trigger2 : MonoBehaviour
         {
             //StartCoroutine(AnimateRadius());
             //StartCoroutine(AnimateOpacity());
-            
+            poster.SetActive(false);
             StartCoroutine(RunBothAnimations());
             SceneTransitionAudioSource.Play();
         }
@@ -83,11 +97,16 @@ public class Trigger2 : MonoBehaviour
 
     public void changeToEnd()
     {
-        StartCoroutine(RunBothAnimations());
-        SceneTransitionAudioSource.Play();
-        playerTrans.position = target.position;
-        Arinteraction.SetActive(false);
-        Locker.SetActive(false);
+        playercamera.clearFlags = CameraClearFlags.Skybox;
+        StartCoroutine(AnimateSkyboxExposure(0f, 1f, skyboxFadeDuration));
+        StartCoroutine(toClimbEnd());
+ 
+
+
+    }
+    public void changeToClimb()
+    {
+        StartCoroutine(AnimateRadius_out_toclimb());
 
     }
 
@@ -160,6 +179,64 @@ public class Trigger2 : MonoBehaviour
     [SerializeField] float RadiusDuration_out = 5f;
     [SerializeField] float startRadius = 0f;
     [SerializeField] float endRadius = 100f;
+
+
+
+    private IEnumerator AnimateRadius_out_toclimb()
+    {
+        float elapsedTime = 0f;
+        Arinteraction.SetActive(false);
+        Locker.SetActive(false);
+        courtroom.SetActive(false);
+       
+        while (elapsedTime < 2f)
+        {
+            // ʹ�÷����Բ�ֵ����
+            float t = 1 - Mathf.Pow(1 - (elapsedTime / 5f), 2); // ��������
+            drmGameObject.radius = Mathf.Lerp(80f, startRadius, t);
+
+            //playercamera.clearFlags = CameraClearFlags.Skybox;
+            float extraSpeedFactor = 5f; // �ɸ�����Ҫ�������ٱ���
+            float extraT = 1 - Mathf.Pow(1 - (elapsedTime / 5f), 2) * extraSpeedFactor;
+
+            // ���Ӷ���İ뾶����
+            drmGameObject.radius -= Mathf.Lerp(0, 80f - startRadius, extraT) * Time.deltaTime;
+
+            //Debug.Log("vfx");
+
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        // ʾ�����룺����Passthrough��ָ�����
+
+        drmGameObject.radius = startRadius;
+        yield return null;
+        sceneClimb.SetActive(true);
+        LastRope.SetActive(true);
+        yield return null;
+        _showfirstrope.ropeshow();
+    }
+    private IEnumerator toClimbEnd()
+    {
+        drmGameObject.radius = endRadius;
+        SceneTransitionAudioSource.Play();
+        playerTrans.position = target.position;
+        Arinteraction.SetActive(false);
+        Locker.SetActive(false);
+
+        courtroom.SetActive(false);
+        yield return null;
+        sceneClimb.SetActive(true);
+        yield return null;
+        LastRope.SetActive(true);
+        yield return null;
+        attachAnchorEnd.Attach();
+
+        yield return null;
+     
+    }
+
     private IEnumerator AnimateRadius_out_first()
     {
         float elapsedTime = 0f;
@@ -210,6 +287,8 @@ public class Trigger2 : MonoBehaviour
                 // ���Ӷ���İ뾶����
                 drmGameObject.radius += Mathf.Lerp(0, endRadius - startRadius, extraT) * Time.deltaTime;
                 VFX.SetActive(true);
+                dissolverTest.StartDissolve();
+                mushroom.isTrigger = true;
                 if (hand_naiv3.activeSelf == false)
                 {
                     hand_naiv2.SetActive(true);
@@ -335,9 +414,17 @@ public class Trigger2 : MonoBehaviour
            // Destroy(ptLayer);
         }
         playercamera.clearFlags = CameraClearFlags.Skybox;
+        if (cameraData != null)
+        {
+            cameraData.renderPostProcessing = true; // 默认关闭后处理
+        }
         //SetupPostprocess();
         Coroutine skyboxRoutine = StartCoroutine(AnimateSkyboxExposure(0f, 1f, skyboxFadeDuration));
         yield return skyboxRoutine;
+
+
+
+
 
     }
     private IEnumerator AnimateOpacity_out()
@@ -412,7 +499,10 @@ public class Trigger2 : MonoBehaviour
     void OnDestroy()
     {
         // ȡ�������¼�
-        grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        }
     }
     public void StartFade(float targetVol, float speed)
     {

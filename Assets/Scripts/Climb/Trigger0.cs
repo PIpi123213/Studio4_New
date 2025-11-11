@@ -6,6 +6,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.Playables;
 using UnityEngine.Rendering.Universal;
 
+
+using UnityEngine.Rendering;
+
+
 public class Trigger0 : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -27,7 +31,9 @@ public class Trigger0 : MonoBehaviour
     private UniversalAdditionalCameraData cameraData;
     private void Awake()
     {
-        RenderSettings.fog = false;
+        //RenderSettings.fog = false;
+        RenderSettings.fog = true;
+        RenderSettings.fogDensity = 0f;
         RenderSettings.skybox.SetFloat("_Exposure", 0f);
     }
     void Start()
@@ -35,7 +41,7 @@ public class Trigger0 : MonoBehaviour
         cameraData = playercamera.GetUniversalAdditionalCameraData();
         if (cameraData != null)
         {
-            cameraData.renderPostProcessing = false; // 默认关闭后处理
+           // cameraData.renderPostProcessing = false; // 默认关闭后处理
         }
 
 
@@ -245,10 +251,7 @@ public class Trigger0 : MonoBehaviour
             ptLayer.enabled = false;
             // Destroy(ptLayer);
         }
-        if (cameraData != null)
-        {
-            cameraData.renderPostProcessing = true; // 开启后处理
-        }
+       
         //playercamera.clearFlags = CameraClearFlags.Skybox;
 
 
@@ -320,8 +323,10 @@ public class Trigger0 : MonoBehaviour
 
     void OnDestroy()
     {
-        // ȡ�������¼�
-        grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+        }
     }
     private IEnumerator findCamera()
     {
@@ -342,13 +347,20 @@ public class Trigger0 : MonoBehaviour
 
 
     }
-
+    void SetFog()
+    {
+        var urpAsset = GraphicsSettings.currentRenderPipeline as UniversalRenderPipelineAsset;
+        if (urpAsset != null)
+        {
+            // URP 2022.3 LTS 全局雾
+           
+        }
+    }
 
     public void enableFog()
     {
         RenderSettings.fog = true;
-
-
+        RenderSettings.fogDensity = 0.05f;
 
     }
 }
